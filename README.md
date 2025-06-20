@@ -1,0 +1,3 @@
+### TO THOSE WHO STOOD WITH US IN THE BRIGHTEST DAYS AND DARKEST HOURS OF TJTT
+
+TJTT (Tongji Table Tennis), also known as "The Journey To Top", was a studio that once thrived on the Tongji campus. Its goal was to bring an innovative table tennis scoring system to college campuses by hosting scoring matches and developing an all-in-one online platform. However, operations were once halted by the Tongji Sports Office due to the studio’s distinct organizational status from the official student association. The conflict escalated, ultimately marking the end of TJTT. All studio materials have been made public in this repository—for those who wish to explore our model, and for everyone who witnessed the rise and fall of TJTT.
