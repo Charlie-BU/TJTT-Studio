@@ -1,0 +1,84 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT信息管理平台-ui-breadcrumb{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Breadcrumb</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="#" class="text-muted">Home</a></li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-5 align-self-center">
+                        <div class="customize-input float-right">
+                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                                <option selected>Aug 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Jun 19</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Default bootstrap breadcrumb</h4>
+                                <h6 class="card-subtitle">use class <code>.breadcrumb to ol</code></h6>
+                                <ol class="breadcrumb mb-2">
+                                    <li class="breadcrumb-item active">Home</li>
+                                </ol>
+                                <ol class="breadcrumb mb-2">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                    <li class="breadcrumb-item active">Library</li>
+                                </ol>
+                                <ol class="breadcrumb mb-2">
+                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:void(0)">Library</a></li>
+                                    <li class="breadcrumb-item active">Data</li>
+                                </ol>
+                                <br>
+                                <br>
+                                <h4 class="card-title">Nav breadcrumb</h4>
+                                <h6 class="card-subtitle">use class <code>.breadcrumb to nav</code> similar to
+                                    navigation</h6>
+                                <nav class="breadcrumb">
+                                    <a class="breadcrumb-item" href="javascript:void(0)">Home</a>
+                                    <a class="breadcrumb-item" href="javascript:void(0)">Library</a>
+                                    <a class="breadcrumb-item" href="javascript:void(0)">Data</a>
+                                    <span class="breadcrumb-item active">Bootstrap</span>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <!-- This Page JS -->
+    <script src="{{ url_for('static', filename='assets/extra-libs/prism/prism.js') }}"></script>
+{% endblock %}

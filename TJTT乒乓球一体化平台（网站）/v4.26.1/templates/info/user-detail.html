@@ -1,0 +1,461 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-用户详情{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    {#flash弹窗#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;
+{#            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"#}
+{#                    id="refresh"#}
+{#                    onclick="location.reload()">{{_("刷新")}}#}
+{#            </button>#}
+        </div>
+    {% endfor %}
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("用户详情")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:history.back(-1)">User List</a></li>
+                            <li class="breadcrumb-item" aria-current="page">User Detail</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- basic table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--四个框框-->
+                        <div class="row nowrap">
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-primary text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white" style="font-size:28px;">{{ user1.username }}</h1>
+                                        <h6 class="text-white">{{_("姓名")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-cyan text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white" style="font-size:28px;">{{ user1.school }}</h1>
+                                        <h6 class="text-white" id="school_{{ user.id }}">{{_("学校")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-danger text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white" style="font-size:28px;">{{ user1.role }}</h1>
+                                        <h6 class="text-white">{{_("身份")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-success text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white" style="font-size:28px;">{{ user1.score }}</h1>
+                                        <h6 class="text-white">{{_("积分")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("修改用户信息")}}</h4>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                id="user_edit_{{ user1.id }}"
+                                                onclick="edit_user('{{ user1.id }}', this)">{{_("编辑")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("设为私密用户")}}</h4>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+                                           id="set_private"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#privateUser">{{_("设置")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("变更所属组织")}}</h4>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-orange"
+                                                id="which_organ"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#organChange">{{_("变更")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if user.usertype == "K11" %}
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("变更用户权限级别")}}</h4>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-warning"
+                                                id="is_admin"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#authorityChange">{{_("变更")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped table-bordered no-wrap" style="text-align: center;">
+                        <tr>
+                            <th>{{_("性别")}}</th>
+                            <td class="font-weight-bold link" id="gender_{{ user1.id }}">{{ user1.gender }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("地区")}}</th>
+                            <td class="font-weight-bold link" id="address_{{ user1.id }}">{{ user1.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("手机号")}}</th>
+                            <td class="font-weight-bold link" id="phone_{{ user1.id }}">{{ user1.phone }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("邮箱")}}</th>
+                            <td class="font-weight-bold link" id="email_{{ user1.id }}">{{ user1.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("学校")}}</th>
+                            <td class="font-weight-bold link" id="school_{{ user1.id }}">{{ user1.school }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("学号/工号")}}</th>
+                            <td class="font-weight-bold link" id="stu_num_{{ user1.id }}">{{ user1.stu_num }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("所属组织")}}</th>
+                            <td class="font-weight-bold link" id="organ_{{ user1.id }}">{{ user1.organ.organname }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("执拍手")}}</th>
+                            <td class="font-weight-bold link" id="hand_{{ user1.id }}">{{ user1.hand }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("握拍方式")}}</th>
+                            <td class="font-weight-bold link" id="grip_{{ user1.id }}">{{ user1.grip }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("底板型号")}}</th>
+                            <td class="font-weight-bold link" id="blade_{{ user1.id }}">{{ user1.blade }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("正手胶皮")}}</th>
+                            <td class="font-weight-bold link" id="forehand_{{ user1.id }}">{{ user1.forehand }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("反手胶皮")}}</th>
+                            <td class="font-weight-bold link" id="backhand_{{ user1.id }}">{{ user1.backhand }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{_("是否带颗粒")}}</th>
+                            <td class="font-weight-bold link" id="particle_{{ user1.id }}">{{ user1.particle }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="privateUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{_("设为私密用户")}}</h5>
+                </div>
+
+                <form method="POST" action="{{ url_for("user.private_user") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:20rem;">
+                                <div class="card-body">
+                                    <h5 class="text-dark">是否设为私密用户：</h5>
+                                    <h6 style="color: red;">注意：设为私密用户后，该用户在“积分排名”中将以“{{ user1.username[0] }} **”显示。</h6>
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                    <input type="number" class="form-control" id="user_id" name="user_id" value="{{ user1.id }}" style="display: none;">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="no" name="privacy" value="0" checked>
+                                    <label for="no" class="text-dark">否</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="yes" name="privacy" value="1">
+                                    <label for="yes" class="text-dark">是</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认修改")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="authorityChange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{_("变更用户权限级别")}}</h5>
+                </div>
+                <form method="POST" action="{{ url_for("user.is_admin") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:18rem;">
+                                <div class="card-body">
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                    <input type="number" class="form-control" id="id" name="id" value="{{ user1.id }}" style="display: none;">
+                                    <h5 class="text-dark">{{_("请选择用户权限级别")}}：</h5>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="non-admin" name="usertype" value="0" checked>
+                                    <label for="non-admin">{{_("普通用户")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="K9" name="usertype" value="K9">
+                                    <label for="K9">{{ _("K9级")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="K10" name="usertype" value="K10">
+                                    <label for="K10">{{ _("K10级")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="K11" name="usertype" value="K11">
+                                    <label for="K11">{{ _("K11级")}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认变更")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="organChange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{_("变更所属组织")}}</h5>
+                </div>
+                <form method="POST" action="{{ url_for("user.organ_change") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:18rem;">
+                                <div class="card-body">
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                    <input type="number" class="form-control" id="id" name="id" value="{{ user1.id }}" style="display: none;">
+                                    <h5 class="text-dark">{{_("请选择用户所属组织")}}：</h5>
+                                    {% for organ in organs %}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="{{ organ.id }}" name="organ_id" value="{{ organ.id }}">
+                                        <label for="{{ organ.id }}">{{ organ.organname }}</label><br/>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认变更")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，以判断是否为管理
+        let isAdmin1;
+        {% if user %}
+            get_g("{{ user.usertype }}")
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin1 = g_user_type;
+        }
+
+        // 修改用户信息
+        let genderIn = document.createElement("input");
+        let addressIn = document.createElement("input");
+        let phoneIn = document.createElement("input");
+        let emailIn = document.createElement("input");
+        let schoolIn = document.createElement("input");
+        let stu_numIn = document.createElement("input");
+        let handIn = document.createElement("input");
+        let gripIn = document.createElement("input");
+        let bladeIn = document.createElement("input");
+        let forehandIn = document.createElement("input");
+        let backhandIn = document.createElement("input");
+        let particleIn = document.createElement("input");
+
+        function edit_user(id, btn) {
+            if (isAdmin1 != "K10" && isAdmin1 != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            let genderEl = document.getElementById('gender_' + id);
+            let addressEl = document.getElementById('address_' + id);
+            let phoneEl = document.getElementById('phone_' + id);
+            let emailEl = document.getElementById('email_' + id);
+            let stu_numEl = document.getElementById('stu_num_' + id);
+            let schoolEl = document.getElementById('school_' + id);
+            let handEl = document.getElementById('hand_' + id);
+            let gripEl = document.getElementById('grip_' + id);
+            let bladeEl = document.getElementById('blade_' + id);
+            let forehandEl = document.getElementById('forehand_' + id);
+            let backhandEl = document.getElementById('backhand_' + id);
+            let particleEl = document.getElementById('particle_' + id);
+
+
+            if (btn.innerText === '{{_("确认修改")}}') {
+                genderEl.innerText = genderIn.value;
+                addressEl.innerText = addressIn.value;
+                phoneEl.innerText = phoneIn.value;
+                emailEl.innerText = emailIn.value;
+                schoolEl.innerText = schoolIn.value;
+                stu_numEl.innerText = stu_numIn.value;
+                handEl.innerText = handIn.value;
+                gripEl.innerText = gripIn.value;
+                bladeEl.innerText = bladeIn.value;
+                forehandEl.innerText = forehandIn.value;
+                backhandEl.innerText = backhandIn.value;
+                particleEl.innerText = particleIn.value;
+
+                let data = {
+                    'id': id,
+                    'my_id': {{ user.id }},
+                    'gender': genderIn.value,
+                    'address': addressIn.value,
+                    "phone": phoneIn.value,
+                    'email': emailIn.value,
+                    'school': schoolIn.value,
+                    'stu_num': stu_numIn.value,
+                    'hand': handIn.value,
+                    'grip': gripIn.value,
+                    'blade': bladeIn.value,
+                    'forehand': forehandIn.value,
+                    'backhand': backhandIn.value,
+                    'particle': particleIn.value,
+                }
+                fetch_ajax("POST", "modify_user", data, "user")
+                setTimeout(function () {
+                    alert(res.message);
+                }, 500);
+
+                btn.innerText = '{{_("编辑")}}';
+                return;
+            }
+            btn.innerText = "{{_("确认修改")}}";
+
+            let gender = genderEl.innerText;
+            let address = addressEl.innerText;
+            let phone = phoneEl.innerText;
+            let email = emailEl.innerText;
+            let school = schoolEl.innerText;
+            let stu_num = stu_numEl.innerText;
+            let hand = handEl.innerText;
+            let grip = gripEl.innerText;
+            let blade = bladeEl.innerText;
+            let forehand = forehandEl.innerText;
+            let backhand = backhandEl.innerText;
+            let particle = particleEl.innerText;
+
+            genderIn.value = gender;
+            addressIn.value = address;
+            phoneIn.value = phone;
+            emailIn.value = email;
+            schoolIn.value = school;
+            stu_numIn.value = stu_num;
+            handIn.value = hand;
+            gripIn.value = grip;
+            bladeIn.value = blade;
+            forehandIn.value = forehand;
+            backhandIn.value = backhand;
+            particleIn.value = particle;
+
+            genderEl.innerHTML = "";
+            addressEl.innerHTML = "";
+            phoneEl.innerHTML = "";
+            emailEl.innerHTML = "";
+            schoolEl.innerHTML = "";
+            stu_numEl.innerHTML = "";
+            handEl.innerHTML = "";
+            gripEl.innerHTML = "";
+            bladeEl.innerHTML = "";
+            forehandEl.innerHTML = "";
+            backhandEl.innerHTML = "";
+            particleEl.innerHTML = "";
+
+            genderEl.appendChild(genderIn);
+            addressEl.appendChild(addressIn);
+            phoneEl.appendChild(phoneIn);
+            emailEl.appendChild(emailIn);
+            schoolEl.appendChild(schoolIn);
+            stu_numEl.appendChild(stu_numIn);
+            handEl.appendChild(handIn);
+            gripEl.appendChild(gripIn);
+            bladeEl.appendChild(bladeIn);
+            forehandEl.appendChild(forehandIn);
+            backhandEl.appendChild(backhandIn);
+            particleEl.appendChild(particleIn);
+        }
+
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

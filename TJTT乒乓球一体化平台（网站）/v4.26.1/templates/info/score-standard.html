@@ -1,0 +1,331 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-积分标准{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("积分标准")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Scoring Standard</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ _("TJTT个人积分升降标准")}}</h4>
+                        <h6 class="card-subtitle">{{_("参考中国乒乓球水平积分制度“ChinaTT”")}}</h6>
+                        <br/>
+                        <div class="col-lg-7">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" style="text-align: center;" >
+                                    <thead>
+                                        <tr class="font-weight-bold">
+                                            <th>{{_("选手间积分差")}}</th>
+                                            <th>{{_("积分高者得胜所加积分")}}<br/>{{_("积分低者战败所减积分")}}</th>
+                                            <th>{{_("积分低者得胜所加积分")}}<br/>{{_("积分高者战败所减积分")}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="font-weight-bold">
+                                        <tr>
+                                            <td>0-12</td>
+                                            <td>8</td>
+                                            <td>8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>13-37</td>
+                                            <td>7</td>
+                                            <td>10</td>
+                                        </tr>
+                                        <tr>
+                                            <td>38-62</td>
+                                            <td>6</td>
+                                            <td>13</td>
+                                        </tr>
+                                        <tr>
+                                            <td>63-87</td>
+                                            <td>5</td>
+                                            <td>16</td>
+                                        </tr>
+                                        <tr>
+                                            <td>88-112</td>
+                                            <td>4</td>
+                                            <td>20</td>
+                                        </tr>
+                                        <tr>
+                                            <td>113-137</td>
+                                            <td>3</td>
+                                            <td>25</td>
+                                        </tr>
+                                        <tr>
+                                            <td>138-162</td>
+                                            <td>2</td>
+                                            <td>30</td>
+                                        </tr>
+                                        <tr>
+                                            <td>163-187</td>
+                                            <td>2</td>
+                                            <td>35</td>
+                                        </tr>
+                                        <tr>
+                                            <td>188-212</td>
+                                            <td>1</td>
+                                            <td>40</td>
+                                        </tr>
+                                        <tr>
+                                            <td>213-237</td>
+                                            <td>1</td>
+                                            <td>45</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ _("238以上")}}</td>
+                                            <td>0</td>
+                                            <td>50</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{_("运动员积分预估值参考标准")}}</h4>
+                        <h6 class="card-subtitle">{{_("参考中国乒乓球水平积分制度“ChinaTT”")}}</h6>
+                        <br/>
+                        <div class="col-12">
+                            <div class="card">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" style="text-align: center;">{{_("积分")}}</th>
+                                        <th scope="col" style="text-align: center;">{{_("标准")}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">400</th>
+                                        <td class="font-weight-bold">{{_("刚开始打乒乓球。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">600</th>
+                                        <td class="font-weight-bold">{{_("很有限的打球经验，主要练习能够打到球。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">800</th>
+                                        <td class="font-weight-bold">{{_("需要打球经验，有明显的击球弱点，能打一些和平球，发一些和平球。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">1000</th>
+                                        <td class="font-weight-bold">{{_("开始学习判断球的旋转，对球的控制能力弱，能打一些速度、力量一般的球。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">1200</th>
+                                        <td class="font-weight-bold">{{_("能协调地回击中速球，能简单的使用搓、推、挡、攻等各种击球方法，但缺乏较好方向性、力度和旋转的控制，能发一些有力度和旋转球。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">1400</th>
+                                        <td class="font-weight-bold">{{_("对来球的旋转性和方向性有一定的判断，球的控制能力有提高，能较熟练的使用搓、推、挡、攻等各种击球方法，发球有一些落点、旋转、速度的变化。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">1600</th>
+                                        <td class="font-weight-bold">{{_("正反手击球较稳定，方向感较好。基本掌握前冲弧圈球、高吊弧圈球的区别，对不同打法有一定的了解，熟练掌握3套以上的发球方法，接发球判断较好。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">1800</th>
+                                        <td class="font-weight-bold">
+                                            {{_("熟练运用击球力量、速度、旋转的变化，开始注意步法；了解反胶、长胶、生胶、正胶的不同特点。针对不同的对手采用不同的战术打法，回球落点好，能连续进攻，已经形成自己的打法特点。利用发球为自己创造进攻机会或直接得分，在对手不易判断、用近乎相同的发球动作发出上下旋转变化的球。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">2000</th>
+                                        <td class="font-weight-bold">{{_("有很好的球感、手感和判断力，经常能在比赛中打出精彩的对攻回合球来。经常使用摆、晃、切、挑、挤、弹、抹、快带等技术，能迅速洞悉对手的弱点，及时调整战术，发挥自己的特长和优势。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">2200</th>
+                                        <td class="font-weight-bold">{{_("形成了以速度、技巧、力量和顽强作风作为取胜法宝的风格。在比赛中变化不同的战术，在有压力的情况下仍能稳定地发挥水平，曾接受过一定专业训练，参加过省级水平的比赛。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">2400</th>
+                                        <td class="font-weight-bold">{{_("经过专业强化训练，参加国家级水平的比赛，并有国家定义的运动员级别。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">2600</th>
+                                        <td class="font-weight-bold">{{_("参加规模较小的世界范围内的锦标赛，有合适的机会便会跃升到下一级。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">2800</th>
+                                        <td class="font-weight-bold">{{_("世界级选手，经常参加国际级的比赛，主要收入来自于比赛的奖金。")}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="font-weight-bold" style="text-align: center;">3000</th>
+                                        <td class="font-weight-bold">{{_("奥运冠军、世乒赛单打冠军选手。")}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ _("TJTT积分分数段评级")}}</h4>
+                        <h6 class="card-subtitle">{{_("参考中国乒乓球水平积分制度“ChinaTT”")}}</h6>
+                        <br/>
+{#                        <img src="{{ url_for('static', filename='assets/images/level.png') }}" alt="score" width="700">#}
+                        <div class="col-lg-7">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" style="text-align: center;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">{{_("积分")}}</th>
+                                            <th scope="col">{{_("级别")}}</th>
+                                            <th scope="col">{{_("积分")}}</th>
+                                            <th scope="col">{{_("级别")}}</th>
+                                            <th scope="col">{{_("积分")}}</th>
+                                            <th scope="col">{{_("级别")}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="font-weight-bold">
+                                        <tr>
+                                            <td>{{_("2900及以上")}}</td>
+                                            <td>SS1</td>
+                                            <td>2100-2199</td>
+                                            <td>A3</td>
+                                            <td>1300-1399</td>
+                                            <td>D2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2800-2899</td>
+                                            <td>SS2</td>
+                                            <td>2000-2099</td>
+                                            <td>B1</td>
+                                            <td>1200-1299</td>
+                                            <td>D3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2700-2799</td>
+                                            <td>SS3</td>
+                                            <td>1900-1999</td>
+                                            <td>B2</td>
+                                            <td>1100-1199</td>
+                                            <td>E1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2600-2699</td>
+                                            <td>S1</td>
+                                            <td>1800-1899</td>
+                                            <td>B3</td>
+                                            <td>1000-1099</td>
+                                            <td>E2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2500-2599</td>
+                                            <td>S2</td>
+                                            <td>1700-1799</td>
+                                            <td>C1</td>
+                                            <td>900-999</td>
+                                            <td>E3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2400-2499</td>
+                                            <td>S3</td>
+                                            <td>1600-1699</td>
+                                            <td>C2</td>
+                                            <td>800-899</td>
+                                            <td>F1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2300-2399</td>
+                                            <td>A1</td>
+                                            <td>1500-1599</td>
+                                            <td>C3</td>
+                                            <td>700-799</td>
+                                            <td>F2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2200-2299</td>
+                                            <td>A2</td>
+                                            <td>1400-1499</td>
+                                            <td>D1</td>
+                                            <td>{{_("700以下")}}</td>
+                                            <td>F3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ _("TJTT团体积分说明")}}</h4>
+                        <h6 class="card-subtitle">{{_("TJTT首创积分赛制")}}</h6>
+                        <br/>
+                        <div class="col-11">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center">
+                                    <thead>
+                                        <tr class="font-weight-bold nowrap">
+                                            <th>序号</th>
+                                            <th>说明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="font-weight-bold">
+                                        <tr>
+                                            <td>1</td>
+                                            <td class="text-left">代表队暂以学院、学堂为单位。考虑到不同赛事面对对象有所差异，每个代表队与相应团体赛事绑定，不同赛事中代表队不同。但每位运动员可同时从属多个代表队。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td class="text-left">每个代表队有队员人数上限。且队内积分排名前三的队员为主力队员，在代表队积分计算中具有较大权重。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td class="text-left">代表队（队员数=n）积分计算公式：<br/>n = 0：代表队积分 = 0<br/>0 < n ≤ 3：代表队积分 = 各队员个人积分和 / n<br/>n ≥ 4：代表队积分 = 3名主力个人积分和 / 3 × 0.6 + 其余队员个人积分和 / (n-3) × 0.4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td class="text-left">选手报名团体赛时，需如实选择参赛代表队。若虚假报名其他代表队，将视情况给予相应处罚。报名取消后选手重新报名，上一次报名信息会被覆盖，比赛进行以最后一次报名信息为准。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td class="text-left">团体赛事中，单打比赛积分正常计算；双打比赛以队员积分均值作为双方积分进行计算，计算规则与单打相同。结算时胜方两位选手均加相应积分，负方两位选手均减相应积分。</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td class="text-left">比赛结束后各选手个人积分与各代表队积分将自动同步至“积分排名”中。</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

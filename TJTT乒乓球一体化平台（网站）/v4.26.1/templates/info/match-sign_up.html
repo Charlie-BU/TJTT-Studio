@@ -1,0 +1,98 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-赛事报名{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("赛事报名")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition List</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition Detail</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition Sign up</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+    <div class="card responsive">
+        <div class="card-header">{{_("请确认相关信息，阅读并同意承诺书")}}</div>
+        <div class="card-body">
+            <form class="mt-4" method="POST">
+                <div class="form-group" style="display: none;">
+                    <h5 class="card-title">选手id</h5>
+                    <input type="number" class="form-control" id="user_id" name="user_id" style="width:300px;" value="{{ user.id }}">
+                </div>
+                <div class="form-group" style="display: none;">
+                    <h5 class="card-title">赛事id</h5>
+                    <input type="number" class="form-control" id="match_id" name="match_id" style="width:300px;" value="{{ match1.id }}">
+                </div>
+                <div class="form-group">
+                    <h5 class="card-title">{{_("选手姓名")}}</h5>
+                    <input type="text" class="form-control" id="username" name="username" style="width:300px;" value="{{ user.username }}" disabled>
+                </div>
+                <div class="form-group">
+                    <h5 class="card-title">{{_("手机号")}}</h5>
+                    <input type="tel" class="form-control" id="phone" name="phone" style="width:300px;" value="{{ user.phone }}" disabled>
+                </div>
+                <div class="form-group">
+                    <h5 class="card-title">{{_("身份")}}</h5>
+                    <input type="text" class="form-control" id="role" name="role" style="width:300px;" value="{{ user.role }}" disabled>
+                </div>
+                <div class="form-group">
+                    <h5 class="card-title">{{_("积分")}}</h5>
+                    <input type="number" class="form-control" id="score" name="score" style="width:300px;" value="{{ user.score }}" disabled>
+                </div>
+
+                <hr/>
+                <div class="form-group">
+                    <h5 class="card-title">{{_("报名赛事")}}</h5>
+                    <input type="text" class="form-control" id="match_title" name="match_title" style="width:300px;" value="{{ match1.title }}" disabled>
+                </div>
+                <div class="form-group">
+                    <h5 class="card-title">{{_("报名限制条件")}}</h5>
+                    {% if match1.restriction == "积分限制" %}
+                        <input type="text" class="form-control" id="match_title" name="match_title" style="width:300px;" value="{{ match1.restriction }} | 限制积分范围：{{ match1.score_min }} ~ {{ match1.score_max }}" disabled>
+                    {% else %}
+                        <input type="text" class="form-control" id="match_title" name="match_title" style="width:300px;" value="{{ match1.restriction }}" disabled>
+                    {% endif %}
+                </div>
+                {% if match1.match_type == "男子单打" or match1.match_type == "女子单打" or match1.match_type == "混合单打" %}
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("剩余参赛名额")}}</h5>
+                        <input type="number" class="form-control" id="vacant" name="vacant" style="width:300px;" value="{{ match1.participant - (match1.players | length) }}" disabled>
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("报名代表队")}}</h5>
+                        {% for team_x in teams %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="team_{{ team_x.id }}" name="team_id" value="{{ team_x.id }}">
+                            <label for="team_{{ team_x.id }}" class="text-dark">{{ team_x.teamname }}（{{_("剩余参赛名额")}}：{{ team_x.member_max - team_x.members|length }}）</label><br/>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <h5 class="card-title" style="color: red;">{{_("承诺书")}}</h5>
+                    <h5 class="card-subtitle text-dark">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{_("本人真实姓名")}}{{ user.username }}{{_("，不打假球，不消极比赛，不另注册账号参加积分赛，<br/>不找人替打、帮人替打积分赛，营造公平、公正的比赛环境。若违反上述承诺<br/>，本人自愿接受“永久取消TJTT积分、禁止参加TJTT积分赛”的处罚。")}}</h5>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="agree" name="agree" value="agreed">
+                    <label for="agree" class="text-dark">{{_("同意")}}</label>
+                    <input type="radio" class="form-check-input" id="agree2" name="agree" value="disagreed" style="display: none;" checked>
+                </div>
+                {#flash弹窗#}
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">{{_("确定")}}</button>&nbsp;&nbsp;
+                <a href="javascript:history.back(-1)" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">{{_("取消")}}</a>
+            </form>
+        </div>
+    </div>
+    <!-- Card -->
+
+{% endblock %}

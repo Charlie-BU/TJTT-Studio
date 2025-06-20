@@ -1,0 +1,89 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-赛事成绩{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    {#flash弹窗#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;
+{#            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"#}
+{#                    id="refresh"#}
+{#                    onclick="location.reload()">{{_("刷新")}}#}
+{#            </button>#}
+        </div>
+    {% endfor %}
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("赛事成绩")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition List</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:history.back(-1)">Competition Detail</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Competition Result</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-dark text-center">{{ match1.title }}{{_("赛制")}}：{{ match1.system }}</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered no-wrap text-center">
+                        <thead>
+                        <tr>
+                            <th>{{_("场次")}}</th>
+                            <th>{{_("胜者")}}</th>
+                            <th>{{_("胜者原积分")}}</th>
+                            <th>{{_("胜者结算积分")}}</th>
+                            <th>{{_("负者")}}</th>
+                            <th>{{_("负者原积分")}}</th>
+                            <th>{{_("负者结算积分")}}</th>
+                            <th>{{_("比分")}}</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-weight-bold">
+                        {% for log in logs %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ log.winner_name }}</td>
+                                <td>{{ log.winner_score_before }}</td>
+                                <td>{{ log.winner_score_after }}</td>
+                                <td>{{ log.loser_name }}</td>
+                                <td>{{ log.loser_score_before }}</td>
+                                <td>{{ log.loser_score_after }}</td>
+                                <td>{{ log.result }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <a href="javascript:history.back(-1)" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">{{_("返回")}}</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，以判断是否为管理
+        let isAdmin1;
+        {% if user %}
+            get_g({{ user.usertype }})
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin1 = g_user_type;
+        }
+
+    </script>
+{% endblock %}

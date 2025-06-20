@@ -1,0 +1,1727 @@
+# Translations template for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-02-11 11:03+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.14.0\n"
+
+#: templates/base.html:57
+msgid "首页"
+msgstr ""
+
+#: templates/base.html:60
+msgid "赛事预告"
+msgstr ""
+
+#: templates/base.html:63 templates/info/info_base.html:276
+msgid "信息管理系统"
+msgstr ""
+
+#: templates/base.html:68 templates/info/match-insert_single.html:147
+#: templates/info/match-insert_team.html:141
+msgid "其他"
+msgstr ""
+
+#: templates/base.html:71
+msgid "赛事回顾"
+msgstr ""
+
+#: templates/base.html:83 templates/index.html:254
+msgid "通知公告"
+msgstr ""
+
+#: templates/base.html:89
+msgid "介绍"
+msgstr ""
+
+#: templates/base.html:96 templates/info/info_base.html:198
+msgid "语言"
+msgstr ""
+
+#: templates/base.html:124 templates/info/info_base.html:247
+msgid "退出登录"
+msgstr ""
+
+#: templates/base.html:126 templates/log-in.html:50
+#: templates/log-in_viaph.html:51 templates/sign-up.html:97
+msgid "登录"
+msgstr ""
+
+#: templates/base.html:127 templates/log-in.html:54
+#: templates/log-in_viaph.html:55 templates/sign-up.html:95
+msgid "注册"
+msgstr ""
+
+#: templates/base.html:148
+msgid "联系我们："
+msgstr ""
+
+#: templates/base.html:150
+msgid "友情链接："
+msgstr ""
+
+#: templates/base.html:151
+msgid "同济大学官网"
+msgstr ""
+
+#: templates/base.html:152
+msgid "同济大学体育场馆预约系统"
+msgstr ""
+
+#: templates/forget-psw.html:15 templates/forget-psw2.html:13
+#: templates/log-in.html:56 templates/log-in_viaph.html:57
+msgid "忘记密码"
+msgstr ""
+
+#: templates/forget-psw.html:29 templates/forget-psw2.html:27
+msgid "请填写下列信息以验证您的身份"
+msgstr ""
+
+#: templates/forget-psw.html:35 templates/forget-psw2.html:33
+#: templates/info/my-profile.html:53 templates/info/score-rank.html:112
+#: templates/info/user-detail.html:49 templates/info/user-insert.html:57
+#: templates/info/user-list.html:117 templates/log-in.html:32
+msgid "姓名"
+msgstr ""
+
+#: templates/forget-psw.html:38
+msgid "邮箱验证码"
+msgstr ""
+
+#: templates/forget-psw.html:40 templates/forget-psw.html:84
+msgid "发送邮箱验证码"
+msgstr ""
+
+#: templates/forget-psw.html:48 templates/forget-psw2.html:56
+#: templates/info/match-result-record.html:80
+#: templates/info/match-sign_up.html:91 templates/info/score-update.html:55
+msgid "确定"
+msgstr ""
+
+#: templates/forget-psw.html:50 templates/forget-psw2.html:58
+#: templates/info/match-detail.html:31 templates/info/match-order.html:106
+#: templates/info/match-players.html:79
+#: templates/info/match-result-record.html:81
+#: templates/info/match-result.html:63
+msgid "返回"
+msgstr ""
+
+#: templates/forget-psw.html:79
+msgid "秒后重新发送"
+msgstr ""
+
+#: templates/forget-psw2.html:37 templates/info/match-sign_up.html:41
+#: templates/info/my-profile.html:126 templates/info/user-detail.html:136
+#: templates/info/user-insert.html:67 templates/log-in_viaph.html:33
+#: templates/sign-up.html:45
+msgid "手机号"
+msgstr ""
+
+#: templates/forget-psw2.html:41
+msgid "学校（如已毕业需加“（已毕业）”）"
+msgstr ""
+
+#: templates/forget-psw2.html:45 templates/info/my-profile.html:146
+#: templates/info/user-detail.html:156
+msgid "底板型号"
+msgstr ""
+
+#: templates/forget-psw2.html:49 templates/info/my-profile.html:154
+#: templates/info/user-detail.html:164
+msgid "反手胶皮"
+msgstr ""
+
+#: templates/index.html:2
+msgid "TJTT乒乓球积分赛平台"
+msgstr ""
+
+#: templates/index.html:14
+msgid "2023秋"
+msgstr ""
+
+#: templates/index.html:15
+msgid "乒协学期报告"
+msgstr ""
+
+#: templates/index.html:16
+msgid "“新的一年，<br/>愿大家都能万事随想，所爱如山。”<br/>“从此眼底是绮丽，周遭是晴朗，嘴角是笑意，<br/>耳畔是阜盛烟火，心上凛冬散尽，星河长明。”"
+msgstr ""
+
+#: templates/index.html:19
+msgid "点击查看"
+msgstr ""
+
+#: templates/index.html:39
+msgid "TJTT积分赛（第二期）"
+msgstr ""
+
+#: templates/index.html:40
+msgid "即将开赛"
+msgstr ""
+
+#: templates/index.html:52
+msgid "面向对象"
+msgstr ""
+
+#: templates/index.html:53
+msgid "同济大学全校师生"
+msgstr ""
+
+#: templates/index.html:62
+msgid "报名时间"
+msgstr ""
+
+#: templates/index.html:63
+msgid "开始：2024年2月20日 14:10<br/>截止：2024年2月29日 14:10"
+msgstr ""
+
+#: templates/index.html:72 templates/info/match-detail.html:145
+#: templates/info/match-insert_single.html:96
+#: templates/info/match-insert_team.html:96 templates/info/match-list.html:122
+msgid "比赛时间"
+msgstr ""
+
+#: templates/index.html:73
+msgid "2024年3月1日 9:00 - 13:00"
+msgstr ""
+
+#: templates/index.html:98
+msgid "<br/>TJTT第一期积分赛<br/>（同济乒协内测）<br/>"
+msgstr ""
+
+#: templates/index.html:103
+msgid "<br/>“试点，在于发现问题、探索路径，为宏观决策提供现实依据。”<br/>“试点要取得实效，必须与时俱进。”"
+msgstr ""
+
+#: templates/index.html:105
+msgid "赛况回顾"
+msgstr ""
+
+#: templates/index.html:129
+msgid "同济大学2023新生杯"
+msgstr ""
+
+#: templates/index.html:130 templates/index.html:149
+msgid "点击查看赛况"
+msgstr ""
+
+#: templates/index.html:132
+msgid "与你相约，下一个春天丨同济大学2023年乒乓球新生杯比赛圆满落幕"
+msgstr ""
+
+#: templates/index.html:133
+msgid "“请不要相信胜利就像山坡上的蒲公英一样唾手可得。”<br/>“但请相信，世上总有美好值得我们全力以赴，哪怕粉身碎骨。”"
+msgstr ""
+
+#: templates/index.html:136
+msgid "往届新生杯回顾"
+msgstr ""
+
+#: templates/index.html:148
+msgid "同济大学研究生枫林杯"
+msgstr ""
+
+#: templates/index.html:151
+msgid "乒乓球赛四平路赛区赛事总结回顾"
+msgstr ""
+
+#: templates/index.html:152
+msgid "“每个你都是赛场的主角”<br/>“每个你都是自己的冠军”"
+msgstr ""
+
+#: templates/index.html:154
+msgid "半程赛况回顾"
+msgstr ""
+
+#: templates/index.html:173
+msgid "问题 & 回答"
+msgstr ""
+
+#: templates/index.html:202 templates/index.html:239
+msgid "提问"
+msgstr ""
+
+#: templates/index.html:222
+msgid "发布问题"
+msgstr ""
+
+#: templates/index.html:223
+msgid "任何与乒乓球、同济乒协、TJTT等相关的问题"
+msgstr ""
+
+#: templates/index.html:228 templates/info/answer-questions.html:41
+#: templates/info/answer-questions.html:87
+msgid "问题"
+msgstr ""
+
+#: templates/index.html:237 templates/info/answer-questions.html:39
+msgid "提问者"
+msgstr ""
+
+#: templates/index.html:240 templates/index.html:397
+msgid "关闭"
+msgstr ""
+
+#: templates/index.html:264
+msgid "乒协招新"
+msgstr ""
+
+#: templates/index.html:278 templates/index.html:301 templates/index.html:324
+msgid "查看通知"
+msgstr ""
+
+#: templates/index.html:287
+msgid "乒协干事招新"
+msgstr ""
+
+#: templates/index.html:310
+msgid "TJTT招新面试"
+msgstr ""
+
+#: templates/index.html:341
+msgid "同济大学乒乓球协会"
+msgstr ""
+
+#: templates/index.html:342
+msgid "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里，如果你是久经沙场的乒乓球大佬，可以与其他会员自由切磋，体验比赛的快感，享受打球的乐趣，与隔案的他/她结为朋友；如果你是精益求精的乒乓球爱好者，可以选择多球训练，让基本功更加扎实，让动作更有型；如果你是乒乓球方面的萌新小白，请不要害怕，会有校队的热心温柔的小哥哥、小姐姐亲手教学，资源多多，快来探索吧！"
+msgstr ""
+
+#: templates/index.html:343 templates/info/match-detail.html:372
+#: templates/info/organ-insert.html:62 templates/info/organ-list.html:90
+msgid "简介"
+msgstr ""
+
+#: templates/index.html:370
+msgid "乒协简介"
+msgstr ""
+
+#: templates/index.html:373
+msgid "同济大学乒乓球协会致力于为同济大学乒乓球爱好者提供乒乓球活动平台，组织协会成员积极参与乒乓球运动，感受体育的魅力，组织承办校级乒乓球比赛。让更多的学生从乒乓球这项运动中结交朋友、收获快乐。"
+msgstr ""
+
+#: templates/index.html:374
+msgid "查看赛事举办情况"
+msgstr ""
+
+#: templates/index.html:379
+msgid "风采回顾！同济大学乒乓球队在上海市运会中喜获佳绩！"
+msgstr ""
+
+#: templates/index.html:383
+msgid "徜徉球场，舞动国球音律 —— 同济大学乒乓球校队诚招新秀"
+msgstr ""
+
+#: templates/index.html:387
+msgid "乒乒乓乓 | 同济乒坛呼唤你！"
+msgstr ""
+
+#: templates/index.html:391
+msgid "同济乒坛，爱“乒”才会赢"
+msgstr ""
+
+#: templates/index.html:396 templates/info/match-list.html:150
+#: templates/info/user-list.html:143 templates/info/user-list.html:158
+msgid "详情"
+msgstr ""
+
+#: templates/index.html:410
+msgid "TJTT项目组"
+msgstr ""
+
+#: templates/index.html:427
+msgid "同济大学2021级本科生，环境科学与工程专业，乒乓球国家一级运动员；2023.9-今任同济大学乒乓球校队队长；2023.9-今任乒协教学组组长；2023.8首次将“开球网积分赛”引入阿拉善。"
+msgstr ""
+
+#: templates/index.html:428
+msgid "齐古伯"
+msgstr ""
+
+#: templates/index.html:428
+msgid "负责人"
+msgstr ""
+
+#: templates/index.html:439
+msgid ""
+"同济大学2023级本科生，新生院信息类；2023.6-今担任呼和浩特乒乓球训练中心教练员；2023.8\n"
+"                                                    "
+"第二届“亚萨卡·全世爆”杯乒乓球比赛优秀教练员；2023.9-今同济大学乒乓球校队队员、乒乓球协会教练组干事。"
+msgstr ""
+
+#: templates/index.html:441
+msgid "卜天"
+msgstr ""
+
+#: templates/index.html:441 templates/index.html:454
+#: templates/info/index.html:400 templates/info/index.html:429
+msgid "平台开发"
+msgstr ""
+
+#: templates/index.html:453
+msgid "同济大学2023级博士生，同济大学上海自主智能无人系统科学中心智能科学与技术专业；本科期间，2017-2018担任乒乓球俱乐部部长，2018-2019担任校学生会副主席，2020届优秀毕业生；硕士期间，2021-2022担任遥感导航支部书记，2020、2021、2022年研究生数学建模竞赛国家级奖项，2023届上海市优秀硕士毕业生。"
+msgstr ""
+
+#: templates/index.html:454
+msgid "李沛橦"
+msgstr ""
+
+#: templates/index.html:465
+msgid ""
+"同济大学2022级本科生，经济与管理学院数理金融创新实验区；2022.10-2023.6任团工委宣传部活动策划组长；2023.8 Oxford "
+"Interdisciplinary\n"
+"                                                    Mathematics "
+"Programme评分 A+；2023.9-今任同济大学乒乓球协会组织部负责人。"
+msgstr ""
+
+#: templates/index.html:467
+msgid "张子坤"
+msgstr ""
+
+#: templates/index.html:467
+msgid "组织规划"
+msgstr ""
+
+#: templates/index.html:478
+msgid "同济大学2021级本科生，设计创意学院视觉传达设计专业；2023.9-今任乒乓球协会会长；2022.7-今任同济大学信息办破壁工作室设计组干事。"
+msgstr ""
+
+#: templates/index.html:479
+msgid "杨蕾"
+msgstr ""
+
+#: templates/index.html:479
+msgid "设计创意"
+msgstr ""
+
+#: templates/index.html:491
+msgid "同济大学2021级本科生，土木工程学院智能建造专业；2022.9-2023.9任乒乓球协会宣传部负责人；2023.9-今任乒乓球协会宣传部干事、土木工程学院团委实践部部长、土木工程学院智能建造俱乐部成员。"
+msgstr ""
+
+#: templates/index.html:492
+msgid "黄之婧"
+msgstr ""
+
+#: templates/index.html:492 templates/index.html:505
+msgid "宣传公关"
+msgstr ""
+
+#: templates/index.html:504
+msgid "同济大学2022级硕士研究生，建筑与城市规划学院城市规划专业；2017.9-今乒乓球校队主力队员；2023.9-今任乒乓球协会副会长；2023.9-今任建院团委组织部部长。"
+msgstr ""
+
+#: templates/index.html:505
+msgid "陈祎雯"
+msgstr ""
+
+#: templates/index.html:517
+msgid "同济大学2023级硕士研究生，交通运输工程学院交通运输专业；2021.9-2023.7同济大学学生乒乓球协会会长；2019.9-2022.9美国土木工程师协会同济分会副主席；2022.4-2023.6同济大学破壁工作室新媒体运营部部长；2021.9-2022.6同济大学星光志愿者中队部长。"
+msgstr ""
+
+#: templates/index.html:518
+msgid "郑佳欣"
+msgstr ""
+
+#: templates/index.html:518
+msgid "审核校对"
+msgstr ""
+
+#: templates/index.html:530
+msgid "同济大学2023级硕士研究生，机械与能源工程学院机械专业；2021.3-2022.6同济大学乒乓球协会嘉定分会团支书；2022.11-2023.3粤港澳大数字经济研究院-C/C++软件开发实习生。"
+msgstr ""
+
+#: templates/index.html:531
+msgid "金珂"
+msgstr ""
+
+#: templates/index.html:531
+msgid "技术支持"
+msgstr ""
+
+#: templates/index.html:564
+msgid "团队阶段规划公示"
+msgstr ""
+
+#: templates/index.html:568
+msgid "2024.1-2&nbsp;&nbsp;&nbsp;&nbsp;网页设计、平台架构、小程序开发"
+msgstr ""
+
+#: templates/index.html:572
+msgid "2024.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;平台上线、开题答辩、第二期积分赛举办"
+msgstr ""
+
+#: templates/index.html:576
+msgid "2024.4-9&nbsp;&nbsp;&nbsp;&nbsp;资金申请、后续赛事、第一赛季开启、平台功能拓展"
+msgstr ""
+
+#: templates/index.html:580
+msgid "2024.12-2025.9&nbsp;&nbsp;&nbsp;&nbsp;下发管理权限，与外校取得联系、拓展积分赛业务范围"
+msgstr ""
+
+#: templates/index.html:584
+msgid "2025.9- ∞&nbsp;&nbsp;&nbsp;整合积分赛运行中的各学校选手信息、将积分赛推行至全国高校圈"
+msgstr ""
+
+#: templates/log-in.html:13 templates/log-in_viaph.html:13
+msgid "用户登录"
+msgstr ""
+
+#: templates/info/user-insert.html:106 templates/log-in.html:37
+#: templates/log-in_viaph.html:38 templates/sign-up.html:77
+msgid "密码"
+msgstr ""
+
+#: templates/log-in.html:46 templates/log-in_viaph.html:47
+#: templates/sign-up.html:91
+msgid "我同意网站的"
+msgstr ""
+
+#: templates/log-in.html:47 templates/log-in_viaph.html:48
+#: templates/sign-up.html:92
+msgid "政策"
+msgstr ""
+
+#: templates/log-in.html:47 templates/log-in_viaph.html:48
+#: templates/sign-up.html:92
+msgid "条款和协议"
+msgstr ""
+
+#: templates/log-in.html:55
+msgid "手机号登录"
+msgstr ""
+
+#: templates/log-in_viaph.html:56
+msgid "姓名登录"
+msgstr ""
+
+#: templates/sign-up.html:12
+msgid "用户注册"
+msgstr ""
+
+#: templates/sign-up.html:28
+msgid "姓名（请输入真实姓名）"
+msgstr ""
+
+#: templates/sign-up.html:32
+msgid "性别："
+msgstr ""
+
+#: templates/sign-up.html:34
+msgid "男"
+msgstr ""
+
+#: templates/sign-up.html:38
+msgid "女"
+msgstr ""
+
+#: templates/sign-up.html:50
+msgid "电子邮箱"
+msgstr ""
+
+#: templates/info/match-players.html:50 templates/info/my-profile.html:62
+#: templates/info/score-rank.html:113 templates/info/user-detail.html:58
+#: templates/info/user-insert.html:77 templates/info/user-list.html:119
+#: templates/sign-up.html:55
+msgid "学校"
+msgstr ""
+
+#: templates/sign-up.html:64
+msgid "身份："
+msgstr ""
+
+#: templates/sign-up.html:66
+msgid "学生"
+msgstr ""
+
+#: templates/sign-up.html:70
+msgid "教师"
+msgstr ""
+
+#: templates/sign-up.html:82
+msgid "确认密码"
+msgstr ""
+
+#: templates/info/answer-questions.html:18 templates/info/info_base.html:334
+msgid "问题回答"
+msgstr ""
+
+#: templates/info/answer-questions.html:33
+msgid "问题列表"
+msgstr ""
+
+#: templates/info/answer-questions.html:38 templates/info/match-list.html:119
+#: templates/info/organ-list.html:88 templates/info/user-list.html:116
+msgid "序号"
+msgstr ""
+
+#: templates/info/answer-questions.html:40
+msgid "提问时间"
+msgstr ""
+
+#: templates/info/answer-questions.html:42
+#: templates/info/answer-questions.html:62
+#: templates/info/answer-questions.html:89
+msgid "回答"
+msgstr ""
+
+#: templates/info/answer-questions.html:43 templates/info/match-list.html:125
+#: templates/info/match-players.html:54 templates/info/organ-list.html:92
+#: templates/info/user-list.html:123
+msgid "操作"
+msgstr ""
+
+#: templates/info/answer-questions.html:51
+msgid "匿名访客"
+msgstr ""
+
+#: templates/info/answer-questions.html:67 templates/info/organ-list.html:125
+#: templates/info/user-list.html:153 templates/info/user-list.html:168
+msgid "删除"
+msgstr ""
+
+#: templates/info/answer-questions.html:78
+msgid "回答问题"
+msgstr ""
+
+#: templates/info/answer-questions.html:96
+msgid "提交"
+msgstr ""
+
+#: templates/info/answer-questions.html:97 templates/info/match-detail.html:314
+#: templates/info/match-detail.html:347 templates/info/match-detail.html:381
+#: templates/info/match-insert_single.html:194
+#: templates/info/match-insert_team.html:188
+#: templates/info/match-players.html:123 templates/info/match-sign_up.html:92
+#: templates/info/my-profile.html:194 templates/info/organ-insert.html:72
+#: templates/info/user-detail.html:206 templates/info/user-detail.html:239
+#: templates/info/user-insert.html:125
+msgid "取消"
+msgstr ""
+
+#: templates/info/answer-questions.html:163 templates/info/info_base.html:428
+#: templates/info/info_base.html:437 templates/info/info_base.html:446
+#: templates/info/info_base.html:455 templates/info/info_base.html:464
+#: templates/info/info_base.html:473 templates/info/info_base.html:482
+#: templates/info/info_base.html:491 templates/info/log.html:102
+#: templates/info/match-detail.html:409 templates/info/match-detail.html:440
+#: templates/info/match-players.html:153 templates/info/organ-list.html:112
+#: templates/info/organ-list.html:223 templates/info/user-detail.html:279
+#: templates/info/user-list.html:213 templates/info/user-list.html:229
+#: templates/info/user-list.html:305
+msgid "权限不足"
+msgstr ""
+
+#: templates/info/answer-questions.html:166
+msgid "确定删除该问题"
+msgstr ""
+
+#: templates/info/index.html:13
+msgid "欢迎"
+msgstr ""
+
+#: templates/info/index.html:17
+msgid "Welcome"
+msgstr ""
+
+#: templates/info/index.html:51
+msgid "现有用户"
+msgstr ""
+
+#: templates/info/index.html:64 templates/info/organ-list.html:38
+msgid "全国组织"
+msgstr ""
+
+#: templates/info/index.html:80
+msgid "近期赛事"
+msgstr ""
+
+#: templates/info/index.html:111
+msgid "TJTT项目组成员"
+msgstr ""
+
+#: templates/info/index.html:330
+msgid "TJTT骨干成员"
+msgstr ""
+
+#: templates/info/index.html:350 templates/info/organ-list.html:91
+msgid "成员"
+msgstr ""
+
+#: templates/info/index.html:351
+msgid "负责工作"
+msgstr ""
+
+#: templates/info/index.html:352 templates/info/match-players.html:52
+#: templates/info/my-profile.html:138 templates/info/score-rank.html:116
+#: templates/info/user-detail.html:148
+msgid "所属组织"
+msgstr ""
+
+#: templates/info/index.html:353
+msgid "所在学校"
+msgstr ""
+
+#: templates/info/index.html:354
+msgid "TJTT积分"
+msgstr ""
+
+#: templates/info/index.html:371
+msgid "统筹规划"
+msgstr ""
+
+#: templates/info/info_base.html:227 templates/info/info_base.html:231
+msgid "你好"
+msgstr ""
+
+#: templates/info/info_base.html:240 templates/info/my-profile.html:26
+msgid "个人信息"
+msgstr ""
+
+#: templates/info/info_base.html:244
+msgid "切换用户"
+msgstr ""
+
+#: templates/info/info_base.html:273
+msgid "平台主页"
+msgstr ""
+
+#: templates/info/info_base.html:279
+msgid "应用"
+msgstr ""
+
+#: templates/info/info_base.html:283 templates/info/score-standard.html:8
+msgid "积分标准"
+msgstr ""
+
+#: templates/info/info_base.html:288 templates/info/score-rank.html:10
+msgid "积分排名"
+msgstr ""
+
+#: templates/info/info_base.html:293 templates/info/match-detail.html:211
+#: templates/info/match-sign_up.html:8
+msgid "赛事报名"
+msgstr ""
+
+#: templates/info/info_base.html:298
+msgid "管理"
+msgstr ""
+
+#: templates/info/info_base.html:302 templates/info/user-list.html:20
+msgid "用户列表"
+msgstr ""
+
+#: templates/info/info_base.html:307 templates/info/organ-list.html:10
+msgid "组织管理"
+msgstr ""
+
+#: templates/info/info_base.html:312 templates/info/match-detail.html:45
+msgid "赛事管理"
+msgstr ""
+
+#: templates/info/info_base.html:316 templates/info/score-update.html:8
+msgid "积分更新（手动）"
+msgstr ""
+
+#: templates/info/info_base.html:320 templates/info/match-list.html:20
+msgid "赛事列表"
+msgstr ""
+
+#: templates/info/info_base.html:324 templates/info/match-insert_single.html:51
+msgid "举办赛事（单打）"
+msgstr ""
+
+#: templates/info/info_base.html:328 templates/info/match-insert_team.html:51
+msgid "举办赛事（团体）"
+msgstr ""
+
+#: templates/info/info_base.html:339 templates/info/log.html:18
+msgid "积分变动日志"
+msgstr ""
+
+#: templates/info/log.html:39
+msgid "日志"
+msgstr ""
+
+#: templates/info/log.html:40
+msgid "胜者/积分加者姓名"
+msgstr ""
+
+#: templates/info/log.html:41 templates/info/log.html:44
+msgid "原积分"
+msgstr ""
+
+#: templates/info/log.html:42 templates/info/log.html:45
+msgid "结算积分"
+msgstr ""
+
+#: templates/info/log.html:43
+msgid "负者/积分减者姓名"
+msgstr ""
+
+#: templates/info/log.html:46
+msgid "关联赛事"
+msgstr ""
+
+#: templates/info/log.html:47
+msgid "操作者"
+msgstr ""
+
+#: templates/info/log.html:48
+msgid "变动时间"
+msgstr ""
+
+#: templates/info/log.html:64
+msgid "手动变动"
+msgstr ""
+
+#: templates/info/log.html:74
+msgid "清空所有日志"
+msgstr ""
+
+#: templates/info/log.html:77
+msgid "权限不足，无法访问！"
+msgstr ""
+
+#: templates/info/log.html:105
+msgid "确定清空所有日志"
+msgstr ""
+
+#: templates/info/match-detail.html:21
+msgid "赛事详情"
+msgstr ""
+
+#: templates/info/match-detail.html:52
+msgid "赛事更改"
+msgstr ""
+
+#: templates/info/match-detail.html:55 templates/info/match-detail.html:500
+msgid "修改赛事信息"
+msgstr ""
+
+#: templates/info/match-detail.html:60 templates/info/match-detail.html:286
+msgid "修改报名限制"
+msgstr ""
+
+#: templates/info/match-detail.html:65 templates/info/match-detail.html:328
+msgid "变更主办方"
+msgstr ""
+
+#: templates/info/match-detail.html:69
+msgid "删除赛事"
+msgstr ""
+
+#: templates/info/match-detail.html:80 templates/info/match-detail.html:361
+msgid "添加参赛代表队"
+msgstr ""
+
+#: templates/info/match-detail.html:84
+msgid "添加"
+msgstr ""
+
+#: templates/info/match-detail.html:93
+msgid "查看参赛选手"
+msgstr ""
+
+#: templates/info/match-detail.html:97 templates/info/organ-list.html:108
+#: templates/info/organ-list.html:113
+msgid "人"
+msgstr ""
+
+#: templates/info/match-detail.html:106 templates/info/match-order.html:18
+msgid "赛事成绩管理"
+msgstr ""
+
+#: templates/info/match-detail.html:111
+msgid "进入"
+msgstr ""
+
+#: templates/info/match-detail.html:125
+#: templates/info/match-insert_single.html:57
+#: templates/info/match-insert_team.html:57 templates/info/match-list.html:120
+#: templates/info/match-result-record.html:34
+msgid "赛事名称"
+msgstr ""
+
+#: templates/info/match-detail.html:129
+#: templates/info/match-insert_single.html:63
+#: templates/info/match-insert_team.html:63
+msgid "赛事简介"
+msgstr ""
+
+#: templates/info/match-detail.html:133
+#: templates/info/match-insert_single.html:69
+#: templates/info/match-insert_team.html:69 templates/info/match-list.html:121
+msgid "赛事类型"
+msgstr ""
+
+#: templates/info/match-detail.html:137
+#: templates/info/match-insert_single.html:83
+#: templates/info/match-insert_team.html:83
+msgid "所在地区"
+msgstr ""
+
+#: templates/info/match-detail.html:141
+#: templates/info/match-insert_single.html:89
+#: templates/info/match-insert_team.html:89
+msgid "主办方"
+msgstr ""
+
+#: templates/info/match-detail.html:149
+#: templates/info/match-insert_single.html:132
+#: templates/info/match-insert_team.html:126 templates/info/match-order.html:66
+#: templates/info/match-result.html:36
+msgid "赛制"
+msgstr ""
+
+#: templates/info/match-detail.html:153
+#: templates/info/match-insert_single.html:152
+#: templates/info/match-insert_team.html:146
+msgid "选手报名限制"
+msgstr ""
+
+#: templates/info/match-detail.html:161
+#: templates/info/match-insert_single.html:102
+#: templates/info/match-insert_team.html:102
+msgid "报名开始时间"
+msgstr ""
+
+#: templates/info/match-detail.html:165
+#: templates/info/match-insert_single.html:108
+#: templates/info/match-insert_team.html:108
+msgid "报名截止时间"
+msgstr ""
+
+#: templates/info/match-detail.html:169
+#: templates/info/match-insert_single.html:114
+#: templates/info/match-insert_team.html:114 templates/info/match-list.html:123
+msgid "地点"
+msgstr ""
+
+#: templates/info/match-detail.html:173
+#: templates/info/match-insert_single.html:120
+msgid "最大参赛名额"
+msgstr ""
+
+#: templates/info/match-detail.html:183
+msgid "已报名人数"
+msgstr ""
+
+#: templates/info/match-detail.html:187
+msgid "报名费"
+msgstr ""
+
+#: templates/info/match-detail.html:191
+msgid "冠军奖品"
+msgstr ""
+
+#: templates/info/match-detail.html:195
+msgid "亚军奖品"
+msgstr ""
+
+#: templates/info/match-detail.html:199
+msgid "季军奖品"
+msgstr ""
+
+#: templates/info/match-detail.html:203
+msgid "备注"
+msgstr ""
+
+#: templates/info/match-detail.html:218 templates/info/match-players.html:100
+msgid "参加赛事"
+msgstr ""
+
+#: templates/info/match-detail.html:219
+msgid "未报名选手请点击下列按钮报名参加赛事"
+msgstr ""
+
+#: templates/info/match-detail.html:224
+msgid "报名"
+msgstr ""
+
+#: templates/info/match-detail.html:233
+msgid "放弃参加赛事"
+msgstr ""
+
+#: templates/info/match-detail.html:234
+msgid "已报名选手请点击下列按钮取消报名"
+msgstr ""
+
+#: templates/info/match-detail.html:235
+msgid "取消报名"
+msgstr ""
+
+#: templates/info/match-detail.html:245
+msgid "赛事进行"
+msgstr ""
+
+#: templates/info/match-detail.html:252
+msgid "赛程安排"
+msgstr ""
+
+#: templates/info/match-detail.html:253
+msgid "点击下列按钮查看赛程安排"
+msgstr ""
+
+#: templates/info/match-detail.html:254 templates/info/match-detail.html:267
+msgid "查看"
+msgstr ""
+
+#: templates/info/match-detail.html:261
+msgid "比赛成绩"
+msgstr ""
+
+#: templates/info/match-detail.html:261
+msgid "积分公示"
+msgstr ""
+
+#: templates/info/match-detail.html:262
+msgid "点击下列按钮查看比赛成绩及参赛选手赛后积分"
+msgstr ""
+
+#: templates/info/match-detail.html:295
+msgid "请选择限制条件"
+msgstr ""
+
+#: templates/info/match-detail.html:297
+#: templates/info/match-insert_single.html:155
+#: templates/info/match-insert_team.html:149
+msgid "无限制"
+msgstr ""
+
+#: templates/info/match-detail.html:299
+#: templates/info/match-insert_single.html:158
+#: templates/info/match-insert_team.html:152
+msgid "限制（仅）男子"
+msgstr ""
+
+#: templates/info/match-detail.html:301
+#: templates/info/match-insert_single.html:161
+#: templates/info/match-insert_team.html:155
+msgid "限制（仅）女子"
+msgstr ""
+
+#: templates/info/match-detail.html:303
+#: templates/info/match-insert_single.html:164
+#: templates/info/match-insert_team.html:158
+msgid "限制（仅）学生"
+msgstr ""
+
+#: templates/info/match-detail.html:305
+#: templates/info/match-insert_single.html:167
+#: templates/info/match-insert_team.html:161
+msgid "限制（仅）教师"
+msgstr ""
+
+#: templates/info/match-detail.html:307
+#: templates/info/match-insert_single.html:170
+#: templates/info/match-insert_team.html:164
+msgid "积分限制"
+msgstr ""
+
+#: templates/info/match-detail.html:308
+#: templates/info/match-insert_single.html:171
+#: templates/info/match-insert_team.html:165
+msgid "最低积分"
+msgstr ""
+
+#: templates/info/match-detail.html:308
+#: templates/info/match-insert_single.html:171
+#: templates/info/match-insert_team.html:165
+msgid "最高积分"
+msgstr ""
+
+#: templates/info/match-detail.html:315 templates/info/match-detail.html:348
+#: templates/info/user-detail.html:207 templates/info/user-detail.html:240
+msgid "确认变更"
+msgstr ""
+
+#: templates/info/match-detail.html:337
+msgid "请选择新主办方"
+msgstr ""
+
+#: templates/info/match-detail.html:370
+msgid "代表队名"
+msgstr ""
+
+#: templates/info/match-detail.html:374
+msgid "队员人数上限"
+msgstr ""
+
+#: templates/info/match-detail.html:382 templates/info/match-players.html:124
+#: templates/info/organ-insert.html:67 templates/info/user-insert.html:121
+msgid "确认添加"
+msgstr ""
+
+#: templates/info/match-detail.html:412
+msgid "确定删除该赛事"
+msgstr ""
+
+#: templates/info/match-detail.html:460 templates/info/match-detail.html:503
+#: templates/info/my-profile.html:195 templates/info/my-profile.html:236
+#: templates/info/my-profile.html:269 templates/info/user-detail.html:294
+#: templates/info/user-detail.html:327 templates/info/user-list.html:239
+#: templates/info/user-list.html:262
+msgid "确认修改"
+msgstr ""
+
+#: templates/info/match-detail.html:578
+msgid "确定取消报名"
+msgstr ""
+
+#: templates/info/match-insert_single.html:72
+msgid "男子单打"
+msgstr ""
+
+#: templates/info/match-insert_single.html:75
+msgid "女子单打"
+msgstr ""
+
+#: templates/info/match-insert_single.html:78
+msgid "混合单打"
+msgstr ""
+
+#: templates/info/match-insert_single.html:126
+#: templates/info/match-insert_team.html:120
+msgid "报名费（元）"
+msgstr ""
+
+#: templates/info/match-insert_single.html:135
+#: templates/info/match-insert_team.html:129
+msgid "小组循环赛+淘汰赛"
+msgstr ""
+
+#: templates/info/match-insert_single.html:138
+#: templates/info/match-insert_team.html:132
+msgid "淘汰赛"
+msgstr ""
+
+#: templates/info/match-insert_single.html:141
+#: templates/info/match-insert_team.html:135
+msgid "大循环"
+msgstr ""
+
+#: templates/info/match-insert_single.html:144
+#: templates/info/match-insert_team.html:138
+msgid "小组循环赛（不决名次）"
+msgstr ""
+
+#: templates/info/match-insert_single.html:189
+#: templates/info/match-insert_team.html:183
+msgid "确认"
+msgstr ""
+
+#: templates/info/match-insert_team.html:72
+msgid "男子团体"
+msgstr ""
+
+#: templates/info/match-insert_team.html:75
+msgid "女子团体"
+msgstr ""
+
+#: templates/info/match-insert_team.html:78
+msgid "混合团体"
+msgstr ""
+
+#: templates/info/match-list.html:48
+msgid "当前赛事"
+msgstr ""
+
+#: templates/info/match-list.html:57
+msgid "赛事总数"
+msgstr ""
+
+#: templates/info/match-list.html:66
+msgid "上海市赛事"
+msgstr ""
+
+#: templates/info/match-list.html:76
+msgid "查找赛事"
+msgstr ""
+
+#: templates/info/match-list.html:77
+msgid "请输入赛事名称"
+msgstr ""
+
+#: templates/info/match-list.html:80 templates/info/organ-list.html:62
+#: templates/info/score-rank.html:73 templates/info/user-list.html:90
+msgid "查询"
+msgstr ""
+
+#: templates/info/match-list.html:88
+msgid "其他赛事"
+msgstr ""
+
+#: templates/info/match-list.html:90
+msgid "查看历史赛事"
+msgstr ""
+
+#: templates/info/match-list.html:93
+msgid "查看全部赛事"
+msgstr ""
+
+#: templates/info/match-list.html:101
+msgid "我的赛事"
+msgstr ""
+
+#: templates/info/match-list.html:104
+msgid "查看已报名赛事"
+msgstr ""
+
+#: templates/info/match-list.html:124 templates/info/match-players.html:103
+#: templates/info/match-sign_up.html:68 templates/info/match-sign_up.html:76
+msgid "剩余参赛名额"
+msgstr ""
+
+#: templates/info/match-list.html:141
+msgid "见各队名额"
+msgstr ""
+
+#: templates/info/match-order.html:33
+msgid "注意：对阵双方每场比赛成绩只需录一次，不可重复录入！"
+msgstr ""
+
+#: templates/info/match-order.html:73
+msgid "大循环表"
+msgstr ""
+
+#: templates/info/match-order.html:77 templates/info/match-players.html:53
+#: templates/info/match-sign_up.html:49 templates/info/my-profile.html:80
+#: templates/info/score-rank.html:117 templates/info/score-standard.html:116
+#: templates/info/score-standard.html:200
+#: templates/info/score-standard.html:202
+#: templates/info/score-standard.html:204 templates/info/user-detail.html:76
+#: templates/info/user-insert.html:111 templates/info/user-list.html:121
+msgid "积分"
+msgstr ""
+
+#: templates/info/match-order.html:78 templates/info/score-rank.html:111
+msgid "排名"
+msgstr ""
+
+#: templates/info/match-order.html:94
+msgid "录"
+msgstr ""
+
+#: templates/info/match-players.html:18
+msgid "赛事选手"
+msgstr ""
+
+#: templates/info/match-players.html:35
+msgid "参赛选手"
+msgstr ""
+
+#: templates/info/match-players.html:38
+msgid "添加选手"
+msgstr ""
+
+#: templates/info/match-players.html:45
+msgid "选手"
+msgstr ""
+
+#: templates/info/match-players.html:46 templates/info/my-profile.html:118
+#: templates/info/user-detail.html:128 templates/info/user-list.html:118
+msgid "性别"
+msgstr ""
+
+#: templates/info/match-players.html:48
+msgid "代表队"
+msgstr ""
+
+#: templates/info/match-players.html:51 templates/info/match-sign_up.html:45
+#: templates/info/my-profile.html:71 templates/info/score-rank.html:114
+#: templates/info/user-detail.html:67 templates/info/user-list.html:120
+msgid "身份"
+msgstr ""
+
+#: templates/info/match-players.html:71
+msgid "移除"
+msgstr ""
+
+#: templates/info/match-players.html:90
+msgid "添加参赛选手"
+msgstr ""
+
+#: templates/info/match-players.html:106 templates/info/match-sign_up.html:37
+msgid "选手姓名"
+msgstr ""
+
+#: templates/info/match-players.html:111
+msgid "选手报名代表队"
+msgstr ""
+
+#: templates/info/match-players.html:156
+msgid "确定移除该选手"
+msgstr ""
+
+#: templates/info/match-result-record.html:8
+msgid "成绩录入"
+msgstr ""
+
+#: templates/info/match-result-record.html:26
+msgid "比赛比分录入"
+msgstr ""
+
+#: templates/info/match-result-record.html:39
+msgid "对阵双方"
+msgstr ""
+
+#: templates/info/match-result-record.html:46
+#: templates/info/match-result.html:44
+msgid "比分"
+msgstr ""
+
+#: templates/info/match-result-record.html:71
+msgid "X胜"
+msgstr ""
+
+#: templates/info/match-result-record.html:73
+msgid "Y胜"
+msgstr ""
+
+#: templates/info/match-result-record.html:75
+msgid "注意：成绩录入后选手积分自动计算，该操作不可逆，请务必确认对阵双方及比分正确！"
+msgstr ""
+
+#: templates/info/match-result.html:18
+msgid "赛事成绩"
+msgstr ""
+
+#: templates/info/match-result.html:41
+msgid "场次"
+msgstr ""
+
+#: templates/info/match-result.html:42
+msgid "选手X"
+msgstr ""
+
+#: templates/info/match-result.html:43
+msgid "选手Y"
+msgstr ""
+
+#: templates/info/match-result.html:45
+msgid "选手X积分"
+msgstr ""
+
+#: templates/info/match-result.html:46
+msgid "选手Y积分"
+msgstr ""
+
+#: templates/info/match-sign_up.html:25
+msgid "请确认相关信息，阅读并同意承诺书"
+msgstr ""
+
+#: templates/info/match-sign_up.html:55
+msgid "报名赛事"
+msgstr ""
+
+#: templates/info/match-sign_up.html:59
+msgid "报名限制条件"
+msgstr ""
+
+#: templates/info/match-sign_up.html:73
+msgid "报名代表队"
+msgstr ""
+
+#: templates/info/match-sign_up.html:81
+msgid "承诺书"
+msgstr ""
+
+#: templates/info/match-sign_up.html:82
+msgid "本人真实姓名"
+msgstr ""
+
+#: templates/info/match-sign_up.html:82
+msgid "，不打假球，不消极比赛，不另注册账号参加积分赛，不找人替打、帮人替打积分赛，营造公平、公正的比赛环境。若违反上述承诺，本人自愿接受“永久取消TJTT积分、禁止参加TJTT积分赛”的处罚。"
+msgstr ""
+
+#: templates/info/match-sign_up.html:84
+msgid "同意"
+msgstr ""
+
+#: templates/info/my-profile.html:14
+msgid "重新修改"
+msgstr ""
+
+#: templates/info/my-profile.html:18
+msgid "刷新"
+msgstr ""
+
+#: templates/info/my-profile.html:89
+msgid "修改/完善个人信息"
+msgstr ""
+
+#: templates/info/my-profile.html:92 templates/info/my-profile.html:266
+#: templates/info/organ-list.html:121 templates/info/user-detail.html:89
+#: templates/info/user-detail.html:324 templates/info/user-list.html:148
+#: templates/info/user-list.html:163 templates/info/user-list.html:259
+msgid "编辑"
+msgstr ""
+
+#: templates/info/my-profile.html:101 templates/info/my-profile.html:175
+msgid "修改个人密码"
+msgstr ""
+
+#: templates/info/my-profile.html:105
+msgid "修改"
+msgstr ""
+
+#: templates/info/my-profile.html:122 templates/info/score-rank.html:115
+#: templates/info/user-detail.html:132 templates/info/user-insert.html:116
+msgid "地区"
+msgstr ""
+
+#: templates/info/my-profile.html:130 templates/info/user-detail.html:140
+#: templates/info/user-insert.html:72
+msgid "邮箱"
+msgstr ""
+
+#: templates/info/my-profile.html:134 templates/info/user-detail.html:144
+#: templates/info/user-insert.html:101
+msgid "学号/工号"
+msgstr ""
+
+#: templates/info/my-profile.html:142 templates/info/user-detail.html:152
+msgid "执拍手"
+msgstr ""
+
+#: templates/info/my-profile.html:150 templates/info/user-detail.html:160
+msgid "正手胶皮"
+msgstr ""
+
+#: templates/info/my-profile.html:158 templates/info/user-detail.html:168
+msgid "是否带颗粒"
+msgstr ""
+
+#: templates/info/my-profile.html:183
+msgid "请输入原密码"
+msgstr ""
+
+#: templates/info/my-profile.html:185
+msgid "请输入新密码"
+msgstr ""
+
+#: templates/info/my-profile.html:187
+msgid "请再次输入新密码"
+msgstr ""
+
+#: templates/info/organ-insert.html:52 templates/info/organ-list.html:72
+msgid "添加组织"
+msgstr ""
+
+#: templates/info/organ-insert.html:57 templates/info/organ-list.html:89
+msgid "组织名称"
+msgstr ""
+
+#: templates/info/organ-insert.html:103 templates/info/user-insert.html:165
+msgid "内容输入不完整"
+msgstr ""
+
+#: templates/info/organ-list.html:47
+msgid "上海市组织"
+msgstr ""
+
+#: templates/info/organ-list.html:58
+msgid "查找组织"
+msgstr ""
+
+#: templates/info/organ-list.html:59
+msgid "请输入组织名"
+msgstr ""
+
+#: templates/info/organ-list.html:74
+msgid "点我添加组织"
+msgstr ""
+
+#: templates/info/organ-list.html:226
+msgid "确定删除该组织"
+msgstr ""
+
+#: templates/info/score-rank.html:38
+msgid "选手总数"
+msgstr ""
+
+#: templates/info/score-rank.html:47 templates/info/user-list.html:57
+msgid "学生人数"
+msgstr ""
+
+#: templates/info/score-rank.html:56 templates/info/user-list.html:66
+msgid "教师人数"
+msgstr ""
+
+#: templates/info/score-rank.html:69
+msgid "查找选手"
+msgstr ""
+
+#: templates/info/score-rank.html:70
+msgid "请输入选手姓名"
+msgstr ""
+
+#: templates/info/score-rank.html:81
+msgid "学校排名"
+msgstr ""
+
+#: templates/info/score-rank.html:82
+msgid "请输入学校名称"
+msgstr ""
+
+#: templates/info/score-rank.html:85 templates/info/score-rank.html:97
+msgid "筛选"
+msgstr ""
+
+#: templates/info/score-rank.html:93
+msgid "地区排名"
+msgstr ""
+
+#: templates/info/score-rank.html:94
+msgid "请输入地区"
+msgstr ""
+
+#: templates/info/score-standard.html:25
+msgid "TJTT积分升降标准"
+msgstr ""
+
+#: templates/info/score-standard.html:26 templates/info/score-standard.html:109
+#: templates/info/score-standard.html:192
+msgid "参考中国乒乓球水平积分制度“ChinaTT”"
+msgstr ""
+
+#: templates/info/score-standard.html:34
+msgid "选手间积分差"
+msgstr ""
+
+#: templates/info/score-standard.html:35
+msgid "积分高者得胜所加积分"
+msgstr ""
+
+#: templates/info/score-standard.html:35
+msgid "积分低者战败所减积分"
+msgstr ""
+
+#: templates/info/score-standard.html:36
+msgid "积分低者得胜所加积分"
+msgstr ""
+
+#: templates/info/score-standard.html:36
+msgid "积分高者战败所减积分"
+msgstr ""
+
+#: templates/info/score-standard.html:91
+msgid "238以上"
+msgstr ""
+
+#: templates/info/score-standard.html:108
+msgid "运动员积分预估值参考标准"
+msgstr ""
+
+#: templates/info/score-standard.html:117
+msgid "标准"
+msgstr ""
+
+#: templates/info/score-standard.html:123
+msgid "刚开始打乒乓球。"
+msgstr ""
+
+#: templates/info/score-standard.html:127
+msgid "很有限的打球经验，主要练习能够打到球。"
+msgstr ""
+
+#: templates/info/score-standard.html:131
+msgid "需要打球经验，有明显的击球弱点，能打一些和平球，发一些和平球。"
+msgstr ""
+
+#: templates/info/score-standard.html:135
+msgid "开始学习判断球的旋转，对球的控制能力弱，能打一些速度、力量一般的球。"
+msgstr ""
+
+#: templates/info/score-standard.html:139
+msgid "能协调地回击中速球，能简单的使用搓、推、挡、攻等各种击球方法，但缺乏较好方向性、力度和旋转的控制，能发一些有力度和旋转球。"
+msgstr ""
+
+#: templates/info/score-standard.html:143
+msgid "对来球的旋转性和方向性有一定的判断，球的控制能力有提高，能较熟练的使用搓、推、挡、攻等各种击球方法，发球有一些落点、旋转、速度的变化。"
+msgstr ""
+
+#: templates/info/score-standard.html:147
+msgid "正反手击球较稳定，方向感较好。基本掌握前冲弧圈球、高吊弧圈球的区别，对不同打法有一定的了解，熟练掌握3套以上的发球方法，接发球判断较好。"
+msgstr ""
+
+#: templates/info/score-standard.html:152
+msgid "熟练运用击球力量、速度、旋转的变化，开始注意步法；了解反胶、长胶、生胶、正胶的不同特点。针对不同的对手采用不同的战术打法，回球落点好，能连续进攻，已经形成自己的打法特点。利用发球为自己创造进攻机会或直接得分，在对手不易判断、用近乎相同的发球动作发出上下旋转变化的球。"
+msgstr ""
+
+#: templates/info/score-standard.html:156
+msgid "有很好的球感、手感和判断力，经常能在比赛中打出精彩的对攻回合球来。经常使用摆、晃、切、挑、挤、弹、抹、快带等技术，能迅速洞悉对手的弱点，及时调整战术，发挥自己的特长和优势。"
+msgstr ""
+
+#: templates/info/score-standard.html:160
+msgid "形成了以速度、技巧、力量和顽强作风作为取胜法宝的风格。在比赛中变化不同的战术，在有压力的情况下仍能稳定地发挥水平，曾接受过一定专业训练，参加过省级水平的比赛。"
+msgstr ""
+
+#: templates/info/score-standard.html:164
+msgid "经过专业强化训练，参加国家级水平的比赛，并有国家定义的运动员级别。"
+msgstr ""
+
+#: templates/info/score-standard.html:168
+msgid "参加规模较小的世界范围内的锦标赛，有合适的机会便会跃升到下一级。"
+msgstr ""
+
+#: templates/info/score-standard.html:172
+msgid "世界级选手，经常参加国际级的比赛，主要收入来自于比赛的奖金。"
+msgstr ""
+
+#: templates/info/score-standard.html:176
+msgid "奥运冠军、世乒赛单打冠军选手。"
+msgstr ""
+
+#: templates/info/score-standard.html:191
+msgid "TJTT积分分数段评级"
+msgstr ""
+
+#: templates/info/score-standard.html:201
+#: templates/info/score-standard.html:203
+#: templates/info/score-standard.html:205
+msgid "级别"
+msgstr ""
+
+#: templates/info/score-standard.html:210
+msgid "2900及以上"
+msgstr ""
+
+#: templates/info/score-standard.html:270
+msgid "700以下"
+msgstr ""
+
+#: templates/info/score-update.html:25
+msgid "通过比赛胜负更新积分"
+msgstr ""
+
+#: templates/info/score-update.html:29
+msgid "请输入比赛时间"
+msgstr ""
+
+#: templates/info/score-update.html:33
+msgid "请输入胜者姓名"
+msgstr ""
+
+#: templates/info/score-update.html:35
+msgid "胜者姓名"
+msgstr ""
+
+#: templates/info/score-update.html:38
+msgid "请输入负者姓名"
+msgstr ""
+
+#: templates/info/score-update.html:40
+msgid "负者姓名"
+msgstr ""
+
+#: templates/info/score-update.html:43
+msgid "警告！"
+msgstr ""
+
+#: templates/info/score-update.html:44
+msgid "积分更新后无法撤销，请确保信息无误后在下方输入“确认”。"
+msgstr ""
+
+#: templates/info/user-detail.html:20
+msgid "用户详情"
+msgstr ""
+
+#: templates/info/user-detail.html:86
+msgid "修改用户信息"
+msgstr ""
+
+#: templates/info/user-detail.html:97 templates/info/user-detail.html:220
+msgid "变更所属组织"
+msgstr ""
+
+#: templates/info/user-detail.html:101 templates/info/user-detail.html:114
+msgid "变更"
+msgstr ""
+
+#: templates/info/user-detail.html:110 templates/info/user-detail.html:183
+msgid "变更用户权限级别"
+msgstr ""
+
+#: templates/info/user-detail.html:192
+msgid "请选择用户权限级别"
+msgstr ""
+
+#: templates/info/user-detail.html:194
+msgid "普通用户"
+msgstr ""
+
+#: templates/info/user-detail.html:196
+msgid "K9级"
+msgstr ""
+
+#: templates/info/user-detail.html:198
+msgid "K10级"
+msgstr ""
+
+#: templates/info/user-detail.html:200
+msgid "K11级"
+msgstr ""
+
+#: templates/info/user-detail.html:229
+msgid "请选择用户所属组织"
+msgstr ""
+
+#: templates/info/user-insert.html:52 templates/info/user-list.html:100
+msgid "添加用户"
+msgstr ""
+
+#: templates/info/user-insert.html:62
+msgid "性别（请输入“男”或“女”）"
+msgstr ""
+
+#: templates/info/user-insert.html:82
+msgid "身份（请输入“学生”或“教师”）"
+msgstr ""
+
+#: templates/info/user-insert.html:167
+msgid "性别输入格式错误"
+msgstr ""
+
+#: templates/info/user-insert.html:169
+msgid "身份输入格式错误"
+msgstr ""
+
+#: templates/info/user-list.html:48
+msgid "用户总数"
+msgstr ""
+
+#: templates/info/user-list.html:75
+msgid "管理员"
+msgstr ""
+
+#: templates/info/user-list.html:86
+msgid "查找用户"
+msgstr ""
+
+#: templates/info/user-list.html:87
+msgid "请输入用户名"
+msgstr ""
+
+#: templates/info/user-list.html:102
+msgid "点我添加用户"
+msgstr ""
+
+#: templates/info/user-list.html:122
+msgid "加入时间"
+msgstr ""
+
+#: templates/info/user-list.html:308
+msgid "确定删除该用户"
+msgstr ""
+

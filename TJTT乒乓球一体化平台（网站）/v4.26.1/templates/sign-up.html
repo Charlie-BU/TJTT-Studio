@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}TJTT乒乓球积分赛平台-用户注册{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+    <header class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1 class="text-center">{{_("用户注册")}}</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- Basic -->
+    <div class="ex-form-1 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3">
+                    <div class="text-box mt-5 mb-5">
+
+
+                        <form method="POST" action="{{ user.register }}">
+                            <div class="mb-4 form-floating">
+                                <input name="username" type="text" class="form-control" id="floatingInput2" placeholder="Your name">
+                                <label for="floatingInput2">{{_("姓名（请输入真实姓名）")}}</label>
+                            </div>
+
+                            <div class="d1">
+                                <div class="d1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{_("性别：")}}</div>
+                                <input name="gender" type="radio" class="form-check-input" id="gentleman" value="男">
+                                <label for="gentleman">{{_("男")}}&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="d1">
+                                <input name="gender" type="radio" class="form-check-input" id="lady" value="女">
+                                <label for="lady">{{_("女")}}</label>
+                            </div>
+                            <br/><br/>
+
+                            <div class="mb-4 form-floating">
+                                <input name="phone" type="tel" class="form-control" id="floatingInput3"
+                                       placeholder="Your phone">
+                                <label for="floatingInput3">{{_("手机号")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input type="email" class="form-control" id="floatingInput"
+                                       placeholder="name@example.com" name="email">
+                                <label for="floatingInput">{{_("电子邮箱")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="school" type="text" class="form-control" id="floatingInput5"
+                                       placeholder="Your school">
+                                <label for="floatingInput5">{{_("学校")}}</label>
+                            </div>
+                            {#                            <div class="mb-4 form-floating">#}
+                            {#                                <input name="role" type="text" class="form-control" id="floatingInput6"#}
+                            {#                                       placeholder="Your role">#}
+                            {#                                <label for="floatingInput6">身份（请输入“学生”或“教师”）</label>#}
+                            {#                            </div>#}
+
+                            <div class="d1">
+                                <div class="d1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{_("身份：")}}</div>
+                                <input name="role" type="radio" class="form-check-input" id="student" value="学生">
+                                <label for="student">{{_("学生")}}&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="d1">
+                                <input name="role" type="radio" class="form-check-input" id="teacher" value="教师">
+                                <label for="teacher">{{_("教师")}}&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                            <div class="d1">
+                                <input name="role" type="radio" class="form-check-input" id="others" value="校友及校外人士">
+                                <label for="others">{{_("校友及校外人士")}}</label>
+                            </div>
+                            <br/><br/>
+
+                            <div class="mb-4 form-floating">
+                                <input name="password" type="password" class="form-control" id="floatingPassword"
+                                       placeholder="Password">
+                                <label for="floatingPassword">{{_("密码")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="password2" type="password" class="form-control" id="floatingPassword2"
+                                       placeholder="确认密码">
+                                <label for="floatingPassword2">{{_("确认密码")}}</label>
+                            </div>
+                            {#flash弹窗#}
+                            {% for message in get_flashed_messages() %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endfor %}
+
+                            <div class="mb-4 form-check">
+                                <input type="radio" class="form-check-input" id="agree" name="agree" value="agreed">
+                                <label class="form-check-label" for="agree">{{_("我同意网站的")}} <a
+                                        href={{ url_for('privacy') }}>{{_("政策")}}</a> <a href={{ url_for('terms') }}>{{_("条款和协议")}}</a></label>
+                                <input type="radio" class="form-check-input" id="agree2" name="agree" value="disagreed" checked style="display: none;">
+                            </div>
+                            <button type="submit" class="form-control-submit-button">{{_("注册")}}</button>
+                        </form>
+                        <br/><button class="other-button" onclick="location='{{ url_for('user.login') }}'">{{_("登录")}}</button>
+
+                    </div> <!-- end of text-box -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of ex-basic-1 -->
+    <!-- end of basic -->
+
+    {% block scripts %}
+        <!-- All Required js -->
+        <!-- ============================================================== -->
+        <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="{{ url_for('static', filename='assets/libs/popper.js/dist/umd/popper.min.js') }} "></script>
+        <script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.min.js') }} "></script>
+        <!-- ============================================================== -->
+        <!-- This page plugin js -->
+        <!-- ============================================================== -->
+        <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+        <script>
+            $(".preloader ").fadeOut();
+        </script>
+        <style>.d1 {
+            display: inline-block;
+        }</style>
+
+
+    {% endblock %}
+{% endblock %}

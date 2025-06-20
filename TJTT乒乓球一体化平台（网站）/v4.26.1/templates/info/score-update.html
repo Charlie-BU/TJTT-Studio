@@ -1,0 +1,147 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-积分更新（手动）{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("积分更新（手动）")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Management</li>
+                            <li class="breadcrumb-item">Competition Management</li>
+                            <li class="breadcrumb-item" aria-current="page">Score Update (Manual)</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="card" style="width: 50rem;">
+            <div class="card-header">{{_("通过比赛胜负更新积分（单打）")}}</div>
+            <div class="card-body">
+                <form class="mt-4" method="POST" action="{{ url_for("competition.score_update") }}">
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("请选择赛事")}}</h5>
+                        <select class="form-control" id="match_title" name="match_title" style="width: 300px;">
+                        <option selected style="color: orangered;">其他赛事</option>
+                            {% for match_x in matches %}
+                                <option>{{ match_x.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("请输入胜者姓名")}}</h5>
+                        <input type="text" class="form-control" id="winner" name="winner" style="width:300px;"
+                               placeholder="{{_("胜者姓名")}}">
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("请输入负者姓名")}}</h5>
+                        <input type="text" class="form-control" id="loser" name="loser" style="width:300px;"
+                               placeholder="{{_("负者姓名")}}">
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("比分")}}（胜 : 负）</h5>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r1" name="result" value="2:0">
+                        <label for="r1">2:0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r2" name="result" value="2:1">
+                        <label for="r2">2:1</label><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r5" name="result" value="3:0">
+                        <label for="r5">3:0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r6" name="result" value="3:1">
+                        <label for="r6">3:1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r7" name="result" value="3:2">
+                        <label for="r7">3:2</label><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r11" name="result" value="4:x">
+                        <label for="r11">4:x</label>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title" style="color: red;">{{_("警告！")}}</h5>
+                        <h6 class="card-subtitle">{{_("积分更新后无法撤销，请确保信息无误后在下方输入“确认”。")}}</h6>
+                        <input type="text" class="form-control" id="confirm" name="confirm" style="width:300px;">
+                    </div>
+                    {#用这个给表单把用户id和用户类型提交过去，在后端判断是不是管理、写进日志#}
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="user_id" name="user_id" value="{{ user.id }}" style="display: none;">
+                    </div>
+                    {#flash弹窗#}
+                    {% for message in get_flashed_messages() %}
+                        <div class="alert alert-info">{{ message }}</div>
+                    {% endfor %}
+                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">{{_("确定")}}</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card" style="width: 50rem;">
+            <div class="card-header">{{_("通过比赛胜负更新积分（双打）")}}</div>
+            <div class="card-body">
+                <form class="mt-4" method="POST" action="{{ url_for("competition.score_update_double") }}">
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("请选择赛事")}}</h5>
+                        <select class="form-control" id="match_title" name="match_title" style="width: 300px;">
+                        <option selected style="color: orangered;">其他赛事</option>
+                            {% for match_x in matches %}
+                                <option>{{ match_x.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("请输入胜方选手姓名")}}</h5>
+                        <input type="text" class="form-control" id="winner" name="winner1" style="width:300px;"
+                               placeholder="{{_("选手1")}}">
+                        <input type="text" class="form-control" id="winner" name="winner2" style="width:300px;"
+                               placeholder="{{_("选手2")}}">
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("请输入负方选手姓名")}}</h5>
+                        <input type="text" class="form-control" id="winner" name="loser1" style="width:300px;"
+                               placeholder="{{_("选手1")}}">
+                        <input type="text" class="form-control" id="winner" name="loser2" style="width:300px;"
+                               placeholder="{{_("选手2")}}">
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("比分")}}（胜 : 负）</h5>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r1_2" name="result2" value="2:0">
+                        <label for="r1_2">2:0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r2_2" name="result2" value="2:1">
+                        <label for="r2_2">2:1</label><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r5_2" name="result2" value="3:0">
+                        <label for="r5_2">3:0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r6_2" name="result2" value="3:1">
+                        <label for="r6_2">3:1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r7_2" name="result2" value="3:2">
+                        <label for="r7_2">3:2</label><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r11_2" name="result2" value="4:x">
+                        <label for="r11_2">4:x</label>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title" style="color: red;">{{_("警告！")}}</h5>
+                        <h6 class="card-subtitle">{{_("积分更新后无法撤销，请确保信息无误后在下方输入“确认”。")}}</h6>
+                        <input type="text" class="form-control" id="confirm" name="confirm" style="width:300px;">
+                    </div>
+                    {#用这个给表单把用户id和用户类型提交过去，在后端判断是不是管理、写进日志#}
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="user_id" name="user_id" value="{{ user.id }}" style="display: none;">
+                    </div>
+                    {#flash弹窗#}
+                    {% for message in get_flashed_messages() %}
+                        <div class="alert alert-info">{{ message }}</div>
+                    {% endfor %}
+                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">{{_("确定")}}</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

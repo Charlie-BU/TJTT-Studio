@@ -1,0 +1,403 @@
+{
+	"easycom": {
+	    "^u-(.*)": "@/uni_modules/vk-uview-ui/components/u-$1/u-$1.vue"
+	  },
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "主页",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+			
+		},
+		{
+			"path": "pages/index/issue-notice",
+			"style": {
+				"navigationBarTitleText": "发布通知公告",
+				"navigationStyle": "custom"  
+			}
+		},
+		{
+			"path": "pages/score-ranking/index",
+			"style": {
+				"navigationBarTitleText": "积分排名",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/my/modify-info",
+			"style": {
+				"navigationBarTitleText": "修改个人信息",
+				"navigationStyle": "custom"  
+			}
+		},
+		{
+			"path": "pages/my/modify-psw",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"navigationStyle": "custom"  
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+			
+		},
+		{
+			"path": "pages/login/login_viaph",
+			"style": {
+				"navigationBarTitleText": "手机号登录",
+				"navigationStyle": "custom"
+			}
+			
+		},
+		{
+			"path": "pages/login/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationStyle": "custom"
+			}
+			
+		},
+		{
+			"path": "pages/login/forget_psw",
+			"style": {
+				"navigationBarTitleText": "忘记密码",
+				"navigationStyle": "custom"
+			}
+			
+		},
+		{
+			"path": "pages/login/wx-bind",
+			"style": {
+				"navigationBarTitleText": "微信绑定",
+				"navigationStyle": "custom"
+			}
+			
+		},
+		{
+			"path": "pages/community/index",
+			"style": {
+				"navigationBarTitleText": "交流",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/community/send-play-post",
+			"style": {
+				"navigationBarTitleText": "发布约球帖",
+				"navigationStyle": "custom"  
+			}
+		},
+		{
+			"path": "pages/management/index",
+			"style": {
+				"navigationBarTitleText": "TJTT平台管理",
+				"navigationBarBackgroundColor":"#FEF2DA"
+			}
+		},
+		{
+			"path": "pages/apps/index",
+			"style": {
+				"navigationBarTitleText": "应用",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/apps/standard",
+			"style": {
+				"navigationBarTitleText": "TJTT积分标准",
+				"navigationBarBackgroundColor":"#FEF2DA"
+			}
+		},
+		{
+			"path": "pages/apps/TJTTers",
+			"style": {
+				"navigationBarTitleText": "TJTT工作室成员",
+				"navigationBarBackgroundColor":"#FEF2DA"
+			}
+		},
+		{
+			"path": "pages/apps/modify-TJTTer-info",
+			"style": {
+				"navigationBarTitleText": "修改TJTT工作室成员信息",
+				"navigationStyle": "custom"  
+			}
+		},
+		{
+			"path": "pages/apps/athlete",
+			"style": {
+				"navigationBarTitleText": "乒乓球运动员",
+				"navigationBarBackgroundColor":"#FEF2DA"
+			}
+		}
+	],
+	
+	"subPackages":[
+		{
+			"root":"page_subjec",
+			"pages":[
+				{
+					"path": "user/user-list",
+					"style": {
+						"navigationBarTitleText": "用户管理",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					}
+				},
+				{
+					"path": "user/add-user",
+					"style": {
+						"navigationBarTitleText": "添加用户",
+						"navigationStyle": "custom"
+					}
+					
+				},
+				{
+					"path": "user/user-detail",
+					"style": {
+						"navigationBarTitleText": "用户详情",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					}
+				},
+				{
+					"path": "user/modify-user-info",
+					"style": {
+						"navigationBarTitleText": "修改用户信息",
+						"navigationStyle": "custom"  
+					}
+				},
+				{
+					"path": "organization/organ-list",
+					"style": {
+						"navigationBarTitleText": "组织管理",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					}
+				},
+				{
+					"path": "organization/add-organ",
+					"style": {
+						"navigationBarTitleText": "添加组织",
+						"navigationStyle": "custom"
+					}
+					
+				},
+				{
+					"path": "match/score-update",
+					"style": {
+						"navigationBarTitleText": "积分更新（手动）",
+						"navigationStyle": "custom"
+					}
+					
+				},
+				{
+					"path": "team/team-list",
+					"style": {
+						"navigationBarTitleText": "代表队管理",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					}
+				},
+				{
+					"path": "team/add-team",
+					"style": {
+						"navigationBarTitleText": "添加代表队",
+						"navigationStyle": "custom"
+					}
+					
+				},
+				{
+					"path": "team/members",
+					"style": {
+						"navigationBarTitleText": "代表队队员",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "match/index",
+					"style": {
+						"navigationBarTitleText": "赛事报名",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					}
+				},
+				{
+					"path": "match/sign_up",
+					"style": {
+						"navigationBarTitleText": "报名赛事",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "match/detail",
+					"style": {
+						"navigationBarTitleText": "赛事详情",
+						"navigationBarBackgroundColor":"#FEF2DA"
+	
+					}
+				},
+				{
+					"path": "match/hold-match",
+					"style": {
+						"navigationBarTitleText": "举办赛事",
+						"navigationStyle": "custom"
+					
+					}
+				},
+				{
+					"path": "match/modify-match-info",
+					"style": {
+						"navigationBarTitleText": "修改赛事信息",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "match/players",
+					"style": {
+						"navigationBarTitleText": "参赛选手",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "match/result-management",
+					"style": {
+						"navigationBarTitleText": "赛事成绩管理",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "match/result-record",
+					"style": {
+						"navigationBarTitleText": "赛事成绩录入",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "match/result-announce",
+					"style": {
+						"navigationBarTitleText": "赛事成绩",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "agendas/index",
+					"style": {
+						"navigationBarTitleText": "库",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					}
+				},
+				{
+					"path": "log/score-log",
+					"style": {
+						"navigationBarTitleText": "积分变动日志",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "log/action-log",
+					"style": {
+						"navigationBarTitleText": "用户操作日志",
+						"navigationBarBackgroundColor":"#FEF2DA"
+					
+					}
+				},
+				{
+					"path": "webview/TTTA",
+					"style": {
+						"navigationBarTitleText": "TTTA介绍",
+						"navigationBarBackgroundColor":"#FEF2DA",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "webview/studio-intro",
+					"style": {
+						"navigationBarTitleText": "TJTT Studio介绍文档",
+						"navigationBarBackgroundColor":"#FEF2DA",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "motto/add-motto",
+					"style": {
+						"navigationBarTitleText": "添加乒乓语录",
+						"navigationBarBackgroundColor":"#FEF2DA"
+						
+					}
+				}
+			]
+		}
+	],
+	
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "TJTT",
+		"navigationBarBackgroundColor": "#ffffff"
+	},
+	"tabBar": {
+		"custom": true,
+		"color": "#000000",
+		"selectedColor": "#F25C07",
+		"borderStyle": "white",
+		"backgroundColor": "#f7f7f7",
+		"midButton": {
+			"text": "xxx",
+			"pagePath": "pages/score-ranking/index",
+			"iconPath": "static/tabbar/g.png",
+			"selectedIconPath": "static/tabbar/g.png"
+		},
+		"list": [
+			{
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/Ahome.png",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"iconPath": "static/tabbar/shop.png",
+				"selectedIconPath": "static/tabbar/Ashop.png",
+				"pagePath": "pages/apps/index"
+			},
+			{
+				"iconPath": "static/tabbar/g.png",
+				"selectedIconPath": "static/tabbar/g.png",
+				"pagePath": "pages/score-ranking/index"
+			},
+			{
+				"iconPath": "static/tabbar/list.png",
+				"selectedIconPath": "static/tabbar/lis.png",
+				"pagePath": "pages/community/index"
+			},
+			{
+				"iconPath": "static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/Amy.png",
+				"pagePath": "pages/my/index"
+			}
+			
+		],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+	 }
+}

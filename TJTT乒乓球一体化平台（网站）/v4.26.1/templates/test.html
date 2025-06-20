@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Table Cell</title>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <td id="cell1">Editable Content 1</td>
+        <td id="cell2">Editable Content 2</td>
+        <td id="cell3">Editable Content 3</td>
+        <td><button onclick="makeEditable('cell1')">Edit</button></td>
+        <td><button onclick="makeEditable('cell2')">Edit</button></td>
+        <td><button onclick="makeEditable('cell3')">Edit</button></td>
+    </tr>
+</table>
+
+<script>
+function makeEditable(cellId) {
+    // 获取当前的 <td> 元素
+    var cell = document.getElementById(cellId);
+
+    // 获取 <td> 元素的文本内容
+    var cellText = cell.innerText;
+
+    // 创建一个 <input> 元素
+    var inputElement = document.createElement("input");
+
+    // 将 <input> 的值设置为 <td> 的文本内容
+    inputElement.value = cellText;
+
+    // 替换 <td> 元素为 <input> 元素
+    cell.innerHTML = "";
+    cell.appendChild(inputElement);
+
+    // 焦点自动定位到 input 元素
+    inputElement.focus();
+
+    // 在 input 失去焦点时，将输入的值赋给 <td>，并移除 input 元素
+    inputElement.addEventListener("blur", function() {
+        cell.innerText = inputElement.value;
+    });
+}
+</script>
+
+</body>
+</html>

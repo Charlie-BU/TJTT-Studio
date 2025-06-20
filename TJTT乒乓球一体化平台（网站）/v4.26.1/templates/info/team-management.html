@@ -1,0 +1,238 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-代表队管理{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;
+{#            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"#}
+{#                    id="refresh"#}
+{#                    onclick="location.reload()">{{_("刷新")}}#}
+{#            </button>#}
+        </div>
+    {% endfor %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("代表队管理")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Management</li>
+                            <li class="breadcrumb-item" aria-current="page">Team Management</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- basic table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <!--查找代表队-->
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("查找代表队")}}</h4>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-outline-info dropdown-toggle btn-rounded"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">选择绑定赛事</button>
+                                            <div class="dropdown-menu">
+                                                <h6 class="dropdown-header">团体赛列表</h6>
+                                                <a class="dropdown-item" href="{{ url_for("competition.team_management") }}">全部</a>
+                                                {% for match in all_matches %}
+                                                    <form method="GET" action="{{ url_for("competition.filter_team") }}">
+                                                        <input class="form-check-input" type="number" name="match_id" value="{{ match.id }}" style="display: none;">
+                                                        <button type="submit" class="dropdown-item">{{ match.title }}</button>
+                                                    </form>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--添加组织-->
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("添加代表队")}}</h4>
+                                        <button onclick=""
+                                                class="btn waves-effect waves-light btn-rounded btn-outline-primary" disabled>{{_("请在团体赛“赛事详情”中添加")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--表格-->
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                        <thead>
+                        <tr style="text-align: center;">
+                            <th>{{_("序号")}}</th>
+                            <th>{{_("代表队名称")}}</th>
+                            <th>{{_("代表队积分")}}</th>
+                            <th>{{_("绑定赛事")}}</th>
+                            <th>{{_("队员")}}</th>
+                            <th>{{_("队员人数上限")}}</th>
+                            <th>{{_("简介")}}</th>
+                            <th>{{_("操作")}}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody class="font-weight-bold">
+                        {% for team in teams %}
+                            <tr style="text-align: center;">
+                                <td>{{ loop.index }}</td>
+                                <td id="teamname_{{ team.id }}">{{ team.teamname }}</td>
+                                <td id="score_{{ team.id }}">{{ team.score }}</td>
+                                <td id="match_{{ team.id }}">{{ team.match.title }}</td>
+                                <td>
+                                    <form method="GET" action="/competition/team_members">
+                                        <input class="form-control" name="team_id" value="{{ team.id }}" style="display: none;">
+                                        <button type="submit"
+                                                class="btn waves-effect waves-light btn-rounded btn-outline-info">{{ team.members | length }}{{_("人")}}
+                                        </button>
+                                    </form>
+                                </td>
+                                <td id="member_max_{{ team.id }}">{{ team.member_max }}</td>
+                                <td id="teamname_{{ team.id }}">{{ team.description }}</td>
+                                <td>
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-info"
+                                            id="change_match_{{ team.id }}"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#changeMatch_{{ team.id }}">{{ _("变更绑定赛事") }}
+                                    </button>
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-info"
+                                            id="modify_max_{{ team.id }}"
+                                            onclick="modify_max('{{ team.id }}', this)">{{_("修改人数上限")}}
+                                    </button>
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+                                            id="user_delete_{{ team.id }}" onclick="delete_team({{ team.id }})">{{_("删除")}}
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <div class="modal fade" id="changeMatch_{{ team.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">{{_("变更绑定赛事")}}</h5>
+                                        </div>
+                                        <form method="POST" action="{{ url_for("competition.match_change") }}">
+                                            <div class="modal-body">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                                    <div class="card" style="width:18rem;">
+                                                        <div class="card-body">
+                                                            <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                                            <input type="number" class="form-control" id="team_id" name="team_id" value="{{ team.id }}" style="display: none;">
+                                                            <h5 class="text-dark">{{_("请选择新绑定赛事")}}：</h5>
+                                                            {% for match in matches %}
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="select_{{ match.id }}" name="match_id" value="{{ match.id }}">
+                                                                <label for="select_{{ match.id }}">{{ match.title }}</label><br/>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认变更")}}</button>
+                                                <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，判断是否为管理
+        let isAdmin2;
+        {% if user %}
+            get_g("{{ user.usertype }}")
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin2 = g_user_type;
+        }
+
+        // 修改人数上限
+        let member_maxIn = document.createElement("input");
+
+        function modify_max(id, btn) {
+            if (isAdmin2 != "K10" && isAdmin2 != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            let member_maxEl = document.getElementById('member_max_' + id);
+
+
+            if (btn.innerText === '{{_("确认修改")}}') {
+                member_maxEl.innerText = member_maxIn.value;
+                let data = {
+                    'my_id': {{ user.id }},
+                    'id': id,
+                    'member_max': member_maxIn.value,
+                    "my_id": {{ user.id }},
+                }
+                fetch_ajax("POST", "modify_max", data, "competition")
+                setTimeout(function () {
+                    alert(res.message);
+                }, 500);
+
+                btn.innerText = '{{_("修改人数上限")}}';
+                return;
+            }
+            btn.innerText = "{{_("确认修改")}}";
+
+            let member_max = member_maxEl.innerText;
+
+            member_maxIn.value = member_max;
+            member_maxEl.innerHTML = "";
+            member_maxEl.appendChild(member_maxIn);
+
+        }
+        
+        // 删除代表队
+        function delete_team(id) {
+            if (isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            if (confirm("{{_("确定删除该代表队")}}？")) {
+                fetch_ajax('POST', 'delete_team', {'id': id, 'my_id': {{ user.id }}}, "competition")
+                setTimeout(function () {
+                    alert(res.message);
+                    location.reload();
+                }, 500);
+            }
+        }
+
+    </script>
+{% endblock %}

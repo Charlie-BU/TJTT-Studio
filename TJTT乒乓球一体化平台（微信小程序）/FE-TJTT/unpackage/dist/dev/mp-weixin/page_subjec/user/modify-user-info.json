@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "修改用户信息",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-icon": "../../uni_modules/vk-uview-ui/components/u-icon/u-icon"
+  }
+}

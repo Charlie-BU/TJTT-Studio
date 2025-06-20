@@ -1,0 +1,104 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/issue-notice",
+    "pages/score-ranking/index",
+    "pages/my/index",
+    "pages/my/modify-info",
+    "pages/my/modify-psw",
+    "pages/login/login",
+    "pages/login/login_viaph",
+    "pages/login/register",
+    "pages/login/forget_psw",
+    "pages/login/wx-bind",
+    "pages/community/index",
+    "pages/community/send-play-post",
+    "pages/management/index",
+    "pages/apps/index",
+    "pages/apps/standard",
+    "pages/apps/TJTTers",
+    "pages/apps/modify-TJTTer-info",
+    "pages/apps/athlete"
+  ],
+  "subPackages": [
+    {
+      "root": "page_subjec",
+      "pages": [
+        "user/user-list",
+        "user/add-user",
+        "user/user-detail",
+        "user/modify-user-info",
+        "organization/organ-list",
+        "organization/add-organ",
+        "match/score-update",
+        "team/team-list",
+        "team/add-team",
+        "team/members",
+        "match/index",
+        "match/sign_up",
+        "match/detail",
+        "match/hold-match",
+        "match/modify-match-info",
+        "match/players",
+        "match/result-management",
+        "match/result-record",
+        "match/result-announce",
+        "agendas/index",
+        "log/score-log",
+        "log/action-log",
+        "webview/TTTA",
+        "webview/studio-intro",
+        "motto/add-motto"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "TJTT",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#F25C07",
+    "borderStyle": "white",
+    "backgroundColor": "#f7f7f7",
+    "list": [
+      {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/Ahome.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "iconPath": "static/tabbar/shop.png",
+        "selectedIconPath": "static/tabbar/Ashop.png",
+        "pagePath": "pages/apps/index"
+      },
+      {
+        "iconPath": "static/tabbar/g.png",
+        "selectedIconPath": "static/tabbar/g.png",
+        "pagePath": "pages/score-ranking/index"
+      },
+      {
+        "iconPath": "static/tabbar/list.png",
+        "selectedIconPath": "static/tabbar/lis.png",
+        "pagePath": "pages/community/index"
+      },
+      {
+        "iconPath": "static/tabbar/my.png",
+        "selectedIconPath": "static/tabbar/Amy.png",
+        "pagePath": "pages/my/index"
+      }
+    ],
+    "globalStyle": {
+      "navigationBarTextStyle": "black",
+      "navigationBarTitleText": "",
+      "navigationBarBackgroundColor": "#F8F8F8",
+      "backgroundColor": "#F8F8F8"
+    }
+  },
+  "usingComponents": {
+    "tabbar": "/components/tabbar/index",
+    "cu-custom": "/components/colorui/components/cu-custom"
+  }
+}

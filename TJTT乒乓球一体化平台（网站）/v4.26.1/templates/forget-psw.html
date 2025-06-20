@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}TJTT乒乓球积分赛平台-忘记密码{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <!-- Header -->
+    <header class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1 class="text-center">{{_("忘记密码")}}</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    <!-- Basic -->
+    <div class="ex-form-1 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3">
+                    <div class="text-box mt-5 mb-5">
+                        <h6 class="mb-4">{{_("请填写下列信息以验证您的身份")}}</h6>
+
+                        <!-- Form -->
+                        <form method="POST">
+                            <div class="mb-4 form-floating">
+                                <input name="username" type="text" class="form-control" id="floatingInput1" placeholder="">
+                                <label for="floatingInput1">{{_("姓名")}}</label>
+                            </div>
+                            <div class="mb-4 input-group">
+                                <input name="captcha" type="text" class="form-control" id="floatingInput3" placeholder="{{_("邮箱验证码")}}">
+                                <div class="input-group-append">
+                                    <button id="send_captcha" class="btn btn-outline-secondary" type="button" style="height: 58px;">{{_("发送邮箱验证码")}}</button>
+                                </div>
+                            </div>
+                            {#flash弹窗#}
+                            {% for message in get_flashed_messages() %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endfor %}
+
+                            <button type="submit" class="form-control-submit-button">{{_("确定")}}</button>
+                        </form>
+                        <br/><button class="other-button" onclick="location='{{ url_for('user.login') }}'">{{_("返回")}}</button>
+
+                    </div> <!-- end of text-box -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of ex-basic-1 -->
+    <!-- end of basic -->
+
+    {% block scripts %}
+        <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+        <!--本页面用到的函数-->
+        <script type="text/javascript">
+            function bindEmailCaptchaClick() {
+                $("#send_captcha").click(function (event) {
+                    var $this = $(this);
+                    // 阻止默认事件把表单提交
+                    event.preventDefault();
+                    var username = $("input[name='username']").val();
+                    $.ajax({
+                        url: "/user/send_captcha?username=" + username,
+                        method: "GET",
+                        success: function (result) {
+                            var status = result["status"];
+                            if (status == 200) {
+                                var countdown = 60;
+                                // 取消按钮点击事件
+                                $this.off("click");
+                                var timer = setInterval(function () {
+                                    $this.text(countdown+"{{_("秒后重新发送")}}");
+                                    countdown -= 1;
+                                    // 倒计时结束
+                                    if (countdown <= 0) {
+                                        clearInterval(timer);
+                                        $this.text("{{_("发送邮箱验证码")}}");
+                                        // 重新绑定点击事件
+                                        bindEmailCaptchaClick();
+                                    }
+                                }, 1000);
+                                alert(result["message"]);
+                            } else {
+                                alert(result["message"]);
+                            }
+                        },
+                        fail: function (error) {
+                            console.log(error);
+                        }
+                    })
+                });
+            }
+
+            $(function (){
+                bindEmailCaptchaClick();
+            });
+
+
+
+        </script>
+    {% endblock %}
+{% endblock %}

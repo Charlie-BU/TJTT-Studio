@@ -1,0 +1,249 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-赛事成绩管理{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    {#flash弹窗#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;
+{#            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"#}
+{#                    id="refresh"#}
+{#                    onclick="location.reload()">{{_("刷新")}}#}
+{#            </button>#}
+        </div>
+    {% endfor %}
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("赛事成绩管理")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition List</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:history.back(-1)">Competition Detail</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Competition Result (admin)</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h4 style="color: red;">{{_("注意：对阵双方每场比赛成绩只需录一次，不可重复录入！")}}</h4>
+        <h4 style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{_("双打比赛成绩请在“积分更新（手动）”中录入！")}}</h4><br/>
+        <div class="row">
+
+{#                不会写这个#}
+{#            {% if user.usertype == 1 %}#}
+{#                <div class="col-12">#}
+{#                    <div class="card">#}
+{#                        <div class="card-header">#}
+{#                            <h4>赛事管理</h4>#}
+{#                        </div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="row">#}
+{#                                <div class="col-md-4">#}
+{#                                    <div class="card">#}
+{#                                        <div class="card-body">#}
+{#                                            <h4 class="card-title">生成/修改赛程</h4>#}
+{#                                            <h5 class="card-subtitle">添加、修改每组选手姓名</h5>#}
+{#                                            <button class="btn waves-effect waves-light btn-rounded btn-outline-purple"#}
+{#                                                    id="order_edit"#}
+{#                                                    onclick="edit_order()">编辑#}
+{#                                            </button>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endif %}#}
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{ match1.title }}{{_("赛制")}}：{{ match1.system }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered table-responsive-lg text-center text-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="white-space: nowrap;">{{_("大循环表")}}</th>
+                                    {% for player_x in match1.players %}
+                                        <th scope="col">{{ loop.index0 + 1 }}</th>
+                                    {% endfor %}
+                                    <th scope="col" style="white-space: nowrap; color: red;">{{_("积分")}}</th>
+                                    <th scope="col" style="white-space: nowrap; color: red;">{{_("排名")}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for player_x in match1.players %}
+                                    <tr style="white-space: nowrap;">
+                                        <th scope="row">{{ loop.index }} {{ player_x.username }}</th>
+                                        {% for player_y in match1.players %}
+                                            <form method="POST" action="{{ url_for("competition.match_order") }}">
+                                                {% if player_x == player_y %}
+                                                    <td style="background-color: #f9f8f8;"></td>
+                                                {% else %}
+                                                    <input class="form-check-input" id="match1_id" name="match1_id" value="{{ match1.id }}" style="display: none;">
+                                                    <input class="form-check-input" id="player_x_id" name="player_x_id" value="{{ player_x.id }}" style="display: none;">
+                                                    <input class="form-check-input" id="player_y_id" name="player_y_id" value="{{ player_y.id }}" style="display: none;">
+{#                                                   btn_id = (i,j) -->  后端维护一个2维表,(true false), 根据这个2为表去显示按钮#}
+                                                    <td><button type="submit" class="btn btn-light btn-circle">{{_("录")}}</button></td>
+                                                {% endif %}
+                                            </form>
+                                        {% endfor %}
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <a href="javascript:history.back(-1)" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">{{_("返回")}}</a>
+                    </div>
+                </div>
+            </div>
+
+{#            {% elif match1.system == "小组循环赛（不决名次）" %}#}
+{#                <div class="col-12">#}
+{#                    <div class="card">#}
+{#                        <div class="card-header">#}
+{#                            <h4>{{ match1.title }}赛制：{{ match1.system }}</h4>#}
+{#                        </div>#}
+{#                        <div class="card-body">#}
+{#                            <div class="table-responsive mt-3">#}
+{#                                <table class="table table-bordered table-responsive-lg text-center text-dark">#}
+{#                                    <thead>#}
+{#                                    <tr>#}
+{#                                        <th scope="col">小组1</th>#}
+{#                                        {% for _ in range(8) %}#}
+{#                                            <th scope="col">{{ loop.index0 + 1 }}</th>#}
+{#                                        {% endfor %}#}
+{#                                        <th scope="col" style="white-space: nowrap; color: red;">积分</th>#}
+{#                                        <th scope="col" style="white-space: nowrap; color: red;">排名</th>#}
+{#                                    </tr>#}
+{#                                    </thead>#}
+{#                                    <tbody>#}
+{#                                    {% for _ in range(8) %}#}
+{#                                        <tr>#}
+{#                                            <th scope="row">{{ loop.index0 + 1 }}</th>#}
+{#                                            {% for _ in range(10) %}#}
+{#                                                <td></td>#}
+{#                                            {% endfor %}#}
+{#                                        </tr>#}
+{#                                    {% endfor %}#}
+{#                                    </tbody>#}
+{#                                </table>#}
+{#                            </div>#}
+{#                            <br/>#}
+{#                            <div class="table-responsive mt-3">#}
+{#                                <table class="table table-bordered table-responsive-lg text-center text-dark">#}
+{#                                    <thead>#}
+{#                                    <tr>#}
+{#                                        <th scope="col">小组2</th>#}
+{#                                        {% for _ in range(8) %}#}
+{#                                            <th scope="col">{{ loop.index0 + 1 }}</th>#}
+{#                                        {% endfor %}#}
+{#                                        <th scope="col" style="white-space: nowrap; color: red;">积分</th>#}
+{#                                        <th scope="col" style="white-space: nowrap; color: red;">排名</th>#}
+{#                                    </tr>#}
+{#                                    </thead>#}
+{#                                    <tbody>#}
+{#                                    {% for _ in range(8) %}#}
+{#                                        <tr>#}
+{#                                            <th scope="row">{{ loop.index0 + 1 }}</th>#}
+{#                                            {% for _ in range(10) %}#}
+{#                                                <td></td>#}
+{#                                            {% endfor %}#}
+{#                                        </tr>#}
+{#                                    {% endfor %}#}
+{#                                    </tbody>#}
+{#                                </table>#}
+{#                            </div>#}
+{#                            {% if match1.players|length > 16 %}#}
+{#                                <br/>#}
+{#                                <div class="table-responsive mt-3">#}
+{#                                    <table class="table table-bordered table-responsive-lg text-center text-dark">#}
+{#                                        <thead>#}
+{#                                        <tr>#}
+{#                                            <th scope="col">小组3</th>#}
+{#                                            {% for _ in range(8) %}#}
+{#                                                <th scope="col">{{ loop.index0 + 1 }}</th>#}
+{#                                            {% endfor %}#}
+{#                                            <th scope="col" style="white-space: nowrap; color: red;">积分</th>#}
+{#                                            <th scope="col" style="white-space: nowrap; color: red;">排名</th>#}
+{#                                        </tr>#}
+{#                                        </thead>#}
+{#                                        <tbody>#}
+{#                                        {% for _ in range(8) %}#}
+{#                                            <tr>#}
+{#                                                <th scope="row">{{ loop.index0 + 1 }}</th>#}
+{#                                                {% for _ in range(10) %}#}
+{#                                                    <td></td>#}
+{#                                                {% endfor %}#}
+{#                                            </tr>#}
+{#                                        {% endfor %}#}
+{#                                        </tbody>#}
+{#                                    </table>#}
+{#                                </div>#}
+{##}
+{#                                {% if match1.players|length > 24 %}#}
+{#                                    <br/>#}
+{#                                    <div class="table-responsive mt-3">#}
+{#                                        <table class="table table-bordered table-responsive-lg text-center text-dark">#}
+{#                                            <thead>#}
+{#                                            <tr>#}
+{#                                                <th scope="col">小组3</th>#}
+{#                                                {% for _ in range(8) %}#}
+{#                                                    <th scope="col">{{ loop.index0 + 1 }}</th>#}
+{#                                                {% endfor %}#}
+{#                                                <th scope="col" style="white-space: nowrap; color: red;">积分</th>#}
+{#                                                <th scope="col" style="white-space: nowrap; color: red;">排名</th>#}
+{#                                            </tr>#}
+{#                                            </thead>#}
+{#                                            <tbody>#}
+{#                                            {% for _ in range(8) %}#}
+{#                                                <tr>#}
+{#                                                    <th scope="row">{{ loop.index0 + 1 }}</th>#}
+{#                                                    {% for _ in range(10) %}#}
+{#                                                        <td></td>#}
+{#                                                    {% endfor %}#}
+{#                                                </tr>#}
+{#                                            {% endfor %}#}
+{#                                            </tbody>#}
+{#                                        </table>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{##}
+{#                            {% endif %}#}
+{##}
+{#                            <a href="javascript:history.back(-1)" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">返回</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，以判断是否为管理
+        let isAdmin1;
+        {% if user %}
+            get_g({{ user.usertype }})
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin1 = g_user_type;
+        }
+
+    </script>
+{% endblock %}

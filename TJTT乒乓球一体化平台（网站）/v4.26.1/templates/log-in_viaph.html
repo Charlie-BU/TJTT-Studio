@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}TJTT乒乓球积分赛平台-用户登录{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+    <!-- Header -->
+    <header class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1 class="text-center">{{_("用户登录")}}</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    <!-- Basic -->
+    <div class="ex-form-1 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3">
+                    <div class="text-box mt-5 mb-5">
+
+
+                        <!-- Log In Form -->
+                        <form method="POST">
+                            <div class="mb-4 form-floating">
+                                <input name="phone" type="tel" class="form-control" id="floatingInput3" placeholder="Your phone">
+                                <label for="floatingInput3">{{_("手机号")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="password" type="password" class="form-control" id="floatingPassword"
+                                       placeholder="Password">
+                                <label for="floatingPassword">{{_("密码")}}</label>
+                            </div>
+                            {#flash弹窗#}
+                            {% for message in get_flashed_messages() %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endfor %}
+
+                            <div class="mb-4 form-check">
+                                <input type="radio" class="form-check-input" id="agree" name="agree" value="agreed">
+                                <label class="form-check-label" for="agree">{{_("我同意网站的")}} <a
+                                        href={{ url_for('privacy') }}>{{_("政策")}}</a> <a href={{ url_for('terms') }}>{{_("条款和协议")}}</a></label>
+                                <input type="radio" class="form-check-input" id="agree" name="agree" value="disagreed" checked style="visibility: hidden;">
+                            </div>
+                            <button type="submit" class="form-control-submit-button">{{_("登录")}}</button>
+                        </form>
+                        <!-- end of log in form -->
+                        <br/>
+                        <button class="other-button" onclick="location='{{ url_for('user.register') }}'">{{_("注册")}}</button><br/><br/>
+                        <button class="other-button" onclick="location='{{ url_for('user.login') }}'">{{_("姓名登录")}}</button><br/><br/>
+                        <button class="other-button" onclick="location='{{ url_for('user.forget_psw') }}'">{{_("忘记密码")}}</button>
+                    </div> <!-- end of text-box -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of ex-basic-1 -->
+    <!-- end of basic -->
+
+{% endblock %}

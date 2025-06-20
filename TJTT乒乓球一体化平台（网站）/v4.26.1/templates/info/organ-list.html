@@ -1,0 +1,381 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-组织管理{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("组织管理")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Management</li>
+                            <li class="breadcrumb-item" aria-current="page">Organization Management</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- basic table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--四个框框-->
+                        <div class="row nowrap">
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-primary text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ organs|length }}</h1>
+                                        <h6 class="text-white">{{_("全国组织")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-cyan text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">1</h1>
+                                        <h6 class="text-white">{{_("上海市组织")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--查找组织-->
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("查找组织")}}</h4>
+                                        <input type="search" placeholder="{{_("请输入组织名")}}"
+                                               aria-label="Search" id="search_input">
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="findOrganByName()">{{_("查询")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--添加组织-->
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("添加组织")}}</h4>
+                                        <button onclick="insert_organ()"
+                                                class="btn waves-effect waves-light btn-rounded btn-outline-primary">＋{{_("点我添加组织")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--表格-->
+                <div class="table-responsive">
+                    <table id="pageListTable" class="table table-striped table-bordered no-wrap">
+                        <thead>
+                        <tr style="text-align: center;">
+                            <th>{{_("序号")}}</th>
+                            <th>{{_("组织名称")}}</th>
+                            <th>{{_("简介")}}</th>
+                            <th>{{_("成员")}}</th>
+                            <th>{{_("操作")}}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="pageListTableBody" class="font-weight-bold">
+                        {% for organ in organs %}
+                            <tr style="text-align: center;">
+                                <td>{{ loop.index }}</td>
+                                <td id="organname_{{ organ.id }}">{{ organ.organname }}</td>
+                                <td id="description_{{ organ.id }}">{{ organ.description }}</td>
+                                <td>
+                                    {% if user.usertype == "K9" or user.usertype == "K10" or user.usertype == "K11" %}
+                                        <form method="POST" action="{{ url_for("user.user_list") }}">
+                                            <input class="form-check-input" name="organ_id" value="{{ organ.id }}" style="display: none;">
+                                            <button type="submit"
+                                                    class="btn waves-effect waves-light btn-rounded btn-outline-info">{{ organ.users | length }}{{_("人")}}
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                            <button onclick=alert("{{_("权限不足")}}！")
+                                                    class="btn waves-effect waves-light btn-rounded btn-outline-info">{{ organ.users | length }}{{_("人")}}
+                                            </button>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-success"
+                                            id="user_edit_{{ user.id }}"
+                                            onclick="edit_organ('{{ organ.id }}', this)">{{_("编辑")}}
+                                    </button>
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+                                            id="user_delete_{{ organ.id }}" onclick="delete_organ({{ organ.id }})">{{_("删除")}}
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <ul id="pages" class="pagination float-right nowrap">
+                    <li class="page-item"><button id="spanFirst" class="page-link" tabindex="-1">首页</button></li>
+                    <li class="page-item"><button id="spanPre" class="page-link">上一页</button></li>
+                    <li class="page-item"><button id="spanNext" class="page-link">下一页</button></li>
+                    <li class="page-item"><button id="spanLast" class="page-link">末页</button></li>
+                    <li class="page-item"><a id="spanNext" class="page-link">第<strong id="spanPageNum"></strong>页/共<strong id="spanTotalPage"></strong>页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，判断是否为管理
+        let isAdmin2;
+        {% if user %}
+            get_g("{{ user.usertype }}")
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin2 = g_user_type;
+        }
+
+
+        // 添加组织
+        function insert_organ() {
+            if (isAdmin != "K10" && isAdmin != "K11") {
+                alert("权限不足！");
+                return;
+            }
+            window.location.href = "{{ url_for('organization.insert_organ') }}";
+        }
+
+        // 编辑组织
+        let organnameIn = document.createElement("input");
+        let descriptionIn = document.createElement("input");
+
+        function edit_organ(id, btn) {
+            if (isAdmin != "K10" && isAdmin != "K11") {
+                alert("权限不足！");
+                return;
+            }
+            let organnameEl = document.getElementById('organname_' + id);
+            let descriptionEl = document.getElementById('description_' + id);
+
+            if (btn.innerText === '确认修改') {
+                organnameEl.innerText = organnameIn.value;
+                descriptionEl.innerText = descriptionIn.value;
+                let data = {
+                    'my_id': {{ user.id }},
+                    'id': id,
+                    'organname': organnameIn.value,
+                    'description': descriptionIn.value,
+                }
+                fetch_ajax("POST", "update_organ", data, "organization")
+                setTimeout(function () {
+                    alert(res.message);
+                }, 500);
+
+                btn.innerText = '编辑';
+                return;
+            }
+            btn.innerText = "确认修改";
+
+            let organname = organnameEl.innerText;
+            let description = descriptionEl.innerText;
+
+            organnameIn.value = organname;
+            descriptionIn.value = description;
+            organnameEl.innerHTML = "";
+            descriptionEl.innerHTML = "";
+            organnameEl.appendChild(organnameIn);
+            descriptionEl.appendChild(descriptionIn);
+
+        }
+
+        // 删除组织
+        function delete_organ(id) {
+            if (isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            if (confirm("{{_("确定删除该组织")}}？")) {
+                fetch_ajax('POST', 'delete_organ', {'id': id, 'my_id': {{ user.id }}}, "organization")
+                setTimeout(function () {
+                    alert(res.message);
+                    location.reload();
+                }, 500);
+            }
+        }
+
+        // 查找组织
+        function findOrganByName() {
+            let searchEl = document.getElementById('search_input');
+            let keywords = searchEl.value;
+            let url;
+            if (keywords === '' || keywords === null) {
+                url = `/organization/organ_list`;
+            } else {
+                url = `/organization/findOrganByName/${keywords}`;
+            }
+            window.location.href = url;
+        }
+
+        // 表格分页
+        var theUL = document.getElementById("pageListTableBody");
+        var totalPage = document.getElementById("spanTotalPage");
+        var pageNum = document.getElementById("spanPageNum"); //获取当前页<span>
+        var spanPre = document.getElementById("spanPre"); //获取上一页<span>
+        var spanNext = document.getElementById("spanNext"); //获取下一页<span>
+        var spanFirst = document.getElementById("spanFirst"); //获取第一页<span>
+        var spanLast = document.getElementById("spanLast"); //获取最后一页<span>
+        var numberRowsInTable = theUL.getElementsByTagName("tr").length; //记录总条数
+        var pageSize = 10; //每页显示的记录条数
+        var page = 1; //当前页，默认第一页
+
+        // 下一页
+        function next() {
+            hideTable();
+            currentRow = pageSize * page;
+            maxRow = currentRow + pageSize;
+            if (maxRow > numberRowsInTable) maxRow = numberRowsInTable;
+            for (var i = currentRow; i < maxRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            page++;
+            if (maxRow == numberRowsInTable) {
+                nextText();
+                lastText();
+            }
+            showPage();
+            preLink();
+            firstLink();
+        }
+
+        // 上一页
+        function pre() {
+            hideTable();
+            page--;
+            currentRow = pageSize * page;
+            maxRow = currentRow - pageSize;
+            if (currentRow > numberRowsInTable) currentRow = numberRowsInTable;
+            for (var i = maxRow; i < currentRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            if (maxRow == 0) {
+                preText();
+                firstText();
+            }
+            showPage();
+            nextLink();
+            lastLink();
+        }
+
+        // 首页
+        function first() {
+            hideTable();
+            page = 1;
+            for (var i = 0; i < pageSize; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            firstText();
+            preText();
+            nextLink();
+            lastLink();
+        }
+
+        // 末页
+        function last() {
+            hideTable();
+            page = pageCount();
+            currentRow = pageSize * (page - 1);
+            for (var i = currentRow; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            preLink();
+            nextText();
+            firstLink();
+            lastText();
+        }
+
+        function hideTable() {
+            for (var i = 0; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+        }
+
+        function showPage() {
+            pageNum.innerHTML = page;
+        }
+
+        // 总页数
+        function pageCount() {
+            return Math.ceil(numberRowsInTable / pageSize);
+        }
+
+        // 显示链接
+        function preLink() {
+            spanPre.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+        }
+
+        function preText() {
+            spanPre.innerHTML = "上一页";
+        }
+
+        function nextLink() {
+            spanNext.innerHTML = "<a href='javascript:next();'>下一页</a>";
+        }
+
+        function nextText() {
+            spanNext.innerHTML = "下一页";
+        }
+
+        function firstLink() {
+            spanFirst.innerHTML = "<a href='javascript:first();'>首页</a>";
+        }
+
+        function firstText() {
+            spanFirst.innerHTML = "首页";
+        }
+
+        function lastLink() {
+            spanLast.innerHTML = "<a href='javascript:last();'>末页</a>";
+        }
+
+        function lastText() {
+            spanLast.innerHTML = "末页";
+        }
+
+        // 隐藏
+        function hide() {
+            for (var i = pageSize; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+            totalPage.innerHTML = pageCount();
+            pageNum.innerHTML = '1';
+            nextLink();
+            lastLink();
+        }
+        hide();
+
+    </script>
+{% endblock %}

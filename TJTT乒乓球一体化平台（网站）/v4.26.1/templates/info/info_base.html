@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/images/favicon1.jpg') }}">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='dist/css/style.min.css')}}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    {% block head %}{% endblock %}
+<![endif]-->
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <!--最上方一栏-->
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="#"><i
+                            class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-brand">
+                        <!-- Logo icon -->
+                        <a href="{{ url_for('user.infor_index') }}">
+                            <b class="logo-icon">
+                                <!-- Dark Logo icon -->
+                                <img src="{{ url_for('static', filename='assets/images/logo1.jpg')}}" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+{#                                <img src="{{ url_for('static', filename='assets/images/logo1.jpg')}}" alt="homepage" class="light-logo" />#}
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <span class="logo-text">
+                                <!-- dark Logo text -->
+                                <img style="height: 40px; width: 160px" src="{{ url_for('static', filename='assets/images/logo2.jpg')}}" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo text -->
+{#                                <img src="{{ url_for('static', filename='assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />#}
+                            </span>
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="#"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                            class="ti-more"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items 上方的Hello-->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-none mr-auto ml-3 pl-1">
+
+                        <li class="nav-item">
+                            <span class="nav-link text-dark font-weight-bold" style="font-size: 20px;">TJTT乒乓球积分赛平台</span>
+                        </li>
+
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+
+                        <li class="nav-item">
+                            <span class="nav-link text-dark font-weight-bold" id="clock"></span>
+                        </li>
+
+                        <!-- 切换语言
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown" style="font-weight: bold;"
+                               aria-expanded="false">{{_("语言")}}</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                <li class="nav-item">
+                                    <form method="POST" action="{{ url_for("change_language") }}">
+                                        <input class="form-check-input" name="lang" value="zh" style="display: none;">
+                                        <button type="submit" class="dropdown-item">中文</button>
+                                    </form>
+                                </li>
+                                <li class="nav-item">
+                                    <form method="POST" action="{{ url_for("change_language") }}">
+                                        <input class="form-check-input" name="lang" value="en" style="display: none;">
+                                        <button type="submit" class="dropdown-item">English</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li> -->
+
+                        <!--用户信息-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                {% if user.id == 1 %}
+                                    <img src="{{ url_for('static', filename='images/admins/bt2.jpg')}}" alt="user" class="rounded-circle" width="40">
+                                {% elif user.gender == "女" %}
+                                    <img src="{{ url_for('static', filename='assets/images/users/female.jpg')}}" alt="user" class="rounded-circle" width="40">
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='assets/images/users/male.jpg')}}" alt="user" class="rounded-circle" width="40">
+                                {% endif %}
+                                {% if user.usertype == "0" %}
+                                    <span class="ml-2 d-none d-lg-inline-block"><span>{{_("你好")}}</span> <span
+                                            class="text-dark" style="font-weight: bold;">{{ user.username }}</span> <i data-feather="chevron-down"
+                                            class="svg-icon"></i></span>
+                                {% else %}
+                                    <span class="ml-2 d-none d-lg-inline-block"><span>{{_("你好")}}&nbsp;</span> <span
+                                            class="text-dark" style="font-weight: bold;">{{ user.usertype }}{{ user.username }}</span> <i data-feather="chevron-down"
+                                            class="svg-icon"></i></span>
+                                {% endif %}
+                            </a>
+                            <!--用户的下拉菜单-->
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <br/>
+                                {% if user.usertype == "0" %}
+                                    <h4 class="text-dark" style="font-weight: bold; text-align: center;">{{ user.username }} - {{ user.school }}</h4>
+                                {% else %}
+                                    <h4 class="text-dark" style="font-weight: bold; text-align: center;">{{ user.usertype }}{{ user.username }} - {{ user.school }}</h4>
+                                {% endif %}
+                                <h6 class="text-dark" style="font-weight: bold; text-align: center;">{{ user.hand }}&nbsp;&nbsp;&nbsp;&nbsp;{{ user.grip }}</h6>
+                                {% if user.score == 0 %}
+                                    <h6 class="text-dark" style="font-weight: bold; text-align: center;">TJTT积分：未录入</h6>
+                                {% else %}
+                                    <h6 class="text-dark" style="font-weight: bold; text-align: center;">TJTT积分：{{ user.score }}</h6>
+                                {% endif %}
+                                <a class="dropdown-item" href="{{ url_for('user.my_profile') }}"><i data-feather="user"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    {{_("个人信息")}}</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url_for('user.login') }}"><i data-feather="users"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    {{_("切换用户")}}</a>
+                                <a class="dropdown-item" href="{{ url_for('user.logout') }}"><i data-feather="user-minus"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    {{_("退出登录")}}</a>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
+        <!--左侧菜单-->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar" data-sidebarbg="skin6">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- 图标在feather icon有，网址：https://feathericons.com/-->
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/"
+                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("平台主页")}}</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url_for('user.infor_index')}}"
+                                aria-expanded="false"><i data-feather="layout" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("信息管理系统")}}</span></a></li>
+
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">{{_("应用")}}</span></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{url_for('competition.score_standard')}}"
+                                aria-expanded="false"><i data-feather="book" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("积分标准")}}
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="#"
+                                aria-expanded="false"><i data-feather="bar-chart-2" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("积分排名")}}</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item"> <a class="sidebar-link" href="{{url_for('competition.score_rank')}}"
+                                        aria-expanded="false"><i data-feather="user" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("个人排名")}}
+                                        </span></a>
+                                </li>
+                                <li class="sidebar-item"> <a class="sidebar-link" href="{{url_for('competition.score_rank_team')}}"
+                                        aria-expanded="false"><i data-feather="users" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("代表队排名")}}
+                                        </span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{url_for('competition.match_list')}}"
+                                aria-expanded="false"><i data-feather="pen-tool" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("赛事报名")}}
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{url_for('user.play_post')}}"
+                                aria-expanded="false"><i data-feather="smile" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("约球")}}
+                                </span></a>
+                        </li>
+
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">{{_("管理")}}</span></li>
+
+                        <li class="sidebar-item" style="cursor:pointer"> <a class="sidebar-link" onclick="enter_user_list()"
+                                aria-expanded="false"><i data-feather="user" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("用户列表")}}
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item" style="cursor:pointer"> <a class="sidebar-link" onclick="enter_organ_list()"
+                                aria-expanded="false"><i data-feather="users" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("组织管理")}}
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="#"
+                                aria-expanded="false"><i data-feather="tablet" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("赛事管理")}}</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item" style="cursor:pointer"><a onclick="enter_score_update()" class="sidebar-link">
+                                    <i data-feather="shuffle" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("积分更新（手动）")}}</span></a>
+                                </li>
+                                <li class="sidebar-item" style="cursor:pointer"><a onclick="enter_match_list()" class="sidebar-link">
+                                    <i data-feather="list" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("赛事列表")}}</span></a>
+                                </li>
+                                <li class="sidebar-item" style="cursor:pointer"><a onclick="enter_team_management()" class="sidebar-link">
+                                    <i data-feather="users" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("代表队管理")}}</span></a>
+                                </li>
+                                <li class="sidebar-item" style="cursor:pointer"><a onclick="enter_match_insert_single()" class="sidebar-link">
+                                    <i data-feather="file-plus" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("举办赛事（单打）")}}</span></a>
+                                </li>
+                                <li class="sidebar-item" style="cursor:pointer"><a onclick="enter_match_insert_team()" class="sidebar-link">
+                                    <i data-feather="file-plus" class="feather-icon"></i><span
+                                            class="hide-menu">{{_("举办赛事（团体）")}}</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item" style="cursor:pointer"> <a class="sidebar-link" onclick="enter_answer_questions()"
+                                aria-expanded="false"><i data-feather="message-circle" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("问题回答")}}
+                                </span></a>
+                        </li>
+                        <li class="sidebar-item" style="cursor:pointer"> <a class="sidebar-link" onclick="enter_log()"
+                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                    class="hide-menu">{{_("积分变动日志")}}
+                                </span></a>
+                        </li>
+                        {% if user.id == 1 %}
+                            <li class="sidebar-item" style="cursor:pointer"> <a class="sidebar-link" onclick="enter_action_log()"
+                                    aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                        class="hide-menu">{{_("用户操作日志")}}
+                                    </span></a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            {% block body %}{% endblock %}
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center text-muted">
+                Copyright © 2023–2024 <a style="color: orangered;" title="TJTT">TJTT</a> v4.26.1
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- apps -->
+    <!-- apps -->
+    <script src="{{ url_for('static', filename='dist/js/app-style-switcher.js')}}"></script>
+    <script src="{{ url_for('static', filename='dist/js/feather.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='dist/js/sidebarmenu.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/extra-libs/sparkline/sparkline.js')}}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{ url_for('static', filename='dist/js/custom.min.js')}}"></script>
+    <!--This page JavaScript -->
+    <script src="{{ url_for('static', filename='assets/extra-libs/c3/d3.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/extra-libs/c3/c3.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/chartist/dist/chartist.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js')}}"></script>
+    <script src="{{ url_for('static', filename='dist/js/pages/dashboards/dashboard1.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='assets/extra-libs/prism/prism.js') }}"></script>
+
+    <!-- Other Scripts -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
+    <script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+    <!-- Swiper for image and text sliders -->
+    <script src="{{ url_for('static', filename='js/purecounter.min.js') }}"></script>
+    <!-- Purecounter counter for statistics numbers -->
+    <script src="{{ url_for('static', filename='js/replaceme.min.js') }}"></script> <!-- ReplaceMe for rotating text -->
+    {% block scripts %}{% endblock %}
+</body>
+
+{% block scripts2 %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，以判断是否为管理
+        let isAdmin;
+        {% if user %}
+            get_g("{{ user.usertype }}")
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin = g_user_type;
+        }
+
+
+        // 进入用户列表
+        function enter_user_list() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('user.user_list') }}";
+        }
+        // 进入组织管理
+        function enter_organ_list() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('organization.organ_list') }}";
+        }
+        // 进入积分更新（手动）
+        function enter_score_update() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('competition.score_update') }}";
+        }
+        // 进入赛事列表
+        function enter_match_list() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('competition.match_list') }}";
+        }
+        // 进入代表队管理
+        function enter_team_management() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('competition.team_management') }}";
+        }
+        // 进入举办赛事（单打）
+        function enter_match_insert_single() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('competition.match_insert') }}";
+        }
+        // 进入举办赛事（团体）
+        function enter_match_insert_team() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('competition.match_insert_team') }}";
+        }
+        // 进入问题回答
+        function enter_answer_questions() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('user.answer_questions') }}";
+        }
+        // 进入积分变动日志
+        function enter_log() {
+            if (isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('user.log') }}";
+        }
+        // 进入用户操作日志
+        function enter_action_log() {
+            if (isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            // jinja2
+            window.location.href = "{{ url_for('user.action_log') }}";
+        }
+
+        // 时间
+        var clock = new Clock();
+        clock.display(document.getElementById("clock"));
+
+        function Clock() {
+            var date = new Date();
+            this.year = date.getFullYear();
+            this.month = date.getMonth() + 1;
+            this.date = date.getDate();
+            this.day = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")[date.getDay()];
+            this.hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            this.minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            this.second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+            this.toString = function () {
+                return this.year + "年" + this.month + "月" + this.date + "日 " + this.hour + ":" + this.minute + ":" + this.second + " " + this.day;
+            };
+
+            this.toSimpleDate = function () {
+                return this.year + "-" + this.month + "-" + this.date;
+            };
+
+            this.toDetailDate = function () {
+                return this.year + "-" + this.month + "-" + this.date + " " + this.hour + ":" + this.minute + ":" + this.second;
+            };
+
+            this.display = function (ele) {
+                var clock = new Clock();
+                ele.innerHTML = clock.toString();
+                window.setTimeout(function () {
+                    clock.display(ele);
+                }, 1000);
+            };
+        }
+
+        // 飘窗
+        var ggRoll = {                                     //创建对象直接量
+            roll: document.getElementById("roll"),          //获取id属性为roll的对象
+            speed: 30,                                      //飘动速度，即为定时器函数多长时间执行一次
+            statusX: 1,                                     //规定每执行一次函数，left属性值变化的幅度
+            statusY: 1,                                     //规定每执行一次函数，top属性值变化的幅度
+            x: 100,                                         //规定初始状态下left属性的值
+            y: 300,                                         //规定初始状态下top属性的值
+            //差值用来测算left属性值的极限
+            winW: document.documentElement.clientWidth - document.getElementById("roll").offsetWidth,
+            //差值用来测算top属性值的极限
+            winH: document.documentElement.clientHeight - document.getElementById("roll").offsetHeight,
+            //声明函数
+            Go: function () {
+                //设置div的left属性值
+                this.roll.style.left = this.x + 'px';
+                //设置div的top属性值
+                this.roll.style.top = this.y + 'px';
+                //如果statusX=1则每次减少1px,否则减少1px
+                this.x = this.x + (this.statusX ? -1 : 1)
+                //如果left属性值小于0，也就是div要超出左边界了，就将statusX设置为0
+                if (this.x < 0) {
+                    this.statusX = 0
+                }
+                //如果top属性值大于winW，也就是div要超出右边界了，就将statusX设置为1
+                if (this.x > this.winW) {
+                    this.statusX = 1
+                }
+
+                this.y = this.y + (this.statusY ? -1 : 1)
+                if (this.y < 0) {
+                    this.statusY = 0
+                }
+                if (this.y > this.winH) {
+                    this.statusY = 1
+                }
+            }
+        };
+        var interval = setInterval("ggRoll.Go()", ggRoll.speed);
+        {#ggRoll.roll.onmouseover=function(){clearInterval(interval)};                     //onmouseover属性：鼠标移动到元素上时触发#}
+        {#ggRoll.roll.onmouseout=function(){interval=setInterval("ggRoll.Go()",ggRoll.speed)};//onmouseout属性:鼠标离开元素时触发#}
+
+    </script>
+{% endblock %}
+
+</html>

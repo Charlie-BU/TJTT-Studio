@@ -1,0 +1,87 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-成绩录入{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("成绩录入")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition List</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition Detail</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:history.back(-1)">Competition Result (admin)</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Result Record</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card" style="width: 50rem;">
+            <div class="card-header">{{_("比赛比分录入")}}</div>
+            <div class="card-body">
+                <form class="mt-4" method="POST" action="{{ url_for("competition.result_record") }}">
+                    {#用这个给表单把用户id和用户类型提交过去，在后端判断是不是管理、写进日志#}
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="user_id" name="user_id" value="{{ user.id }}" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("赛事名称")}}</h5>
+                        <input type="text" class="form-control" id="match1_id" name="match1_id" value="{{ match1.id }}" style="display: none;">
+                        <input type="text" class="form-control" id="match_title" name="match_title" value="{{ match1.title }}" style="width:300px;" disabled>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("对阵双方")}}</h5>
+                        <input type="text" class="form-control" id="player_x_id" name="player_x_id" value="{{ player_x.id }}" style="display: none;">
+                        <input type="text" class="form-control" id="player_x" name="player_x" value="X {{ player_x.username }}" style="width:300px;" disabled>
+                        <input type="text" class="form-control" id="player_y_id" name="player_y_id" value="{{ player_y.id }}" style="display: none;">
+                        <input type="text" class="form-control" id="player_y" name="player_y" value="Y {{ player_y.username }}" style="width:300px;" disabled>
+                    </div>
+                    <div class="form-group">
+                        <h5 class="card-title">{{_("比分")}}（X:Y）</h5>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r1" name="result" value="2:0">
+                        <label for="r1">2:0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r2" name="result" value="2:1">
+                        <label for="r2">2:1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r3" name="result" value="0:2">
+                        <label for="r3">0:2</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r4" name="result" value="1:2">
+                        <label for="r4">1:2</label><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r5" name="result" value="3:0">
+                        <label for="r5">3:0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r6" name="result" value="3:1">
+                        <label for="r6">3:1</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r7" name="result" value="3:2">
+                        <label for="r7">3:2</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r8" name="result" value="0:3">
+                        <label for="r8">0:3</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r9" name="result" value="1:3">
+                        <label for="r9">1:3</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r10" name="result" value="2:3">
+                        <label for="r10">2:3</label><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r11" name="result" value="4:x">
+                        <label for="r11">4:x（{{_("X胜")}}）</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" class="form-check-input" id="r12" name="result" value="x:4">
+                        <label for="r12">x:4（{{_("Y胜")}}）</label>
+                    </div>
+                    <h4 style="color: red;">{{_("注意：成绩录入后选手积分自动计算，该操作不可逆，请务必确认对阵双方及比分正确！")}}</h4><br/>
+                    {#flash弹窗#}
+                    {% for message in get_flashed_messages() %}
+                        <div class="alert alert-warning">{{ message }}</div>
+                    {% endfor %}
+                    <button type="submit" class="btn waves-effect waves-light btn-rounded btn-outline-primary">{{_("确定")}}</button>&nbsp;&nbsp;
+                    <a href="javascript:history.go(-1)" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">{{_("返回")}}</a>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

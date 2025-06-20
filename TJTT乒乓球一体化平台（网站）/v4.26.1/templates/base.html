@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Your description">
+    <meta name="author" content="Your name">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
+    <meta property="og:site_name" content=""/> <!-- website name -->
+    <meta property="og:site" content=""/> <!-- website link -->
+    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content=""/> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content=""/> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content=""/> <!-- where do you want your post to link to -->
+    <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+
+    <!-- Webpage Title -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap"
+          rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/fontawesome-all.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+
+    <!-- Favicon  -->
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="{{ url_for('static', filename='assets/images/favicon1.jpg') }}">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+<!-- 导航栏 -->
+<nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+    <div class="container">
+
+        <!-- Image Logo -->
+        <a class="navbar-brand logo-image" href="/"><img style="height: 50px; width: 200px;" src="{{ url_for('static', filename='images/logo2_new.png') }}"
+                                                         alt="alternative"></a>
+
+        <!-- Text Logo - Use this if you don't have a graphic logo -->
+        <!-- <a class="navbar-brand logo-text" href="index.html">Ioniq</a> -->
+
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/" style="font-size: 16px;">{{ _("首页") }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#matchPreview" style="font-size: 15px;">{{ _("赛事预告") }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user.infor_index') }}" style="font-size: 15px;">{{ _("信息管理系统") }}</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                       aria-expanded="false" style="font-size: 15px;">{{ _("其他") }}</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/#TJTT1">{{ _("赛事回顾") }}</a>
+                        </li>
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/#QandA">Q&A</a>
+                        </li>
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/#notice">{{ _("通知公告") }}</a>
+                        </li>
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="/#association">{{ _("介绍") }}</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown"
+                       aria-expanded="false" style="font-size: 15px;">{{_("语言")}}</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                        <li class="nav-item">
+                            <form method="POST" action="{{ url_for("change_language") }}">
+                                <input class="form-check-input" name="lang" value="zh" style=5display: none;">
+                                <button type="submit" class="dropdown-item">中文</button>
+                            </form>
+                        </li>
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{ url_for("change_language") }}">
+                                <input class="form-check-input" name="lang" value="en" style="display: none;">
+                                <button type="submit" class="dropdown-item">English</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li> -->
+
+            </ul>
+            <span class="nav-item">
+                {% if user %}
+                    {% if user.usertype == "0" %}
+                        <span class="btn-outline-sm" style="font-size: 15px;">{{ user.username }} - {{ user.school }}</span>
+                    {% else %}
+                        <span class="btn-outline-sm" style="font-size: 15px;">{{ user.usertype }}{{ user.username }} - {{ user.school }}</span>
+                    {% endif %}
+                    <a class="btn-outline-sm" href="{{ url_for('user.logout') }}" style="font-size: 15px;">{{ _("退出登录") }}</a>
+                {% else %}
+                    <a class="btn-outline-sm" href="{{ url_for('user.login') }}" style="font-size: 15px;">{{ _("登录") }}</a>
+                    <a class="btn-outline-sm" href="{{ url_for('user.register') }}" style="font-size: 15px;">{{ _("注册") }}</a>
+                {% endif %}
+            </span>
+        </div> <!-- end of navbar-collapse -->
+    </div> <!-- end of container -->
+</nav> <!-- end of navbar -->
+<!-- end of navigation -->
+
+
+{% block body %}{% endblock %}
+
+<!-- Footer -->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer-col first">
+                    <img width="360" height="120" src="{{ url_for('static', filename='images/logo2_new.png') }}" alt="alternative">
+                </div>
+
+                <div class="footer-col second">
+                    <p class="p-small">{{ _("联系我们：") }}<a href="mailto:tjttgroup@163.com"><strong>tjttgroup@163.com</strong></a></p>
+                    <div class="col-lg-6">
+                        <p class="p-small">{{ _("友情链接：") }}<br/>
+                            <a style="white-space: nowrap;" target="_blank" href="https://www.tongji.edu.cn/">{{ _("同济大学官网") }}</a><br/>
+                            <a style="white-space: nowrap;" target="_blank" href="https://stadium.tongji.edu.cn/">{{ _("同济大学体育场馆预约系统") }}</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!--四个图片的跳转-->
+                <div class="footer-col third">
+                            <span class="fa-stack">
+                                <a>
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-weixin fa-stack-1x"></i>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a>
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-qq fa-stack-1x"></i>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a>
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-weibo fa-stack-1x"></i>
+                                </a>
+                            </span>
+                    <span class="fa-stack">
+                                <a>
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-facebook-f fa-stack-1x"></i>
+                                </a>
+                            </span>
+                </div> <!-- end of footer-col -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of footer -->
+<!-- end of footer -->
+
+
+<!-- Copyright -->
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <p class="p-small">Copyright © 2023–2024 <a style="color: orangered; font-weight: bold;" title="TJTT">TJTT</a> v4.26.1</p>
+            </div>
+            <div class="col-lg-6">
+                <p class="p-small">Developed by Charlie BU & Peitong LI.</p>
+            </div>
+        </div> <!-- enf of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of copyright -->
+<!-- end of copyright -->
+
+
+<!-- Back To Top Button -->
+<button onclick="topFunction()" id="myBtn">
+    <img src="{{ url_for('static', filename='images/up-arrow.png') }}" alt="alternative">
+</button>
+<!-- end of back to top button -->
+
+<!-- Scripts -->
+<script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- apps -->
+<!-- apps -->
+<script src="{{ url_for('static', filename='dist/js/app-style-switcher.js') }}"></script>
+<script src="{{ url_for('static', filename='dist/js/feather.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dist/js/sidebarmenu.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/extra-libs/sparkline/sparkline.js') }}"></script>
+<!--Custom JavaScript -->
+<script src="{{ url_for('static', filename='dist/js/custom.min.js') }}"></script>
+<!--This page JavaScript -->
+<script src="{{ url_for('static', filename='assets/extra-libs/c3/d3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/extra-libs/c3/c3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/chartist/dist/chartist.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="{{ url_for('static', filename='dist/js/pages/dashboards/dashboard1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/extra-libs/prism/prism.js') }}"></script>
+
+<!-- Other Scripts -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
+<script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+<!-- Swiper for image and text sliders -->
+<script src="{{ url_for('static', filename='js/purecounter.min.js') }}"></script>
+<!-- Purecounter counter for statistics numbers -->
+<script src="{{ url_for('static', filename='js/replaceme.min.js') }}"></script>
+
+
+<script src="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> <!-- Bootstrap framework -->
+<script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script> <!-- Swiper for image and text sliders -->
+<script src="{{ url_for('static', filename='js/purecounter.min.js') }}"></script>
+<!-- Purecounter counter for statistics numbers -->
+<script src="{{ url_for('static', filename='js/replaceme.min.js') }}"></script> <!-- ReplaceMe for rotating text -->
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script> <!-- Custom scripts -->
+</body>
+</html>

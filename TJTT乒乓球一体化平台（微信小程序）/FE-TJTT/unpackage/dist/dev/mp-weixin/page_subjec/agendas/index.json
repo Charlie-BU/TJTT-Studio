@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "库",
+  "navigationBarBackgroundColor": "#FEF2DA",
+  "usingComponents": {
+    "u-tabs": "../../uni_modules/vk-uview-ui/components/u-tabs/u-tabs"
+  }
+}

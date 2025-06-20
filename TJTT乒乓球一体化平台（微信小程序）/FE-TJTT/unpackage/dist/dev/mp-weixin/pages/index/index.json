@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "主页",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-tabs": "../../uni_modules/vk-uview-ui/components/u-tabs/u-tabs",
+    "nav": "./components/index"
+  }
+}

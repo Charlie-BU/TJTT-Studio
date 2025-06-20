@@ -1,0 +1,364 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-个人积分排名{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("个人积分排名")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Score Ranking</li>
+                            <li class="breadcrumb-item" aria-current="page">Individual Ranking</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- basic table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--四个框框-->
+                        <div class="row">
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-primary text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ users|length }}</h1>
+                                        <h6 class="text-white">{{_("选手总数")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-cyan text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ students|length }}</h1>
+                                        <h6 class="text-white">{{_("学生人数")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-success text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ teachers|length }}</h1>
+                                        <h6 class="text-white">{{_("教师人数")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                        </div>
+
+
+                        <!--查找选手-->
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("查找选手")}}</h4>
+                                        <input type="search" placeholder="{{_("请输入选手姓名")}}"
+                                               aria-label="Search" id="search_input">
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="findUserByName()">{{_("查询")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("学校排名")}}</h4>
+                                        <input type="search" placeholder="{{_("请输入学校名称")}}"
+                                               aria-label="Search" id="search_input2">
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="schoolRank()">{{_("筛选")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("地区排名")}}</h4>
+                                        <input type="search" placeholder="{{_("请输入地区")}}"
+                                               aria-label="Search" id="search_input3">
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="regionRank()">{{_("筛选")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--表格-->
+                <div class="table-responsive">
+                    <table id="pageListTable" class="table table-striped table-bordered no-wrap">
+                        <thead>
+                        <tr style="text-align: center;">
+                            <th>{{_("排名")}}</th>
+                            <th>{{_("姓名")}}</th>
+                            <th>{{_("性别")}}</th>
+                            <th>{{_("学校")}}</th>
+                            <th>{{_("身份")}}</th>
+                            <th>{{_("地区")}}</th>
+                            <th>{{_("所属组织")}}</th>
+                            <th>{{_("积分")}}</th>
+                            <th>{{_("活跃度")}}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="pageListTableBody" class="font-weight-bold">
+                        {% for i in range(0, users|length) %}
+                            {% if users[i].id == user.id %}
+                                <tr style="text-align: center; color: orangered;">
+                                <td>{{ ids[i] }}</td>
+                                <td id="username_{{ users[i].id }}">{{ users[i].username }}</td>
+                                <td id="gender_{{ users[i].id }}">{{ users[i].gender }}</td>
+                                <td id="school_{{ users[i].id }}">{{ users[i].school }}</td>
+                                <td id="role_{{ users[i].id }}">{{ users[i].role }}</td>
+                                <td id="role_{{ users[i].id }}">{{ users[i].address }}</td>
+                                <td id="organ_{{ users[i].id }}">{{ users[i].organ.organname }}</td>
+                                {% if users[i].score == 0 %}
+                                    <td id="score_{{ users[i].id }}">未录入</td>
+                                {% else %}
+                                    <td id="score_{{ users[i].id }}">{{ users[i].score }}</td>
+                                {% endif %}
+                                <td id="active_{{ users[i].id }}">{{ users[i].active }}</td>
+                            </tr>
+                            {% else %}
+                                <tr style="text-align: center;">
+                                    <td>{{ ids[i] }}</td>
+                                    {% if users[i].privacy == "1" %}
+                                        <td id="username_{{ users[i].id }}">{{ users[i].username[0] }} **</td>
+                                    {% else %}
+                                        <td id="username_{{ users[i].id }}">{{ users[i].username }}</td>
+                                    {% endif %}
+                                    <td id="gender_{{ users[i].id }}">{{ users[i].gender }}</td>
+                                    <td id="school_{{ users[i].id }}">{{ users[i].school }}</td>
+                                    <td id="role_{{ users[i].id }}">{{ users[i].role }}</td>
+                                    <td id="role_{{ users[i].id }}">{{ users[i].address }}</td>
+                                    <td id="organ_{{ users[i].id }}">{{ users[i].organ.organname }}</td>
+                                    {% if users[i].score == 0 %}
+                                        <td id="score_{{ users[i].id }}">未录入</td>
+                                    {% else %}
+                                        <td id="score_{{ users[i].id }}">{{ users[i].score }}</td>
+                                    {% endif %}
+                                    <td id="active_{{ users[i].id }}">{{ users[i].active }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <ul id="pages" class="pagination float-right nowrap">
+                    <li class="page-item"><button id="spanFirst" class="page-link" tabindex="-1">首页</button></li>
+                    <li class="page-item"><button id="spanPre" class="page-link">上一页</button></li>
+                    <li class="page-item"><button id="spanNext" class="page-link">下一页</button></li>
+                    <li class="page-item"><button id="spanLast" class="page-link">末页</button></li>
+                    <li class="page-item"><a id="spanNext" class="page-link">第<strong id="spanPageNum"></strong>页/共<strong id="spanTotalPage"></strong>页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+
+        // 查找选手
+        function findUserByName() {
+            let searchEl = document.getElementById('search_input');
+            let keywords = searchEl.value;
+            let url;
+            if (keywords === '' || keywords === null) {
+                url = `/competition/score_rank`;
+            } else {
+                url = `/competition/findUserByName2/${keywords}`;
+            }
+            window.location.href = url;
+        }
+
+        // 学校排名
+        function schoolRank() {
+            let searchEl = document.getElementById('search_input2');
+            let keywords = searchEl.value;
+            let url;
+            if (keywords === '' || keywords === null) {
+                url = `/competition/score_rank`;
+            } else {
+                url = `/competition/schoolRank/${keywords}`;
+            }
+            window.location.href = url;
+        }
+
+        // 地区排名
+        function regionRank() {
+            let searchEl = document.getElementById('search_input3');
+            let keywords = searchEl.value;
+            let url;
+            if (keywords === '' || keywords === null) {
+                url = `/competition/score_rank`;
+            } else {
+                url = `/competition/regionRank/${keywords}`;
+            }
+            window.location.href = url;
+        }
+
+        // 表格分页
+        var theUL = document.getElementById("pageListTableBody");
+        var totalPage = document.getElementById("spanTotalPage");
+        var pageNum = document.getElementById("spanPageNum"); //获取当前页<span>
+        var spanPre = document.getElementById("spanPre"); //获取上一页<span>
+        var spanNext = document.getElementById("spanNext"); //获取下一页<span>
+        var spanFirst = document.getElementById("spanFirst"); //获取第一页<span>
+        var spanLast = document.getElementById("spanLast"); //获取最后一页<span>
+        var numberRowsInTable = theUL.getElementsByTagName("tr").length; //记录总条数
+        var pageSize = 12; //每页显示的记录条数
+        var page = 1; //当前页，默认第一页
+
+        // 下一页
+        function next() {
+            hideTable();
+            currentRow = pageSize * page;
+            maxRow = currentRow + pageSize;
+            if (maxRow > numberRowsInTable) maxRow = numberRowsInTable;
+            for (var i = currentRow; i < maxRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            page++;
+            if (maxRow == numberRowsInTable) {
+                nextText();
+                lastText();
+            }
+            showPage();
+            preLink();
+            firstLink();
+        }
+
+        // 上一页
+        function pre() {
+            hideTable();
+            page--;
+            currentRow = pageSize * page;
+            maxRow = currentRow - pageSize;
+            if (currentRow > numberRowsInTable) currentRow = numberRowsInTable;
+            for (var i = maxRow; i < currentRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            if (maxRow == 0) {
+                preText();
+                firstText();
+            }
+            showPage();
+            nextLink();
+            lastLink();
+        }
+
+        // 首页
+        function first() {
+            hideTable();
+            page = 1;
+            for (var i = 0; i < pageSize; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            firstText();
+            preText();
+            nextLink();
+            lastLink();
+        }
+
+        // 末页
+        function last() {
+            hideTable();
+            page = pageCount();
+            currentRow = pageSize * (page - 1);
+            for (var i = currentRow; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            preLink();
+            nextText();
+            firstLink();
+            lastText();
+        }
+
+        function hideTable() {
+            for (var i = 0; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+        }
+
+        function showPage() {
+            pageNum.innerHTML = page;
+        }
+
+        // 总页数
+        function pageCount() {
+            return Math.ceil(numberRowsInTable / pageSize);
+        }
+
+        // 显示链接
+        function preLink() {
+            spanPre.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+        }
+
+        function preText() {
+            spanPre.innerHTML = "上一页";
+        }
+
+        function nextLink() {
+            spanNext.innerHTML = "<a href='javascript:next();'>下一页</a>";
+        }
+
+        function nextText() {
+            spanNext.innerHTML = "下一页";
+        }
+
+        function firstLink() {
+            spanFirst.innerHTML = "<a href='javascript:first();'>首页</a>";
+        }
+
+        function firstText() {
+            spanFirst.innerHTML = "首页";
+        }
+
+        function lastLink() {
+            spanLast.innerHTML = "<a href='javascript:last();'>末页</a>";
+        }
+
+        function lastText() {
+            spanLast.innerHTML = "末页";
+        }
+
+        // 隐藏
+        function hide() {
+            for (var i = pageSize; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+            totalPage.innerHTML = pageCount();
+            pageNum.innerHTML = '1';
+            nextLink();
+            lastLink();
+        }
+        hide();
+
+    </script>
+{% endblock %}

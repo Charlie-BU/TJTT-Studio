@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}TJTT乒乓球积分赛平台-忘记密码{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+    <!-- Header -->
+    <header class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1 class="text-center">{{_("忘记密码")}}</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    <!-- Basic -->
+    <div class="ex-form-1 pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 offset-xl-3">
+                    <div class="text-box mt-5 mb-5">
+                        <h6 class="mb-4">{{_("请填写下列信息以验证您的身份")}}</h6>
+
+                        <!-- Form -->
+                        <form method="POST">
+                            <div class="mb-4 form-floating">
+                                <input name="username" type="text" class="form-control" id="floatingInput1" placeholder="">
+                                <label for="floatingInput1">{{_("姓名")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="phone" type="tel" class="form-control" id="floatingInput2" placeholder="">
+                                <label for="floatingInput2">{{_("手机号")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="school" type="text" class="form-control" id="floatingInput3" placeholder="">
+                                <label for="floatingInput3">{{_("学校（如已毕业需加“（已毕业）”）")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="blade" type="text" class="form-control" id="floatingInput4" placeholder="">
+                                <label for="floatingInput4">{{_("底板型号")}}</label>
+                            </div>
+                            <div class="mb-4 form-floating">
+                                <input name="backhand" type="text" class="form-control" id="floatingInput5" placeholder="">
+                                <label for="floatingInput5">{{_("反手胶皮")}}</label>
+                            </div>
+                            {#flash弹窗#}
+                            {% for message in get_flashed_messages() %}
+                                <div class="alert alert-danger">{{ message }}</div>
+                            {% endfor %}
+
+                            <button type="submit" class="form-control-submit-button">{{_("确定")}}</button>
+                        </form>
+                        <br/><a class="btn-solid-reg" href="{{ url_for('user.login') }}" style="width:547px; text-align: center;">{{_("返回")}}</a>
+
+                    </div> <!-- end of text-box -->
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of ex-basic-1 -->
+    <!-- end of basic -->
+
+{% endblock %}

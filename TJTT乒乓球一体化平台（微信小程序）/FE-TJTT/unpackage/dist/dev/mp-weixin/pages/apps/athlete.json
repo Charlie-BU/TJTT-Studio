@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "乒乓球运动员",
+  "navigationBarBackgroundColor": "#FEF2DA",
+  "usingComponents": {
+    "u-tabs": "../../uni_modules/vk-uview-ui/components/u-tabs/u-tabs",
+    "u-search": "../../uni_modules/vk-uview-ui/components/u-search/u-search"
+  }
+}

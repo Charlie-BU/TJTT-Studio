@@ -1,0 +1,292 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-问题回答{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    {#flash弹窗#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;
+{#            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"#}
+{#                    id="refresh"#}
+{#                    onclick="location.reload()">{{_("刷新")}}#}
+{#            </button>#}
+        </div>
+    {% endfor %}
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("问题回答")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Management</li>
+                            <li class="breadcrumb-item" aria-current="page">Answer Questions</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="text-dark text-center">{{_("问题列表")}}</h4>
+                <div class="table-responsive">
+                    <table id="pageListTable" class="table table-striped table-bordered text-center">
+                        <thead>
+                        <tr class="font-weight-bold nowrap">
+                            <th>{{_("序号")}}</th>
+                            <th>{{_("提问者")}}</th>
+                            <th>{{_("提问时间")}}</th>
+                            <th>{{_("问题")}}</th>
+                            <th>{{_("回答")}}</th>
+                            <th>{{_("操作")}}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="pageListTableBody" class="font-weight-bold">
+                        {% for QA_x in QAs %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                {% if not QA_x.person %}
+                                    <td class="nowrap">{{_("匿名访客")}}</td>
+                                {% else %}
+                                    <td class="nowrap">{{ QA_x.person.username }}</td>
+                                {% endif %}
+                                <td>{{ QA_x.time }}</td>
+                                <td class="text-left">{{ QA_x.question }}</td>
+                                <td id="answer_{{ QA_x.id }}" class="text-left">{{ QA_x.answer }}</td>
+                                <td class="nowrap">
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-info"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#answerQuestion_{{ QA_x.id }}">{{_("回答")}}
+                                    </button>
+                                    <button type="button"
+                                            class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+                                            id="delete_question_{{ QA_x.id }}"
+                                            onclick="delete_question('{{ QA_x.id }}')">{{_("删除")}}
+                                    </button>
+                                </td>
+                            </tr>
+
+                            {#模态弹框#}
+                            <div class="modal fade" id="answerQuestion_{{ QA_x.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{_("回答问题")}}</h5>
+                                        </div>
+
+                                        <form method="POST" action="{{ url_for("user.answer_questions") }}">
+                                            <div class="modal-body">
+                                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                                    <div class="card" style="width:18rem;">
+                                                        <div class="card-body">
+                                                            <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                                            <input name="question_id" value="{{ QA_x.id }}" style="display: none;">
+                                                            <label for="question" class="text-dark">{{_("问题")}}：</label>
+                                                            <textarea class="form-control" rows="3" id="question" name="question" disabled>{{ QA_x.question }}</textarea><br/>
+                                                            <label for="answer" class="text-dark">{{_("回答")}}：</label>
+                                                            <textarea class="form-control" rows="5" id="answer" name="answer">{{ QA_x.answer }}</textarea><br/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("提交")}}</button>
+                                                <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <ul id="pages" class="pagination float-right nowrap">
+                    <li class="page-item"><button id="spanFirst" class="page-link" tabindex="-1">首页</button></li>
+                    <li class="page-item"><button id="spanPre" class="page-link">上一页</button></li>
+                    <li class="page-item"><button id="spanNext" class="page-link">下一页</button></li>
+                    <li class="page-item"><button id="spanLast" class="page-link">末页</button></li>
+                    <li class="page-item"><a id="spanNext" class="page-link">第<strong id="spanPageNum"></strong>页/共<strong id="spanTotalPage"></strong>页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+
+        // 获取全局变量user, 即登录的用户身份，以判断是否为管理
+        let isAdmin1;
+        {% if user %}
+            get_g("{{ user.usertype }}")
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin1 = g_user_type;
+        }
+
+
+        // 删除问题
+        function delete_question(id) {
+            if (isAdmin1 != "K10" && isAdmin1 != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            if (confirm("{{_("确定删除该问题")}}？")) {
+                fetch_ajax('POST', 'delete_question', {'id': id, 'my_id': {{ user.id }}}, "user")
+                setTimeout(function () {
+                    alert(res.message);
+                    location.reload();
+                }, 500);
+            }
+        }
+
+        // 表格分页
+        var theUL = document.getElementById("pageListTableBody");
+        var totalPage = document.getElementById("spanTotalPage");
+        var pageNum = document.getElementById("spanPageNum"); //获取当前页<span>
+        var spanPre = document.getElementById("spanPre"); //获取上一页<span>
+        var spanNext = document.getElementById("spanNext"); //获取下一页<span>
+        var spanFirst = document.getElementById("spanFirst"); //获取第一页<span>
+        var spanLast = document.getElementById("spanLast"); //获取最后一页<span>
+        var numberRowsInTable = theUL.getElementsByTagName("tr").length; //记录总条数
+        var pageSize = 10; //每页显示的记录条数
+        var page = 1; //当前页，默认第一页
+
+        // 下一页
+        function next() {
+            hideTable();
+            currentRow = pageSize * page;
+            maxRow = currentRow + pageSize;
+            if (maxRow > numberRowsInTable) maxRow = numberRowsInTable;
+            for (var i = currentRow; i < maxRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            page++;
+            if (maxRow == numberRowsInTable) {
+                nextText();
+                lastText();
+            }
+            showPage();
+            preLink();
+            firstLink();
+        }
+
+        // 上一页
+        function pre() {
+            hideTable();
+            page--;
+            currentRow = pageSize * page;
+            maxRow = currentRow - pageSize;
+            if (currentRow > numberRowsInTable) currentRow = numberRowsInTable;
+            for (var i = maxRow; i < currentRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            if (maxRow == 0) {
+                preText();
+                firstText();
+            }
+            showPage();
+            nextLink();
+            lastLink();
+        }
+
+        // 首页
+        function first() {
+            hideTable();
+            page = 1;
+            for (var i = 0; i < pageSize; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            firstText();
+            preText();
+            nextLink();
+            lastLink();
+        }
+
+        // 末页
+        function last() {
+            hideTable();
+            page = pageCount();
+            currentRow = pageSize * (page - 1);
+            for (var i = currentRow; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            preLink();
+            nextText();
+            firstLink();
+            lastText();
+        }
+
+        function hideTable() {
+            for (var i = 0; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+        }
+
+        function showPage() {
+            pageNum.innerHTML = page;
+        }
+
+        // 总页数
+        function pageCount() {
+            return Math.ceil(numberRowsInTable / pageSize);
+        }
+
+        // 显示链接
+        function preLink() {
+            spanPre.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+        }
+
+        function preText() {
+            spanPre.innerHTML = "上一页";
+        }
+
+        function nextLink() {
+            spanNext.innerHTML = "<a href='javascript:next();'>下一页</a>";
+        }
+
+        function nextText() {
+            spanNext.innerHTML = "下一页";
+        }
+
+        function firstLink() {
+            spanFirst.innerHTML = "<a href='javascript:first();'>首页</a>";
+        }
+
+        function firstText() {
+            spanFirst.innerHTML = "首页";
+        }
+
+        function lastLink() {
+            spanLast.innerHTML = "<a href='javascript:last();'>末页</a>";
+        }
+
+        function lastText() {
+            spanLast.innerHTML = "末页";
+        }
+
+        // 隐藏
+        function hide() {
+            for (var i = pageSize; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+            totalPage.innerHTML = pageCount();
+            pageNum.innerHTML = '1';
+            nextLink();
+            lastLink();
+        }
+        hide();
+
+    </script>
+{% endblock %}

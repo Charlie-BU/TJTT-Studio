@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/images/favicon1.jpg') }}">
+    <title>TJTT乒乓球积分赛平台-添加用户</title>
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='dist/css/style.min.css')}}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    {% block head %}{% endblock %}
+<![endif]-->
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative"
+            style="background:url({{ url_for('static', filename='assets/images/big/auth-bg.jpg') }}) no-repeat center center;">
+            <div class="auth-box row text-center">
+                <div class="col-lg-7 col-md-5 modal-bg-img" style="background-image: url({{ url_for('static', filename='assets/images/big/my_img.png') }});">
+                </div>
+                <div class="col-lg-5 col-md-7 bg-white">
+                    <div class="p-3">
+                        <img src="{{ url_for('static', filename='assets/images/big/icon.png') }} " alt="wrapkit">
+                        <h2 class="text-dark mt-3 text-center">{{_("添加用户")}}</h2>
+                        <div class="mt-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="username" class="form-control" type="text" placeholder="{{_("姓名")}} *">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="gender" class="form-control" type="text" placeholder="{{_("性别（请输入“男”或“女”）")}} *">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="phone" class="form-control" type="tel" placeholder="{{_("手机号")}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="email" class="form-control" type="email" placeholder="{{_("邮箱")}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="school" class="form-control" type="text" placeholder="{{_("学校")}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="role" class="form-control" type="text" placeholder="{{_("身份（请输入“学生”、“教师”或“校友及校外人士”）")}} *">
+                                    </div>
+                                </div>
+
+{#                                <div class="d1">#}
+{#                                    <div class="d1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;身份：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>#}
+{#                                    <input name="role" type="radio" class="form-check-input" id="student" value="学生">#}
+{#                                    <label for="student">学生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>#}
+{#                                </div>#}
+{#                                <div class="d1">#}
+{#                                    <input name="role" type="radio" class="form-check-input" id="teacher" value="教师">#}
+{#                                    <label for="teacher">教师</label>#}
+{#                                </div>#}
+{#                                <br/>#}
+{#                                <br/>#}
+{#                                <style>.d1 {display: inline-block;}</style>#}
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="stu_num" class="form-control" type="text" placeholder="{{_("学号/工号")}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="password" class="form-control" type="password" placeholder="{{_("密码")}} *">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="score" class="form-control" type="number" placeholder="{{_("积分")}}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input id="address" class="form-control" type="text" placeholder="{{_("地区")}}">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 text-center">
+                                    <button onclick="insert_user()" class="btn btn-block btn-dark">{{_("确认添加")}}</button>
+                                </div>
+                                <br/><br/>
+                                <div class="col-lg-12 text-center">
+                                    <a href="{{ url_for('user.user_list') }}" class="btn btn-block btn-dark">{{_("取消")}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Login box.scss -->
+        <!-- ============================================================== -->
+    </div>
+
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{ url_for('static', filename='assets/libs/popper.js/dist/umd/popper.min.js') }} "></script>
+    <script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.min.js') }} "></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+    <script>
+        $(".preloader ").fadeOut();
+
+        function insert_user() {
+
+            let username = document.getElementById("username")["value"];
+            let gender = document.getElementById("gender")["value"];
+            let phone = document.getElementById("phone")["value"];
+            let email = document.getElementById("email")["value"];
+            let school = document.getElementById("school")["value"];
+            let role = document.getElementById("role")["value"];
+            let stu_num = document.getElementById("stu_num")["value"];
+            let password = document.getElementById("password")["value"];
+            let score = document.getElementById("score")["value"];
+            let address = document.getElementById("address")["value"];
+
+            if(username === ''|| gender === ''|| password === '') {
+                alert("{{_("内容输入不完整")}}！");
+            } else if(gender !== "男" && gender !== "女") {
+                alert("{{_("性别输入格式错误")}}！");
+            } else if(role !== "学生" && role !== "教师" && role !== "校友及校外人士") {
+                alert("{{_("身份输入格式错误")}}！");
+            } else {
+                let data = {
+                    'my_id': {{ user.id }},
+                    'username': username,
+                    "gender": gender,
+                    "phone": phone,
+                    'email': email,
+                    'school': school,
+                    "role": role,
+                    'stu_num': stu_num,
+                    'password': password,
+                    'score': score,
+                    "address": address,
+                }
+                console.log(data)
+                fetch_ajax("POST", 'insert_user', data, "user");
+                setTimeout(function () {
+                    // res是全局变量, 在ajax_request.js中定义的
+                    alert(res.message);
+                    window.location.href = "{{ url_for('user.user_list') }}";
+                }, 500);
+            }
+        }
+    </script>
+</body>
+
+</html>

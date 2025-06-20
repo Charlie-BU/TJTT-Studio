@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/images/favicon1.jpg') }}">
+    <title>TJTT乒乓球积分赛平台-举办赛事</title>
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='dist/css/style.min.css') }}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    {% block head %}{% endblock %}
+<![endif]-->
+</head>
+
+<body>
+<div class="main-wrapper">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Login box.scss -->
+    <!-- ============================================================== -->
+    <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative"
+         style="background:url({{ url_for('static', filename='assets/images/big/auth-bg.jpg') }}) no-repeat center center;">
+        <div class="auth-box row">
+            <div class="col-lg-7 col-md-5 modal-bg-img" style="background-image: url({{ url_for('static', filename='assets/images/big/my_img.png') }});">
+            </div>
+            <div class="col-lg-5 col-md-7 bg-white">
+                <div class="p-3">
+                    <h2 class="text-dark mt-3 text-center">{{_("举办赛事（团体）")}}</h2>
+                    <div class="mt-4">
+                        <form method="POST" action="{{ url_for("competition.match_insert_team")}}">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="title">{{_("赛事名称")}}：</label>
+                                        <input id="title" name="title" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="description">{{_("赛事简介")}}：</label>
+                                        <input id="description" name="description" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{_("赛事类型")}}：</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="match_type" type="radio" class="form-check-input" id="t1" value="男子团体">
+                                        <label for="t1">{{_("男子团体")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="match_type" type="radio" class="form-check-input" id="t2" value="女子团体">
+                                        <label for="t2">{{_("女子团体")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="match_type" type="radio" class="form-check-input" id="t3" value="混合团体">
+                                        <label for="t3">{{_("混合团体")}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="address">{{_("所在地区")}}：</label>
+                                        <input id="address" name="address" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="organname">{{_("主办方")}}：</label>
+                                        <input id="organname" name="organname" class="form-control" type="text" value="{{ user.organ.organname }}" disabled>
+                                        <input id="organ_id" name="organ_id" class="form-control" value="{{ user.organ.id }}" style="display: none;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="match_time">{{_("比赛时间")}}：</label>
+                                        <input id="match_time" name="match_time" class="form-control" type="datetime-local">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="sign_start_time">{{_("报名开始时间")}}：</label>
+                                        <input id="sign_start_time" name="sign_start_time" class="form-control" type="datetime-local">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="sign_end_time">{{_("报名截止时间")}}：</label>
+                                        <input id="sign_end_time" name="sign_end_time" class="form-control" type="datetime-local">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="place">{{_("地点")}}：</label>
+                                        <input id="place" name="place" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="fee">{{_("报名费（元）")}}：</label>
+                                        <input id="fee" name="fee" class="form-control" type="number">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{_("赛制")}}：</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="system" type="radio" class="form-check-input" id="s1" value="小组循环赛+淘汰赛">
+                                        <label for="s1">{{_("小组循环赛+淘汰赛")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="system" type="radio" class="form-check-input" id="s2" value="淘汰赛">
+                                        <label for="s2">{{_("淘汰赛")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="system" type="radio" class="form-check-input" id="s3" value="大循环">
+                                        <label for="s3">{{_("大循环")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="system" type="radio" class="form-check-input" id="s4" value="大循环">
+                                        <label for="s4">{{_("小组循环赛（不决名次）")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="system" type="radio" class="form-check-input" id="s5" value="（其他）">
+                                        <label for="s5">{{_("其他")}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>{{_("选手报名限制")}}：</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="restriction" type="radio" class="form-check-input" id="r0" value="无限制" checked>
+                                        <label for="r0">{{_("无限制")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="restriction" type="radio" class="form-check-input" id="r1" value="限制（仅）男子">
+                                        <label for="r1">{{_("限制（仅）男子")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="restriction" type="radio" class="form-check-input" id="r2" value="限制（仅）女子">
+                                        <label for="r2">{{_("限制（仅）女子")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="restriction" type="radio" class="form-check-input" id="r3" value="限制（仅）学生">
+                                        <label for="r3">{{_("限制（仅）学生")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="restriction" type="radio" class="form-check-input" id="r4" value="限制（仅）教师">
+                                        <label for="r4">{{_("限制（仅）教师")}}</label>
+                                        <br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="restriction" type="radio" class="form-check-input" id="r5" value="积分限制">
+                                        <label for="r5">{{_("积分限制")}}</label>
+                                        <div><input id="score_min" name="score_min" type="number" style="width: 110px;" placeholder="{{_("最低积分")}}"> ~ <input id="score_max" name="score_max" type="number" style="width: 110px;" placeholder="{{_("最高积分")}}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                {#flash弹窗#}
+                                {% for message in get_flashed_messages() %}
+                                    <div class="alert alert-danger">{{ message }}</div>
+                                {% endfor %}
+                                {#用这个给表单把用户类型提交过去，在后端判断是不是管理#}
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                </div>
+
+                                <div class="col-lg-12 text-center">
+                                    <button type="submit" class="btn btn-block btn-dark">{{_("确认")}}</button>
+                                </div>
+                                <br/>
+                                <br/>
+                                <div class="col-lg-12 text-center">
+                                    <a href="{{ url_for('competition.match_list') }}" class="btn btn-block btn-dark">{{_("取消")}}</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Login box.scss -->
+    <!-- ============================================================== -->
+</div>
+
+<!-- All Required js -->
+<!-- ============================================================== -->
+<script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="{{ url_for('static', filename='assets/libs/popper.js/dist/umd/popper.min.js') }} "></script>
+<script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.min.js') }} "></script>
+<!-- ============================================================== -->
+<!-- This page plugin js -->
+<!-- ============================================================== -->
+<script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+<script>
+    $(".preloader ").fadeOut();
+</script>
+
+</body>
+
+</html>

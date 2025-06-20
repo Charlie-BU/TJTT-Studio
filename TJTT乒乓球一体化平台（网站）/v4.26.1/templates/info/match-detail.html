@@ -1,0 +1,663 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-赛事详情{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    {#flash弹窗#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;</div>
+    {% endfor %}
+
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("赛事详情")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:history.back(-1)">Competition List</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Competition Detail</li>
+                        </ol>
+                    </nav>
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:history.back(-1)" class="btn waves-effect waves-light btn-rounded btn-outline-secondary">{{_("返回")}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+            {% if user.usertype == "K9" or user.usertype == "K10" or user.usertype == "K11" %}
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{_("赛事管理")}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("控制面板")}}</h4>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                id="match_edit_{{ match1.id }}"
+                                                onclick="edit_match('{{ match1.id }}', this)">{{_("修改赛事信息")}}
+                                        </button>&nbsp;&nbsp;
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                id="restriction_change_{{ match1.id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#restrictionChange">{{_("修改报名限制")}}
+                                        </button>&nbsp;&nbsp;
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                id="organ_change_{{ match1.id }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#organChange">{{_("变更主办方")}}
+                                        </button>&nbsp;&nbsp;
+                                        {% if match1.match_type == "男子团体" or match1.match_type == "女子团体" or match1.match_type == "混合团体" %}
+                                            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                    id="add_team_{{ match1.id }}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#addTeam">{{_("添加参赛代表队")}}
+                                            </button>&nbsp;&nbsp;
+                                        {% endif %}
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-danger"
+                                                id="match_delete_{{ match1.id }}"
+                                                onclick="delete_match('{{ match1.id }}')">{{_("删除赛事")}}
+                                        </button>
+                                        <br/><br/><form method="GET" action="/competition/match_players" >
+                                            <input class="form-check-input" name="id" value="{{ match1.id }}" style="display: none;">
+                                            <button type="submit"
+                                                    class="btn waves-effect waves-light btn-rounded btn-outline-purple">{{_("参赛选手：")}}{{ match1.players | length }}{{_("人")}}
+                                            </button>
+                                        </form>
+                                        <br/><form method="GET" action="/competition/match_order">
+                                            <input id="match_id" name="match_id" value="{{ match1.id }}" style="display: none;">
+                                            <button type="submit"
+                                                    class="btn waves-effect waves-light btn-rounded btn-outline-info"
+                                                    id="match_detail_{{ match1.id }}">{{_("赛事成绩管理")}}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="table-responsive">
+                <table id="zero_config" class="table table-striped table-bordered no-wrap" style="text-align: center;">
+                    <tr>
+                        <th>{{_("赛事名称")}}</th>
+                        <td class="font-weight-bold link" id="title_{{ match1.id }}">{{ match1.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("赛事简介")}}</th>
+                        <td class="font-weight-bold link" id="description_{{ match1.id }}">{{ match1.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("赛事类型")}}</th>
+                        <td class="font-weight-bold link" id="match_type_{{ match1.id }}">{{ match1.match_type }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("所在地区")}}</th>
+                        <td class="font-weight-bold link" id="address_{{ match1.id }}">{{ match1.address }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("主办方")}}</th>
+                        <td class="font-weight-bold link" id="organ_{{ match1.id }}">{{ match1.organ.organname }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("比赛时间")}}</th>
+                        <td class="font-weight-bold link" id="match_time_{{ match1.id }}">{{ match1.match_time }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("赛制")}}</th>
+                        <td class="font-weight-bold link" id="system_{{ match1.id }}">{{ match1.system }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("选手报名限制")}}</th>
+                        {% if match1.restriction == "积分限制" %}
+                            <td class="font-weight-bold link" id="restriction_{{ match1.id }}">{{ match1.restriction }} | 限制积分范围：{{ match1.score_min }} ~ {{ match1.score_max }}</td>
+                        {% else %}
+                            <td class="font-weight-bold link" id="restriction_{{ match1.id }}">{{ match1.restriction }}</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>{{_("报名开始时间")}}</th>
+                        <td class="font-weight-bold link" id="sign_start_time_{{ match1.id }}">{{ match1.sign_start_time }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("报名截止时间")}}</th>
+                        <td class="font-weight-bold link" id="sign_end_time_{{ match1.id }}">{{ match1.sign_end_time }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("地点")}}</th>
+                        <td class="font-weight-bold link" id="place_{{ match1.id }}">{{ match1.place }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("最大参赛名额")}}</th>
+                        {% if match1.match_type == "男子单打" or match1.match_type == "女子单打" or match1.match_type == "混合单打" %}
+                            <td class="font-weight-bold link" id="participant_{{ match1.id }}">{{ match1.participant }}</td>
+                        {% elif match1.match_type == "男子团体" or match1.match_type == "女子团体" or match1.match_type == "混合团体" %}
+                            <td class="font-weight-bold link" id="participant_{{ match1.id }}">见各队名额</td>
+                        {% else %}
+                            <td class="font-weight-bold link" id="participant_{{ match1.id }}"></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>{{_("已报名人数")}}</th>
+                        <td class="font-weight-bold link" id="players_{{ match1.id }}">{{ match1.players | length }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("报名费")}}</th>
+                        <td class="font-weight-bold link" id="fee_{{ match1.id }}">{{ match1.fee }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("冠军奖品")}}</th>
+                        <td class="font-weight-bold link" id="prize_for_first_{{ match1.id }}">{{ match1.prize_for_first }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("亚军奖品")}}</th>
+                        <td class="font-weight-bold link" id="prize_for_second_{{ match1.id }}">{{ match1.prize_for_second }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("季军奖品")}}</th>
+                        <td class="font-weight-bold link no-wrap" id="prize_for_third_{{ match1.id }}">{{ match1.prize_for_third }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{_("备注")}}</th>
+                        <td class="font-weight-bold link text-wrap" style="text-align: justify;" id="additional_info_{{ match1.id }}">{{ match1.additional_info }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            {% if match1.match_type == "男子团体" or match1.match_type == "女子团体" or match1.match_type == "混合团体" %}
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{_("赛事报名")}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("参加赛事")}}</h4>
+                                        <h5 class="card-subtitle">{{_("未报名选手请点击下列按钮报名参加赛事")}}</h5>
+                                            <button class="btn waves-effect waves-light btn-rounded btn-success"
+                                                    id="match_detail_{{ match1.id }}"
+                                                    onclick="team_sign()">{{_("报名")}}
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("放弃参加赛事")}}</h4>
+                                        <h5 class="card-subtitle">{{_("已报名选手请点击下列按钮取消报名")}}</h5>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-danger" onclick="alert('团体比赛请联系队长报名 / 取消报名！')">{{_("取消报名")}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif "师生混双" in match1.title %}
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{_("赛事报名")}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("参加赛事")}}</h4>
+                                        <h5 class="card-subtitle">{{_("未报名选手请点击下列按钮报名参加赛事")}}</h5>
+                                            <button class="btn waves-effect waves-light btn-rounded btn-success"
+                                                    id="match_detail_{{ match1.id }}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#addPlayer">{{_("报名")}}
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{{_("赛事报名")}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("参加赛事")}}</h4>
+                                        <h5 class="card-subtitle">{{_("未报名选手请点击下列按钮报名参加赛事")}}</h5>
+                                            <form method="GET" action="/competition/match_sign_up">
+                                                <input id="match_id" name="match_id" value="{{ match1.id }}" style="display: none;">
+                                                <button type="submit"
+                                                        class="btn waves-effect waves-light btn-rounded btn-success"
+                                                        id="match_detail_{{ match1.id }}">{{_("报名")}}
+                                                </button>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("放弃参加赛事")}}</h4>
+                                        <h5 class="card-subtitle">{{_("已报名选手请点击下列按钮取消报名")}}</h5>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-danger" onclick="quitMatch()">{{_("取消报名")}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{_("赛事进行")}}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{_("赛程安排")}}</h4>
+                                    <h5 class="card-subtitle">{{_("点击下列按钮查看赛程安排")}}</h5>
+                                    <button class="btn waves-effect waves-light btn-rounded btn-info">{{_("查看")}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-auto">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{_("比赛成绩")}} / {{_("积分公示")}}</h4>
+                                    <h5 class="card-subtitle">{{_("点击下列按钮查看比赛成绩及参赛选手赛后积分")}}</h5>
+                                    <form method="GET" action="/competition/match_result">
+                                        <input id="match_id" name="match_id" value="{{ match1.id }}" style="display: none;">
+                                        <button type="submit"
+                                                class="btn waves-effect waves-light btn-rounded btn-info"
+                                                id="match_detail_{{ match1.id }}">{{_("查看")}}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="restrictionChange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{_("修改报名限制")}}</h5>
+                </div>
+                <form method="POST" action="{{ url_for("competition.restriction_change") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:18rem;">
+                                <div class="card-body">
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                    <input type="number" class="form-control" id="match_id" name="match_id" value="{{ match1.id }}" style="display: none;">
+                                    <h5 class="text-dark">{{_("请选择限制条件")}}：</h5>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="r1" name="restriction" value="无限制" checked>
+                                    <label for="r1">{{_("无限制")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="r2" name="restriction" value="限制（仅）男子">
+                                    <label for="r2">{{_("限制（仅）男子")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="r3" name="restriction" value="限制（仅）女子">
+                                    <label for="r3">{{_("限制（仅）女子")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="r4" name="restriction" value="限制（仅）学生">
+                                    <label for="r4">{{_("限制（仅）学生")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="r5" name="restriction" value="限制（仅）教师">
+                                    <label for="r5">{{_("限制（仅）教师")}}</label><br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="r6" name="restriction" value="积分限制">
+                                    <label for="r6">{{_("积分限制")}}</label><br/>
+                                    <div><input id="score_min" name="score_min" type="number" style="width: 110px;" placeholder="{{_("最低积分")}}"> ~ <input id="score_max" name="score_max" type="number" style="width: 110px;" placeholder="{{_("最高积分")}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认变更")}}</button>
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="organChange" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{_("变更主办方")}}</h5>
+                </div>
+                <form method="POST" action="{{ url_for("competition.organ_change") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:18rem;">
+                                <div class="card-body">
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                    <input type="number" class="form-control" id="match_id" name="match_id" value="{{ match1.id }}" style="display: none;">
+                                    <h5 class="text-dark">{{_("请选择新主办方")}}：</h5>
+                                    {% for organ in organs %}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" class="form-check-input" id="{{ organ.id }}" name="organ_id" value="{{ organ.id }}">
+                                        <label for="{{ organ.id }}">{{ organ.organname }}</label><br/>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认变更")}}</button>
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addTeam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">{{_("添加参赛代表队")}}</h5>
+                </div>
+                <form method="POST" action="{{ url_for("competition.add_team") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:18rem;">
+                                <div class="card-body">
+                                    <input type="number" class="form-control" id="my_id" name="my_id" value="{{ user.id }}" style="display: none;">
+                                    <input type="number" class="form-control" id="match_id" name="match_id" value="{{ match1.id }}" style="display: none;">
+                                    <label for="teamname">{{_("代表队名")}}：</label>
+                                    <input type="text" class="form-control" id="teamname" name="teamname">
+                                    <label for="description">{{_("简介")}}：</label>
+                                    <input type="text" class="form-control" id="description" name="description">
+                                    <label for="member_max">{{_("队员人数上限")}}：</label>
+                                    <input type="number" class="form-control" id="member_max" name="member_max">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认添加")}}</button>
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态弹框 -->
+    <div class="modal fade" id="addPlayer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{_("报名")}}</h5>
+                </div>
+
+                <form method="POST" action="{{ url_for("competition.tea_stu_sign") }}">
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="card" style="width:18rem;">
+                                <div class="card-body">
+                                    <input type="number" class="form-control" id="user1_id" name="user1_id" value="{{ user.id }}" style="display: none;">
+                                    <label for="player_x_username" class="text-dark">{{_("选手1姓名")}}：</label>
+                                    <input type="text" class="form-control" value="{{ user.username }}" disabled><br/>
+                                    <label for="user2_username" class="text-dark">{{_("选手2姓名")}}：</label>
+                                    <input type="text" class="form-control" id="user2_username" name="user2_username"
+                                           placeholder="请输入选手2姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-rounded btn-outline-primary">{{_("确认报名")}}</button>
+                        <button type="button" class="btn btn-rounded btn-outline-secondary" data-bs-dismiss="modal">{{_("取消")}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+        // 获取全局变量user, 即登录的用户身份，以判断是否为管理
+        let isAdmin1;
+        {% if user %}
+            get_g("{{ user.usertype }}")
+        {% endif %}
+        function get_g(g_user_type) {
+            isAdmin1 = g_user_type;
+        }
+
+        // 删除赛事
+        function delete_match(id) {
+            if (isAdmin1 != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            if (confirm("{{_("确定删除该赛事")}}？")) {
+                fetch_ajax('POST', 'delete_match', {'id': id, 'my_id': {{ user.id }}}, "competition")
+                setTimeout(function () {
+                    alert(res.message);
+                    window.location.href = "{{ url_for('competition.match_list') }}";
+                }, 500);
+            }
+        }
+
+        // 修改赛事信息
+        let titleIn = document.createElement("input");
+        let descriptionIn = document.createElement("input");
+        let match_typeIn = document.createElement("input");
+        let addressIn = document.createElement("input");
+        let match_timeIn = document.createElement("input");
+        let systemIn = document.createElement("input");
+        let sign_start_timeIn = document.createElement("input");
+        let sign_end_timeIn = document.createElement("input");
+        let placeIn = document.createElement("input");
+        let participantIn = document.createElement("input");
+        let feeIn = document.createElement("input");
+        let prize_for_firstIn = document.createElement("input");
+        let prize_for_secondIn = document.createElement("input");
+        let prize_for_thirdIn = document.createElement("input");
+        let additional_infoIn = document.createElement("input");
+
+        function edit_match(id, btn) {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("权限不足")}}！");
+                return;
+            }
+            let titleEl = document.getElementById('title_' + id);
+            let descriptionEl = document.getElementById('description_' + id);
+            let match_typeEl = document.getElementById('match_type_' + id);
+            let addressEl = document.getElementById('address_' + id);
+            let match_timeEl = document.getElementById('match_time_' + id);
+            let systemEl = document.getElementById('system_' + id);
+            let sign_start_timeEl = document.getElementById('sign_start_time_' + id);
+            let sign_end_timeEl = document.getElementById('sign_end_time_' + id);
+            let placeEl = document.getElementById('place_' + id);
+            let participantEl = document.getElementById('participant_' + id);
+            let feeEl = document.getElementById('fee_' + id);
+            let prize_for_firstEl = document.getElementById('prize_for_first_' + id);
+            let prize_for_secondEl = document.getElementById('prize_for_second_' + id);
+            let prize_for_thirdEl = document.getElementById('prize_for_third_' + id);
+            let additional_infoEl = document.getElementById('additional_info_' + id);
+
+
+            if (btn.innerText === '{{_("确认修改")}}') {
+                titleEl.innerText = titleIn.value;
+                descriptionEl.innerText = descriptionIn.value;
+                match_typeEl.innerText = match_typeIn.value;
+                addressEl.innerText = addressIn.value;
+                match_timeEl.innerText = match_timeIn.value;
+                systemEl.innerText = systemIn.value;
+                sign_start_timeEl.innerText = sign_start_timeIn.value;
+                sign_end_timeEl.innerText = sign_end_timeIn.value;
+                placeEl.innerText = placeIn.value;
+                participantEl.innerText = participantIn.value;
+                feeEl.innerText = feeIn.value;
+                prize_for_firstEl.innerText = prize_for_firstIn.value;
+                prize_for_secondEl.innerText = prize_for_secondIn.value;
+                prize_for_thirdEl.innerText = prize_for_thirdIn.value;
+                additional_infoEl.innerText = additional_infoIn.value;
+
+                let data = {
+                    'my_id': {{ user.id }},
+                    'id': id,
+                    'title': titleIn.value,
+                    'description': descriptionIn.value,
+                    'match_type': match_typeIn.value,
+                    'address': addressIn.value,
+                    "match_time": match_timeIn.value,
+                    'system': systemIn.value,
+                    'sign_start_time': sign_start_timeIn.value,
+                    'sign_end_time': sign_end_timeIn.value,
+                    'place': placeIn.value,
+                    'participant': participantIn.value,
+                    'fee': feeIn.value,
+                    'prize_for_first': prize_for_firstIn.value,
+                    'prize_for_second': prize_for_secondIn.value,
+                    'prize_for_third': prize_for_thirdIn.value,
+                    'additional_info': additional_infoIn.value,
+                }
+                fetch_ajax("POST", "update_match", data, "competition")
+                setTimeout(function () {
+                    alert(res.message);
+                }, 500);
+
+                btn.innerText = '{{_("修改赛事信息")}}';
+                return;
+            }
+            btn.innerText = "{{_("确认修改")}}";
+
+            let title = titleEl.innerText;
+            let description = descriptionEl.innerText;
+            let match_type = match_typeEl.innerText;
+            let address = addressEl.innerText;
+            let match_time = match_timeEl.innerText;
+            let system = systemEl.innerText;
+            let sign_start_time = sign_start_timeEl.innerText;
+            let sign_end_time = sign_end_timeEl.innerText;
+            let place = placeEl.innerText;
+            let participant = participantEl.innerText;
+            let fee = feeEl.innerText;
+            let prize_for_first = prize_for_firstEl.innerText;
+            let prize_for_second = prize_for_secondEl.innerText;
+            let prize_for_third = prize_for_thirdEl.innerText;
+            let additional_info = additional_infoEl.innerText;
+
+            titleIn.value = title;
+            descriptionIn.value = description;
+            match_typeIn.value = match_type;
+            addressIn.value = address;
+            match_timeIn.value = match_time;
+            systemIn.value = system;
+            sign_start_timeIn.value = sign_start_time;
+            sign_end_timeIn.value = sign_end_time;
+            placeIn.value = place;
+            participantIn.value = participant;
+            feeIn.value = fee;
+            prize_for_firstIn.value = prize_for_first;
+            prize_for_secondIn.value = prize_for_second;
+            prize_for_thirdIn.value = prize_for_third;
+            additional_infoIn.value = additional_info;
+
+            titleEl.innerHTML = "";
+            descriptionEl.innerHTML = "";
+            match_typeEl.innerHTML = "";
+            addressEl.innerHTML = "";
+            match_timeEl.innerHTML = "";
+            systemEl.innerHTML = "";
+            sign_start_timeEl.innerHTML = "";
+            sign_end_timeEl.innerHTML = "";
+            placeEl.innerHTML = "";
+            participantEl.innerHTML = "";
+            feeEl.innerHTML = "";
+            prize_for_firstEl.innerHTML = "";
+            prize_for_secondEl.innerHTML = "";
+            prize_for_thirdEl.innerHTML = "";
+            additional_infoEl.innerHTML = "";
+
+            titleEl.appendChild(titleIn);
+            descriptionEl.appendChild(descriptionIn);
+            match_typeEl.appendChild(match_typeIn);
+            addressEl.appendChild(addressIn);
+            match_timeEl.appendChild(match_timeIn);
+            systemEl.appendChild(systemIn);
+            sign_start_timeEl.appendChild(sign_start_timeIn);
+            sign_end_timeEl.appendChild(sign_end_timeIn);
+            placeEl.appendChild(placeIn);
+            participantEl.appendChild(participantIn);
+            feeEl.appendChild(feeIn);
+            prize_for_firstEl.appendChild(prize_for_firstIn);
+            prize_for_secondEl.appendChild(prize_for_secondIn);
+            prize_for_thirdEl.appendChild(prize_for_thirdIn);
+            additional_infoEl.appendChild(additional_infoIn);
+        }
+
+        // 报名团体比赛
+        function team_sign() {
+            if (isAdmin != "K9" && isAdmin != "K10" && isAdmin != "K11") {
+                alert("{{_("您不是队长，请通过队长报名")}}！");
+                return;
+            }
+            window.location.href = "{{ url_for('competition.team_management') }}";
+        }
+
+        // 报名师生混双
+        function tea_stu_sign() {
+            window.location.href = "{{ url_for('competition.tea_stu_sign') }}";
+        }
+
+        // 取消报名
+        function quitMatch() {
+            let data = {
+                'my_id': {{ user.id }},
+                'match_id': {{ match1.id }},
+            }
+            if (confirm("{{_("确定取消报名")}}？")) {
+                fetch_ajax("POST", "quit_match", data, "competition")
+                setTimeout(function () {
+                    alert(res.message);
+                    location.reload();
+                }, 500);
+            }
+        }
+
+    </script>
+    </div>
+{% endblock %}

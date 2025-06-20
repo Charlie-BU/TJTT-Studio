@@ -1,0 +1,342 @@
+{% extends "info/info_base.html" %}
+{% block title %}TJTT乒乓球积分赛平台-赛事列表{% endblock %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+    {#flash弹窗#}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">{{ message }}&nbsp;&nbsp;
+{#            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"#}
+{#                    id="refresh"#}
+{#                    onclick="location.reload()">{{_("刷新")}}#}
+{#            </button>#}
+        </div>
+    {% endfor %}
+
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">{{_("赛事列表")}}</h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item">Apps</li>
+                            <li class="breadcrumb-item" aria-current="page">Competition List</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <!--四个框框-->
+                        <div class="row nowrap">
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-success text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ c_matches|length }}</h1>
+                                        <h6 class="text-white">{{_("当前赛事")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-primary text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ matches|length }}</h1>
+                                        <h6 class="text-white">{{_("赛事总数")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="p-2 bg-cyan text-center" style="border-radius: 50px;">
+                                        <h1 class="font-weight-bold text-white">{{ SH_matches|length }}</h1>
+                                        <h6 class="text-white">{{_("上海市赛事")}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--查找赛事-->
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("查找赛事")}}</h4>
+                                        <input type="search" placeholder="{{_("请输入赛事名称")}}"
+                                               aria-label="Search" id="search_input">
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="findMatchByName()">{{_("查询")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body nowrap">
+                                        <h4 class="card-title">{{_("其他赛事")}}</h4>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="historyMatches()">{{_("查看历史赛事")}}
+                                        </button>
+                                        <button class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                onclick="allMatches()">{{_("查看全部赛事")}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{_("我的赛事")}}</h4>
+                                        <form method="GET" action="{{ url_for("competition.myMatches") }}">
+                                            <input class="form-check-input" name="my_id" value="{{ user.id }}" style="display: none;">
+                                            <button class="btn waves-effect waves-light btn-rounded btn-outline-primary">{{_("查看已报名赛事")}}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--表格-->
+                <div class="table-responsive">
+                    <table id="pageListTable" class="table table-striped table-bordered no-wrap">
+                        <thead>
+                        <tr style="text-align: center;">
+                            <th>{{_("序号")}}</th>
+                            <th>{{_("赛事名称")}}</th>
+                            <th>{{_("简介")}}</th>
+                            <th>{{_("赛事类型")}}</th>
+                            <th>{{_("比赛时间")}}</th>
+                            <th>{{_("地点")}}</th>
+                            <th>{{_("剩余参赛名额")}}</th>
+                            <th>{{_("操作")}}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="pageListTableBody">
+                        {% for match in c_matches %}
+                            <tr style="text-align: center;">
+                                <td><span class="font-weight-normal link">{{ loop.index }}</span></td>
+                                <td class="font-weight-bold link" id="title_{{ match.id }}"><span
+                                        class="font-weight-bold link">{{ match.title }}</span></td>
+                                <td class="font-weight-bold link" id="place_{{ match.id }}">{{ match.description }}</td>
+                                <td class="font-weight-bold link" id="match_time_{{ match.id }}">{{ match.match_type }}</td>
+                                <td class="font-weight-bold link" id="match_time_{{ match.id }}">{{ match.match_time }}</td>
+                                <td class="font-weight-bold link" id="place_{{ match.id }}">{{ match.place }}</td>
+                                {% if match.match_type == "男子单打" or match.match_type == "女子单打" or match.match_type == "混合单打" %}
+                                    <td class="font-weight-bold link" id="vacant_{{ match.id }}">{{ match.participant - (match.players | length) }}</td>
+                                {% elif match.match_type == "男子团体" or match.match_type == "女子团体" or match.match_type == "混合团体" %}
+                                    <td class="font-weight-bold link" id="vacant_{{ match.id }}">{{ _("见各队名额") }}</td>
+                                {% else %}
+                                    <td class="font-weight-bold link" id="vacant_{{ match.id }}"></td>
+                                {% endif %}
+                                <td>
+                                    <form method="POST" action="/competition/match_detail">
+                                        <input id="id" name="id" value="{{ match.id }}" style="display: none;">
+                                        <button type="submit"
+                                                class="btn waves-effect waves-light btn-rounded btn-outline-primary"
+                                                id="match_detail_{{ match.id }}">{{ _("详情") }}
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <ul id="pages" class="pagination float-right nowrap">
+                    <li class="page-item"><button id="spanFirst" class="page-link" tabindex="-1">首页</button></li>
+                    <li class="page-item"><button id="spanPre" class="page-link">上一页</button></li>
+                    <li class="page-item"><button id="spanNext" class="page-link">下一页</button></li>
+                    <li class="page-item"><button id="spanLast" class="page-link">末页</button></li>
+                    <li class="page-item"><a id="spanNext" class="page-link">第<strong id="spanPageNum"></strong>页/共<strong id="spanTotalPage"></strong>页</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <!--导入我们定义的Ajax请求函数，全局变量res-->
+    <script src="{{ url_for('static', filename='js/ajax_request.js') }}"></script>
+    <!--本页面用到的函数-->
+    <script type="text/javascript">
+
+        // 查找赛事
+        function findMatchByName() {
+            let searchEl = document.getElementById('search_input');
+            let keywords = searchEl.value;
+            let url;
+            if (keywords === '' || keywords === null) {
+                url = `/competition/match_list`;
+            } else {
+                url = `/competition/findMatchByName/${keywords}`;
+            }
+            window.location.href = url;
+        }
+
+        // 查看全部赛事
+        function allMatches() {
+            let url;
+            url = `/competition/allMatches`;
+            window.location.href = url;
+        }
+
+        // 查看历史赛事
+        function historyMatches() {
+            let url;
+            url = `/competition/historyMatches`;
+            window.location.href = url;
+        }
+
+        // 表格分页
+        var theUL = document.getElementById("pageListTableBody");
+        var totalPage = document.getElementById("spanTotalPage");
+        var pageNum = document.getElementById("spanPageNum"); //获取当前页<span>
+        var spanPre = document.getElementById("spanPre"); //获取上一页<span>
+        var spanNext = document.getElementById("spanNext"); //获取下一页<span>
+        var spanFirst = document.getElementById("spanFirst"); //获取第一页<span>
+        var spanLast = document.getElementById("spanLast"); //获取最后一页<span>
+        var numberRowsInTable = theUL.getElementsByTagName("tr").length; //记录总条数
+        var pageSize = 10; //每页显示的记录条数
+        var page = 1; //当前页，默认第一页
+
+        // 下一页
+        function next() {
+            hideTable();
+            currentRow = pageSize * page;
+            maxRow = currentRow + pageSize;
+            if (maxRow > numberRowsInTable) maxRow = numberRowsInTable;
+            for (var i = currentRow; i < maxRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            page++;
+            if (maxRow == numberRowsInTable) {
+                nextText();
+                lastText();
+            }
+            showPage();
+            preLink();
+            firstLink();
+        }
+
+        // 上一页
+        function pre() {
+            hideTable();
+            page--;
+            currentRow = pageSize * page;
+            maxRow = currentRow - pageSize;
+            if (currentRow > numberRowsInTable) currentRow = numberRowsInTable;
+            for (var i = maxRow; i < currentRow; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            if (maxRow == 0) {
+                preText();
+                firstText();
+            }
+            showPage();
+            nextLink();
+            lastLink();
+        }
+
+        // 首页
+        function first() {
+            hideTable();
+            page = 1;
+            for (var i = 0; i < pageSize; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            firstText();
+            preText();
+            nextLink();
+            lastLink();
+        }
+
+        // 末页
+        function last() {
+            hideTable();
+            page = pageCount();
+            currentRow = pageSize * (page - 1);
+            for (var i = currentRow; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = '';
+            }
+            showPage();
+            preLink();
+            nextText();
+            firstLink();
+            lastText();
+        }
+
+        function hideTable() {
+            for (var i = 0; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+        }
+
+        function showPage() {
+            pageNum.innerHTML = page;
+        }
+
+        // 总页数
+        function pageCount() {
+            return Math.ceil(numberRowsInTable / pageSize);
+        }
+
+        // 显示链接
+        function preLink() {
+            spanPre.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+        }
+
+        function preText() {
+            spanPre.innerHTML = "上一页";
+        }
+
+        function nextLink() {
+            spanNext.innerHTML = "<a href='javascript:next();'>下一页</a>";
+        }
+
+        function nextText() {
+            spanNext.innerHTML = "下一页";
+        }
+
+        function firstLink() {
+            spanFirst.innerHTML = "<a href='javascript:first();'>首页</a>";
+        }
+
+        function firstText() {
+            spanFirst.innerHTML = "首页";
+        }
+
+        function lastLink() {
+            spanLast.innerHTML = "<a href='javascript:last();'>末页</a>";
+        }
+
+        function lastText() {
+            spanLast.innerHTML = "末页";
+        }
+
+        // 隐藏
+        function hide() {
+            for (var i = pageSize; i < numberRowsInTable; i++) {
+                theUL.getElementsByTagName("tr")[i].style.display = 'none';
+            }
+            totalPage.innerHTML = pageCount();
+            pageNum.innerHTML = '1';
+            nextLink();
+            lastLink();
+        }
+        hide();
+
+    </script>
+{% endblock %}
